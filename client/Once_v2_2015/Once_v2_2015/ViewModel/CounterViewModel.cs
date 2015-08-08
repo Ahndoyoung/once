@@ -206,7 +206,7 @@ namespace Once_v2_2015.ViewModel
                 stream = new MemoryStream(byteArr);
                 category = (List<Category>)serializer.Deserialize(stream);
             }
-            catch (Exception e)
+            catch
             {
             }
             finally
