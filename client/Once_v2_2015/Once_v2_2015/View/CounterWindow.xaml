@@ -1,0 +1,109 @@
+﻿<Window x:Class="Once_v2_2015.View.CounterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Once_v2_2015.View"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        x:Name="CounterView"
+        mc:Ignorable="d"
+        Title="Once" Height="1000" Width="1508"
+        DataContext="{Binding CounterVM, Source={StaticResource Locator}}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=CounterView}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid Background="#FFFBFBEF">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Height="113" VerticalAlignment="Top">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFC59971" Offset="0"/>
+                    <GradientStop Color="#FF603A17" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Image Stretch="Fill" Opacity="0.2" Source="/Once_v2_2015;component/img/tree.png"/>
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="68,10,0,0" TextWrapping="Wrap" Text="Once" VerticalAlignment="Top" Foreground="White" FontFamily="Segoe Script" FontSize="64"/>
+            <Button x:Name="button_Copy" Command="{Binding TestCommand}" Style="{StaticResource BrownButton}"  Content="Orders" Margin="0,23,20,28" Foreground="#FFFBFBEF" FontSize="18.667" FontWeight="Bold" FontFamily="Segoe UI" HorizontalAlignment="Right" Width="186"/>
+        </Grid>
+        <Grid Margin="898,113,0,0">
+            <TextBlock x:Name="textBlock1" Margin="181,25,180,0" TextWrapping="Wrap" Text="Order #1" VerticalAlignment="Top" Foreground="#FF603A17" FontSize="29.333" FontFamily="Segoe Print" TextAlignment="Center"/>
+            <ListView x:Name="lvSelling" Margin="20,87,22,253" SelectionMode="Single" FontSize="13" FontFamily="NanumBarunGothic" Foreground="Black" ItemContainerStyle="{StaticResource ColorfulListView}" AlternationCount="2">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="220" DisplayMemberBinding="{Binding }" >
+                            <GridViewColumnHeader TextElement.FontSize="16" FontFamily="Segoe UI">Name</GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding }" >
+                            <GridViewColumnHeader TextElement.FontSize="16" FontFamily="Segoe UI">Each</GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding }" >
+                            <GridViewColumnHeader TextElement.FontSize="16" FontFamily="Segoe UI">Qty</GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn Width="120" DisplayMemberBinding="{Binding }" >
+                            <GridViewColumnHeader TextElement.FontSize="16" FontFamily="Segoe UI">Total</GridViewColumnHeader>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+                <Button/>
+                <Button/>
+                <Button/>
+            </ListView>
+            <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="20,0,0,113" TextWrapping="Wrap" Text="Sub Total :" FontFamily="Segoe UI" Width="124" FontSize="21.333" Foreground="#FF595959" Height="28" VerticalAlignment="Bottom"/>
+            <TextBlock x:Name="textBlock2_Copy" HorizontalAlignment="Left" Margin="20,0,0,153" TextWrapping="Wrap" Text="Discounts :" FontFamily="Segoe UI" Width="124" FontSize="21.333" Foreground="#FF595959" Height="28" VerticalAlignment="Bottom"/>
+            <TextBlock x:Name="textBlock2_Copy1" HorizontalAlignment="Right" Margin="0,0,205,113" TextWrapping="Wrap" Text="Total :" VerticalAlignment="Bottom" FontFamily="Segoe UI Semibold" Width="91" FontSize="26.667" Foreground="#FF595959"/>
+            <Button x:Name="button_Copy2" Command="{Binding DiscountCommand}" Style="{StaticResource IvoryButton}" Content="Discount" HorizontalAlignment="Left" Margin="20,0,0,186" Width="270" Foreground="#FF603A17" FontWeight="Bold" FontFamily="Segoe UI" FontSize="16" Height="62" VerticalAlignment="Bottom">
+                <Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource MyConverter}">
+                        <Binding ElementName="brdDiscount"/>
+                        <Binding ElementName="lvSelling"/>
+                    </MultiBinding>
+                </Button.CommandParameter>
+            </Button>
+            <Button x:Name="button_Copy3" Command="{Binding TestCommand}" Style="{StaticResource BrownButton}"  Content="Send Order" Margin="0,0,22,10" Foreground="#FFFBFBEF" FontSize="16" FontWeight="Bold" FontFamily="Segoe UI" Height="62" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="185"/>
+            <Button x:Name="button_Copy4" Command="{Binding TestCommand}" Style="{StaticResource IvoryButton}"  Content="Cancel Order" Margin="0,0,220,10" Foreground="#FF603A17" FontWeight="Bold" FontFamily="Segoe UI" FontSize="16" Height="62" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="185"/>
+            <RadioButton x:Name="radioButton" Style="{StaticResource StripeRadio}"  Content="카 드" Margin="0,0,22,186" VerticalAlignment="Bottom" FontFamily="NanumBarunGothic" FontSize="14.667" Foreground="#FF603A17" HorizontalAlignment="Right" Width="100"/>
+            <RadioButton x:Name="radioButton_Copy" Style="{StaticResource StripeRadio}"  Content="현 금" Margin="0,0,127,186" VerticalAlignment="Bottom" FontFamily="NanumBarunGothic" FontSize="14.667" Foreground="#FF603A17" HorizontalAlignment="Right" Width="100" IsChecked="True"/>
+            <Border x:Name="brdDiscount" BorderBrush="#FF707070" BorderThickness="1" Height="100" Margin="20,0,22,253" VerticalAlignment="Bottom" Visibility="Collapsed">
+                <local:DiscountUC x:Name="DiscountView" Height="Auto" Width="Auto"/>
+            </Border>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Margin="0,113,0,100" Width="898">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFC59971" Offset="0"/>
+                    <GradientStop Color="#FF603A17" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Button x:Name="btnHome" Style="{StaticResource BrownButton}" Command="{Binding HomeCommand}" CommandParameter="{Binding ElementName=CounterView}" Content="TOP MENU" HorizontalAlignment="Left" Margin="27,10,0,0" VerticalAlignment="Top" Width="182" Height="54" Foreground="#FFFBFBEF" FontFamily="Segoe UI" FontSize="24" FontWeight="Bold"/>
+            <Button x:Name="btnCategory" Style="{StaticResource BrownButton}" Content="Non-Coffee" HorizontalAlignment="Left" Margin="214,10,0,0" VerticalAlignment="Top" Width="305" Height="54" Foreground="#FFFBFBEF" FontFamily="Segoe UI" FontSize="24" FontWeight="Bold"/>
+            <ScrollViewer Margin="0,87,0,0">
+                <Grid x:Name="grdInnerMenu">
+                    <Button x:Name="button_Copy10" Style="{StaticResource IvoryButton}"  Content="Coffee" Margin="45,490,656,0" VerticalAlignment="Top" Height="130" FontFamily="NanumBarunGothic" FontSize="17.333" Background="#FF603A17" Foreground="#FF603A17"/>
+                </Grid>
+
+            </ScrollViewer>
+        </Grid>
+        <Grid x:Name="grdMenuSetting" Height="100" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="898">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF4EED8" Offset="0"/>
+                    <GradientStop Color="#FFC1AB94" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Image Stretch="Fill" Opacity="0.1" Source="/Once_v2_2015;component/img/tree.png"/>
+            <Button x:Name="button_Copy1" Command="{Binding MenuSettingCommand}" Style="{StaticResource IvoryButton}" Margin="0,0,10,8" Foreground="White" Height="80" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="80">
+                <Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource MyConverter}">
+                        <Binding ElementName="grdMenuSetting"/>
+                        <Binding ElementName="svMenu"/>
+                    </MultiBinding>
+                </Button.CommandParameter>
+                <Image Source="../img/setting.png" Stretch="Fill" Width="45" Height="45"/>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>
