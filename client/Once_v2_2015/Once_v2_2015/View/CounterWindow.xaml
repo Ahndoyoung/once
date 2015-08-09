@@ -87,7 +87,7 @@
 
             </ScrollViewer>
         </Grid>
-        <Grid x:Name="grdMenuSetting" Height="100" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="898">
+        <Grid x:Name="grdOutterMenuSetting" Height="100" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="898">
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4EED8" Offset="0"/>
@@ -95,15 +95,12 @@
                 </LinearGradientBrush>
             </Grid.Background>
             <Image Stretch="Fill" Opacity="0.1" Source="/Once_v2_2015;component/img/tree.png"/>
-            <Button x:Name="button_Copy1" Command="{Binding MenuSettingCommand}" Style="{StaticResource IvoryButton}" Margin="0,0,10,8" Foreground="White" Height="80" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="80">
-                <Button.CommandParameter>
-                    <MultiBinding Converter="{StaticResource MyConverter}">
-                        <Binding ElementName="grdMenuSetting"/>
-                        <Binding ElementName="svMenu"/>
-                    </MultiBinding>
-                </Button.CommandParameter>
+            <Button x:Name="button_Copy1" Command="{Binding MenuSettingCommand}" CommandParameter="{Binding ElementName=CounterView}" Style="{StaticResource IvoryButton}" Margin="0,0,10,8" Foreground="White" Height="80" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="80">
                 <Image Source="../img/setting.png" Stretch="Fill" Width="45" Height="45"/>
             </Button>
+            <Grid x:Name="grdInnerMenuSetting" Height="100" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="803">
+                <local:InnerMenuSettingUC Margin="3,0,0,0" Width="Auto" Height="Auto"/>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

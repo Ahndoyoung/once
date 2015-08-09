@@ -4,6 +4,7 @@ using Microsoft.Practices.ServiceLocation;
 
 using Ninject;
 using Once_v2_2015.Container;
+using Once_v2_2015.View;
 
 namespace Once_v2_2015.ViewModel
 {
@@ -29,6 +30,16 @@ namespace Once_v2_2015.ViewModel
         public DiscountViewModel DiscountVM
         {
             get { return Kernel.Get<DiscountViewModel>("DiscountVM"); }
+        }
+
+        public InnerMenuSettingViewModel InnerMenuSettingVM
+        {
+            get { return Kernel.Get<InnerMenuSettingViewModel>("InnerMenuSettingVM"); }
+        }
+
+        public MenuSettingViewModel MenuSettingVM
+        {
+            get { return Kernel.Get<MenuSettingViewModel>("MenuSettingVM"); }
         }
         
         public static void Cleanup()

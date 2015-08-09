@@ -12,6 +12,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using Once_v2_2015.Class;
 using Once_v2_2015.Model;
 using Once_v2_2015.View;
@@ -54,6 +55,10 @@ namespace Once_v2_2015.ViewModel
         {
             categories = LoadCategory(Properties.Resources.MenuList);
             SetCategory(cw);
+
+            cw.grdOutterMenuSetting.Children.Add(menuSettingView);
+            int idx = cw.grdOutterMenuSetting.Children.IndexOf(menuSettingView);
+            cw.grdOutterMenuSetting.Children[idx].Visibility = Visibility.Collapsed;
         }
         #endregion
 
@@ -162,27 +167,31 @@ namespace Once_v2_2015.ViewModel
 
         #region MenuSettingCommand
 
-        private RelayCommand<object> _menuSettingCommand;
+        private RelayCommand<CounterWindow> _menuSettingCommand;
 
-        public RelayCommand<object> MenuSettingCommand
+        public RelayCommand<CounterWindow> MenuSettingCommand
         {
-            get { return _menuSettingCommand ?? (_menuSettingCommand = new RelayCommand<object>(MenuSetting)); }
+            get { return _menuSettingCommand ?? (_menuSettingCommand = new RelayCommand<CounterWindow>(MenuSetting)); }
         }
 
-        private void MenuSetting(object obj)
+        private void MenuSetting(CounterWindow cw)
         {
-            var values = (object[])obj;
-            Grid grd = (Grid)values[0];
+            Grid grdOutter = cw.grdOutterMenuSetting;
+            Grid grdInner = cw.grdInnerMenuSetting;
 
-            if (grd.Height > 150)
+            int idx = grdOutter.Children.IndexOf(menuSettingView);
+
+            if (grdInner.Visibility != Visibility.Visible)
             {
-                grd.Height -= 100;
-                grd.Children.Remove(menuSettingView);
+                grdOutter.Height -= 100;
+                grdOutter.Children[idx].Visibility = Visibility.Collapsed;
+                grdInner.Visibility = Visibility.Visible;
             }
             else
             {
-                grd.Height += 100;
-                grd.Children.Add(menuSettingView);
+                grdOutter.Height += 100;
+                grdOutter.Children[idx].Visibility = Visibility.Visible;
+                grdInner.Visibility = Visibility.Collapsed;
             }
         }
         #endregion
@@ -257,7 +266,6 @@ namespace Once_v2_2015.ViewModel
 
         public CounterViewModel()
         {
-
         }
     }
 }

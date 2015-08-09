@@ -81,18 +81,21 @@
     </ApplicationDefinition>
     <Compile Include="Class\MenuPosition.cs" />
     <Compile Include="Class\PassThroughConverter.cs" />
+    <Compile Include="Class\ViewModelMessage.cs" />
     <Compile Include="Container\DiContainer.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\MenuItem.cs" />
     <Compile Include="ViewModel\CounterViewModel.cs" />
     <Compile Include="ViewModel\DiscountViewModel.cs" />
+    <Compile Include="ViewModel\InnerMenuSettingViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MenuSettingViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\DiscountUC.xaml.cs">
       <DependentUpon>DiscountUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DiscountWindow.xaml.cs">
-      <DependentUpon>DiscountWindow.xaml</DependentUpon>
+    <Compile Include="View\InnerMenuSettingUC.xaml.cs">
+      <DependentUpon>InnerMenuSettingUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MenuSettingView.xaml.cs">
       <DependentUpon>MenuSettingView.xaml</DependentUpon>
@@ -105,7 +108,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DiscountWindow.xaml">
+    <Page Include="View\InnerMenuSettingUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

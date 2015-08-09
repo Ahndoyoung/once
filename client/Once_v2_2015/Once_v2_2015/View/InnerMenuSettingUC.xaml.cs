@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Once_v2_2015.View
 {
     /// <summary>
-    /// DiscountWindow.xaml에 대한 상호 작용 논리
+    /// InnerMenuSettingUC.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class DiscountWindow : Window
+    public partial class InnerMenuSettingUC : UserControl
     {
-        public DiscountWindow()
+        public InnerMenuSettingUC()
         {
             InitializeComponent();
         }
