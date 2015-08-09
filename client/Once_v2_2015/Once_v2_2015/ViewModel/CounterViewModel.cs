@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -195,6 +196,17 @@ namespace Once_v2_2015.ViewModel
             }
         }
         #endregion
+
+        #endregion
+
+        #region Properties
+
+        private ObservableCollection<SellingItem> _sellingItems = new ObservableCollection<SellingItem>();
+
+        public ObservableCollection<SellingItem> SellingItems
+        {
+            get { return _sellingItems; }
+        }
 
         #endregion
 

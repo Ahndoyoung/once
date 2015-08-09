@@ -85,6 +85,7 @@
     <Compile Include="Container\DiContainer.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\MenuItem.cs" />
+    <Compile Include="Model\SellingItem.cs" />
     <Compile Include="ViewModel\CounterViewModel.cs" />
     <Compile Include="ViewModel\DiscountViewModel.cs" />
     <Compile Include="ViewModel\InnerMenuSettingViewModel.cs" />
