@@ -282,7 +282,28 @@ namespace Once_v2_2015.ViewModel
                 SellingItem si = new SellingItem(name, checkedTemp, checkedSize, price);
                 SellingItems.Add(si);
             }
+            SubTotal = (int.Parse(SubTotal) + price).ToString();
+            Total = (int.Parse(SubTotal) - int.Parse(DiscountPrice)).ToString();
         }
+        #endregion
+
+        #region CancelOrderCommand
+
+        private RelayCommand _cancelOrderCommand;
+
+        public RelayCommand CancelOrderCommand
+        {
+            get { return _cancelOrderCommand ?? (_cancelOrderCommand = new RelayCommand(CancelOrder));}
+        }
+
+        private void CancelOrder()
+        {
+            SellingItems.Clear();
+            DiscountPrice = "0";
+            SubTotal = "0";
+            Total = "0";
+        }
+
         #endregion
 
         #endregion
@@ -294,6 +315,42 @@ namespace Once_v2_2015.ViewModel
         public ObservableCollection<SellingItem> SellingItems
         {
             get { return _sellingItems; }
+        }
+
+        private string _discountPrice = "0";
+
+        public string DiscountPrice
+        {
+            get { return _discountPrice; }
+            set
+            {
+                _discountPrice = value;
+                RaisePropertyChanged("DiscountPrice");
+            }
+        }
+
+        private string _subTotal = "0";
+
+        public string SubTotal
+        {
+            get { return _subTotal; }
+            set
+            {
+                _subTotal = value;
+                RaisePropertyChanged("SubTotal");
+            }
+        }
+
+        private string _total ="0";
+
+        public string Total
+        {
+            get { return _total; }
+            set
+            {
+                _total = value;
+                RaisePropertyChanged("Total");
+            }
         }
 
         #endregion

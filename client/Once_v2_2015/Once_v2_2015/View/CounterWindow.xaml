@@ -51,7 +51,7 @@
             </ListView>
             <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="20,0,0,113" TextWrapping="Wrap" Text="Sub Total :" FontFamily="Segoe UI" Width="124" FontSize="21.333" Foreground="#FF595959" Height="28" VerticalAlignment="Bottom"/>
             <TextBlock x:Name="textBlock2_Copy" HorizontalAlignment="Left" Margin="20,0,0,153" TextWrapping="Wrap" Text="Discounts :" FontFamily="Segoe UI" Width="124" FontSize="21.333" Foreground="#FF595959" Height="28" VerticalAlignment="Bottom"/>
-            <TextBlock x:Name="textBlock2_Copy1" HorizontalAlignment="Right" Margin="0,0,205,113" TextWrapping="Wrap" Text="Total :" VerticalAlignment="Bottom" FontFamily="Segoe UI Semibold" Width="91" FontSize="26.667" Foreground="#FF595959"/>
+            <TextBlock x:Name="textBlock2_Copy1" HorizontalAlignment="Right" Margin="0,0,180,112" TextWrapping="Wrap" Text="Total :" VerticalAlignment="Bottom" FontFamily="Segoe UI Semibold" Width="91" FontSize="26.667" Foreground="#FF595959"/>
             <Button x:Name="button_Copy2" Command="{Binding DiscountCommand}" Style="{StaticResource IvoryButton}" Content="Discount" HorizontalAlignment="Left" Margin="20,0,0,186" Width="270" Foreground="#FF603A17" FontWeight="Bold" FontFamily="Segoe UI" FontSize="16" Height="62" VerticalAlignment="Bottom">
                 <Button.CommandParameter>
                     <MultiBinding Converter="{StaticResource MyConverter}">
@@ -61,12 +61,15 @@
                 </Button.CommandParameter>
             </Button>
             <Button x:Name="button_Copy3" Command="{Binding TestCommand}" Style="{StaticResource BrownButton}"  Content="Send Order" Margin="0,0,22,10" Foreground="#FFFBFBEF" FontSize="16" FontWeight="Bold" FontFamily="Segoe UI" Height="62" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="185"/>
-            <Button x:Name="button_Copy4" Command="{Binding TestCommand}" Style="{StaticResource IvoryButton}"  Content="Cancel Order" Margin="0,0,220,10" Foreground="#FF603A17" FontWeight="Bold" FontFamily="Segoe UI" FontSize="16" Height="62" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="185"/>
+            <Button x:Name="button_Copy4" Command="{Binding CancelOrderCommand}" Style="{StaticResource IvoryButton}"  Content="Cancel Order" Margin="0,0,220,10" Foreground="#FF603A17" FontWeight="Bold" FontFamily="Segoe UI" FontSize="16" Height="62" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="185"/>
             <RadioButton x:Name="radioButton" Style="{StaticResource StripeRadio}"  Content="카 드" Margin="0,0,22,186" VerticalAlignment="Bottom" FontFamily="NanumBarunGothic" FontSize="14.667" Foreground="#FF603A17" HorizontalAlignment="Right" Width="100"/>
             <RadioButton x:Name="radioButton_Copy" Style="{StaticResource StripeRadio}"  Content="현 금" Margin="0,0,127,186" VerticalAlignment="Bottom" FontFamily="NanumBarunGothic" FontSize="14.667" Foreground="#FF603A17" HorizontalAlignment="Right" Width="100" IsChecked="True"/>
             <Border x:Name="brdDiscount" BorderBrush="#FF707070" BorderThickness="1" Height="100" Margin="20,0,22,253" VerticalAlignment="Bottom" Visibility="Collapsed">
                 <local:DiscountUC x:Name="DiscountView" Height="Auto" Width="Auto"/>
             </Border>
+            <TextBlock x:Name="textBlock2_Copy2" HorizontalAlignment="Left" Margin="149,0,0,153" TextWrapping="Wrap" Text="{Binding DiscountPrice}" FontFamily="Segoe UI" Width="100" FontSize="21.333" Foreground="#FF595959" Height="28" VerticalAlignment="Bottom" TextAlignment="Right"/>
+            <TextBlock x:Name="textBlock2_Copy3" HorizontalAlignment="Left" Margin="149,0,0,113" TextWrapping="Wrap" Text="{Binding SubTotal}" FontFamily="Segoe UI" Width="100" FontSize="21.333" Foreground="#FF595959" Height="28" VerticalAlignment="Bottom" TextAlignment="Right"/>
+            <TextBlock x:Name="textBlock2_Copy4" HorizontalAlignment="Right" Margin="0,0,22,112" TextWrapping="Wrap" Text="{Binding Total}" VerticalAlignment="Bottom" FontFamily="Segoe UI Semibold" Width="129" FontSize="26.667" Foreground="#FF595959" TextAlignment="Right"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Margin="0,113,0,100" Width="898">
             <Grid.Background>
