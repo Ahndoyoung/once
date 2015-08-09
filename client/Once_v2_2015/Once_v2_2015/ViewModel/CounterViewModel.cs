@@ -306,6 +306,36 @@ namespace Once_v2_2015.ViewModel
 
         #endregion
 
+        #region FireMenuItemCommand
+
+        private RelayCommand _fireMenuItemCommand;
+
+        public RelayCommand FireMenuItemCommand
+        {
+            get { return _fireMenuItemCommand ?? (_fireMenuItemCommand = new RelayCommand(FireMenuItem)); }
+        }
+
+        private void FireMenuItem()
+        {
+            if (SelectedSellingItem == null) return;
+
+
+            SubTotal = (int.Parse(SubTotal) - SelectedSellingItem.price).ToString();
+            Total = (int.Parse(SubTotal) - int.Parse(DiscountPrice)).ToString();
+
+            if (SelectedSellingItem.quantity != 1)
+            {
+                SelectedSellingItem.quantity--;
+                SelectedSellingItem.total = SelectedSellingItem.price * SelectedSellingItem.quantity;
+            }
+            else
+            {
+                SellingItems.Remove(SelectedSellingItem);
+            }
+        }
+        
+        #endregion
+
         #endregion
 
         #region Properties
@@ -350,6 +380,18 @@ namespace Once_v2_2015.ViewModel
             {
                 _total = value;
                 RaisePropertyChanged("Total");
+            }
+        }
+
+        private SellingItem _selectedSellingItem;
+
+        public SellingItem SelectedSellingItem
+        {
+            get { return _selectedSellingItem; }
+            set
+            {
+                _selectedSellingItem = value;
+                RaisePropertyChanged("SelectedSellingItem");
             }
         }
 
