@@ -130,6 +130,11 @@ namespace Once_v2_2015.ViewModel
                     btn.VerticalAlignment = VerticalAlignment.Top;
                     btn.Margin = new Thickness(left, y, right, 0);
 
+                    btn.Command = AddMenuItemCommand;
+                    string name = categories[idx].menuList[i].name;
+                    object[] ob = new object[] {cw, name};
+                    btn.CommandParameter = ob;
+
                     cw.grdInnerMenu.Children.Add(btn);
 
                     col++;
@@ -193,6 +198,89 @@ namespace Once_v2_2015.ViewModel
                 grdOutter.Height += 100;
                 grdOutter.Children[idx].Visibility = Visibility.Visible;
                 grdInner.Visibility = Visibility.Collapsed;
+            }
+        }
+        #endregion
+
+        #region AddMenuItemCommand
+
+        private RelayCommand<object> _addMenuItemCommand;
+
+        public RelayCommand<object> AddMenuItemCommand
+        {
+            get { return _addMenuItemCommand ?? (_addMenuItemCommand = new RelayCommand<object>(AddMenuItem)); }
+        }
+
+        private void AddMenuItem(object obj)
+        {
+            object[] values = (object[])obj;
+            CounterWindow cw = (CounterWindow)values[0];
+            string name = (string)values[1];
+
+            int price = 0;
+
+            bool isNullTemp = true;
+            bool isNullSize = true;
+            foreach (var category in categories)
+            {
+                foreach (var menuItem in category.menuList)
+                {
+                    if (menuItem.name == name)
+                    {
+                        price = menuItem.price;
+                        if (menuItem.temperature != null)
+                        {
+                            isNullTemp = false;
+                        }
+                        if (menuItem.size != null)
+                        {
+                            isNullSize = false;
+                        }
+                        break;
+                    }
+                }
+            }
+
+            char? checkedTemp = null;
+            if (!isNullTemp)
+            {
+                if (cw.InnerMenuSettingView.btnTemperature.Content.ToString() == "Ice")
+                {
+                    checkedTemp = 'i';
+                }
+                else if (cw.InnerMenuSettingView.btnTemperature.Content.ToString() == "Hot")
+                {
+                    checkedTemp = 'h';
+                }
+            }            
+            char? checkedSize = null;
+            if (!isNullSize)
+            {
+                if (cw.InnerMenuSettingView.btnSize.Content.ToString() == "Regular")
+                {
+                    checkedSize = 'r';
+                }
+                else if (cw.InnerMenuSettingView.btnSize.Content.ToString() == "Large")
+                {
+                    checkedSize = 'l';
+                }
+            }
+
+            bool isExist = false;
+            foreach (var sellingItem in SellingItems)
+            {
+                if (sellingItem.name == name && sellingItem.temperature == checkedTemp && sellingItem.size == checkedSize)
+                {
+                    sellingItem.quantity++;
+                    sellingItem.total = sellingItem.price * sellingItem.quantity;
+                    isExist = true;
+                    break;
+                }
+            }
+            if (!isExist)
+            {
+                SellingItem si = new SellingItem(name, checkedTemp, checkedSize, price);
+                SellingItems.Add(si);
             }
         }
         #endregion

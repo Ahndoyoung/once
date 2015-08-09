@@ -31,7 +31,7 @@
         </Grid>
         <Grid Margin="898,113,0,0">
             <TextBlock x:Name="textBlock1" Margin="181,25,180,0" TextWrapping="Wrap" Text="Order #1" VerticalAlignment="Top" Foreground="#FF603A17" FontSize="29.333" FontFamily="Segoe Print" TextAlignment="Center"/>
-            <ListView x:Name="lvSelling" ItemsSource="{Binding SellingItems}" Margin="20,87,22,253" SelectionMode="Single" FontSize="13" FontFamily="NanumBarunGothic" Foreground="Black" ItemContainerStyle="{StaticResource ColorfulListView}" AlternationCount="2">
+            <ListView x:Name="lvSelling" ItemsSource="{Binding SellingItems}" Margin="20,87,22,253" SelectionMode="Single" FontSize="16" FontFamily="NanumBarunGothic" Foreground="Black" ItemContainerStyle="{StaticResource ColorfulListView}" AlternationCount="2">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="220" DisplayMemberBinding="{Binding content}" >
@@ -96,7 +96,7 @@
                 <Image Source="../img/setting.png" Stretch="Fill" Width="45" Height="45"/>
             </Button>
             <Grid x:Name="grdInnerMenuSetting" Height="100" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="803">
-                <local:InnerMenuSettingUC Margin="3,0,0,0" Width="Auto" Height="Auto"/>
+                <local:InnerMenuSettingUC x:Name="InnerMenuSettingView" Margin="3,0,0,0" Width="Auto" Height="Auto"/>
             </Grid>
         </Grid>
     </Grid>

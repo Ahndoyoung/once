@@ -3,17 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GalaSoft.MvvmLight;
 
 namespace Once_v2_2015.Model
 {
     public class SellingItem : MenuItem
     {
         public string content { get; set; }
-        public int quantity { get; set; }
-        public int total { get; set; }
 
-        public SellingItem()
+        private int _quantity;
+        public int quantity
         {
+            get { return _quantity; }
+            set
+            {
+                _quantity = value;
+                RaisePropertyChanged("quantity");
+            }
+        }
+
+        private int _total;
+        public int total
+        {
+            get { return _total; }
+            set
+            {
+                _total = value;
+                RaisePropertyChanged("total");
+            }
+        }
+
+        public SellingItem(string _name, char? _temp, char? _size, int _price)
+        {
+            name = _name;
+            temperature = _temp;
+            size = _size;
+            price = _price;
+            quantity = 1;
+            total = price * quantity;
+
             string temp = null;
             if (temperature == 'i')
                 temp = "Ice";
@@ -30,8 +58,7 @@ namespace Once_v2_2015.Model
             else
                 s = "None";
 
-            content = name + "\n -" + temp + "\n -" + s;
-            total = price * quantity;
+            content = name.Replace('^', ' ') + "\n -" + temp + "\n -" + s;
         }
     }
 }
