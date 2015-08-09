@@ -421,8 +421,28 @@ namespace Once_v2_2015.ViewModel
             }
         }
 
+        private void OnReceiveMessageAction(ViewModelMessage obj)
+        {
+            string[] arr = obj.Text.Split('^');
+
+            // ClearDiscount
+            if (arr[0] == "ClearDiscount")
+            {
+                DiscountPrice = "0";
+                Total = SubTotal;
+            }
+
+            // ApplyDiscount
+            if (arr[0] == "ApplyDiscount")
+            {
+                DiscountPrice = (int.Parse(DiscountPrice) + int.Parse(arr[1])).ToString();
+                Total = (int.Parse(SubTotal) - int.Parse(DiscountPrice)).ToString();
+            }
+        }
+
         public CounterViewModel()
         {
+            Messenger.Default.Register<ViewModelMessage>(this, OnReceiveMessageAction);
         }
     }
 }

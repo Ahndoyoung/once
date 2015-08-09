@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
+using Once_v2_2015.Class;
 
 namespace Once_v2_2015.ViewModel
 {
@@ -13,23 +15,43 @@ namespace Once_v2_2015.ViewModel
     {
         #region Command
 
-        #region CloseCommand
+        #region ClearDiscountCommand
 
-        private RelayCommand<Window> _closeCommand;
+        private RelayCommand _clearDiscountCommand;
 
-        public RelayCommand<Window> CloseCommand
+        public RelayCommand ClearDiscountCommand
         {
-            get { return _closeCommand ?? (_closeCommand = new RelayCommand<Window>(Close)); }
+            get { return _clearDiscountCommand ?? (_clearDiscountCommand = new RelayCommand(ClearDiscount)); }
         }
 
-        private void Close(Window wd)
+        private void ClearDiscount()
         {
-            wd.Close();
+            var msg = new ViewModelMessage()
+            {
+                Text = "ClearDiscount"
+            };
+            Messenger.Default.Send(msg);
         }
+
         #endregion
 
-        #region DiscountCommand
+        #region ApplyDiscountCommand
 
+        private RelayCommand<string> _applyDiscountCommand;
+
+        public RelayCommand<string> ApplyDiscountCommand
+        {
+            get { return _applyDiscountCommand ?? (_applyDiscountCommand = new RelayCommand<string>(ApplyDiscount)); }
+        }
+
+        private void ApplyDiscount(string price)
+        {
+            var msg = new ViewModelMessage()
+            {
+                Text = "ApplyDiscount^" + price
+            };
+            Messenger.Default.Send(msg);
+        }
         #endregion
 
         #endregion

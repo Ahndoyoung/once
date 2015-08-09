@@ -4,16 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Once_v2_2015.View"
-             mc:Ignorable="d" Height="100" Width="560">
+             mc:Ignorable="d" Height="100" Width="560"
+             DataContext="{Binding DiscountVM, Source={StaticResource Locator}}">
     <Grid Background="#FFF7F1E1">
-        <Button x:Name="button" Style="{StaticResource IvoryButton}" Content="Clear" Margin="0,0,10,10" FontFamily="Segoe UI" FontSize="14.667" Foreground="#FF603A17" Height="52" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="96"/>
-        <Button x:Name="button1" HorizontalAlignment="Left" Margin="10,10,0,10" Width="142">
+        <Button x:Name="button" Style="{StaticResource IvoryButton}" Command="{Binding ClearDiscountCommand}"  Content="Clear" Margin="0,0,10,10" FontFamily="Segoe UI" FontSize="14.667" Foreground="#FF603A17" Height="52" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="96"/>
+        <Button x:Name="button1" Command="{Binding ApplyDiscountCommand}" CommandParameter="2000" HorizontalAlignment="Left" Margin="10,10,0,10" Width="142">
             <Image Source="../img/coupon2.png" Stretch="Fill"/>
         </Button>
-        <Button x:Name="button1_Copy" HorizontalAlignment="Left" Margin="171,10,0,10" Width="142">
+        <Button x:Name="button1_Copy" Command="{Binding ApplyDiscountCommand}" CommandParameter="1000" HorizontalAlignment="Left" Margin="171,10,0,10" Width="142">
             <Image Source="/Once_v2_2015;component/img/thousand.jpg" Stretch="Fill"/>
         </Button>
-        <Button x:Name="button1_Copy1" HorizontalAlignment="Left" Margin="329,10,0,10" Width="85" Background="{x:Null}" BorderBrush="{x:Null}">
+        <Button x:Name="button1_Copy1" Command="{Binding ApplyDiscountCommand}" CommandParameter="500" HorizontalAlignment="Left" Margin="329,10,0,10" Width="85" Background="{x:Null}" BorderBrush="{x:Null}">
             <Image Source="/Once_v2_2015;component/img/five_hundred.png" Stretch="Fill"/>
         </Button>
     </Grid>
