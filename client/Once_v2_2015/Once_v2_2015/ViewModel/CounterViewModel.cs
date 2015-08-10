@@ -480,6 +480,16 @@ namespace Once_v2_2015.ViewModel
                 DiscountPrice = (int.Parse(DiscountPrice) + int.Parse(arr[1])).ToString();
                 Total = (int.Parse(SubTotal) - int.Parse(DiscountPrice)).ToString();
             }
+
+            // AddOption
+            if (arr[0] == "AddOption")
+            {
+                SellingItem si = new SellingItem(arr[1], null, null, 500);
+                SellingItems.Add(si);
+
+                SubTotal = (int.Parse(SubTotal) + 500).ToString();
+                Total = (int.Parse(SubTotal) - int.Parse(DiscountPrice)).ToString();
+            }
         }
 
         public CounterViewModel()
