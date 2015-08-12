@@ -21,8 +21,8 @@ namespace Once_v2_2015.Class
     {
         // Border
         public const int InitBorderLeft = 10;
-        public const int InitBorderTop = 10;
-        public const int InitBorderBottom = 38;
+        public const int InitBorderTop = 30;
+        public const int InitBorderBottom = 40;
         public const int MarginBorderLeft = 490;
 
         // TextBlock

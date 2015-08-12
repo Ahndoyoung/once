@@ -66,7 +66,7 @@
                     </MultiBinding>
                 </Button.CommandParameter>
             </Button>
-            <Button x:Name="button_Copy3" Command="{Binding SendOrderCommand}" Style="{StaticResource BrownButton}"  Content="Send Order" Margin="0,0,22,10" Foreground="#FFFBFBEF" FontSize="16" FontWeight="Bold" FontFamily="Segoe UI" Height="62" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="185"/>
+            <Button x:Name="button_Copy3" Command="{Binding SendOrderCommand}" CommandParameter="{Binding ElementName=OrdersView}" Style="{StaticResource BrownButton}"  Content="Send Order" Margin="0,0,22,10" Foreground="#FFFBFBEF" FontSize="16" FontWeight="Bold" FontFamily="Segoe UI" Height="62" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="185"/>
             <Button x:Name="button_Copy4" Command="{Binding CancelOrderCommand}" Style="{StaticResource IvoryButton}"  Content="Cancel Order" Margin="0,0,220,10" Foreground="#FF603A17" FontWeight="Bold" FontFamily="Segoe UI" FontSize="16" Height="62" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="185"/>
             <RadioButton x:Name="radioButton" Style="{StaticResource StripeRadio}"  Content="카 드" Margin="0,0,22,186" VerticalAlignment="Bottom" FontFamily="NanumBarunGothic" FontSize="14.667" Foreground="#FF603A17" HorizontalAlignment="Right" Width="100"/>
             <RadioButton x:Name="radioButton_Copy" Style="{StaticResource StripeRadio}"  Content="현 금" Margin="0,0,127,186" VerticalAlignment="Bottom" FontFamily="NanumBarunGothic" FontSize="14.667" Foreground="#FF603A17" HorizontalAlignment="Right" Width="100" IsChecked="True"/>

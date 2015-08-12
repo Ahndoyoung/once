@@ -17,27 +17,8 @@
                         <cmd:EventToCommand Command="{Binding HorizontalScrollingCommand}"  PassEventArgsToCommand="True"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                <Grid>
-                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="10,10,0,38" Width="450" Background="#FFF4EED8">
-                        <Grid>
-                            <TextBlock x:Name="textBlock1" Margin="103,20,104,0" TextWrapping="Wrap" Text="Order #1" VerticalAlignment="Top" Foreground="#FF603A17" FontSize="29.333" FontFamily="Segoe Print" TextAlignment="Center"/>
-                            <ListView x:Name="listView" Margin="32,96,32,83" SelectionMode="Single" FontSize="16" FontFamily="NanumBarunGothic" Foreground="Black" ItemContainerStyle="{StaticResource ColorfulListView}" AlternationCount="2">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn Width="260" DisplayMemberBinding="{Binding }" >
-                                            <GridViewColumnHeader TextElement.FontSize="16" FontFamily="Segoe UI">Name</GridViewColumnHeader>
-                                        </GridViewColumn>
-                                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding }" >
-                                            <GridViewColumnHeader TextElement.FontSize="16" FontFamily="Segoe UI">Qty</GridViewColumnHeader>
-                                        </GridViewColumn>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                            <Button x:Name="button" Style="{StaticResource BrownButton}" Content="Complete" HorizontalAlignment="Right" Margin="0,0,32,15" Width="112" FontFamily="Segoe UI" FontSize="14.667" Foreground="#FFFBFBEF" Height="56" VerticalAlignment="Bottom"/>
-                            <Button x:Name="button_Copy" Style="{StaticResource IvoryButton}" Content="Modify" HorizontalAlignment="Right" Margin="0,0,149,15" VerticalAlignment="Bottom" Width="112" Height="56" FontFamily="Segoe UI" FontSize="14.667" Foreground="#FF603A17"/>
-                        </Grid>
-                    </Border>
-                    <Border BorderBrush="Black" BorderThickness="1" Margin="500,10,0,38" Background="#FFF4EED8" HorizontalAlignment="Left" Width="450">
+                <Grid x:Name="grdOrders">
+                    <Border Visibility="Collapsed" BorderBrush="Black" BorderThickness="1" Margin="990,50,0,38" Background="#FFF4EED8" HorizontalAlignment="Left" Width="450">
                         <Grid>
                             <TextBlock x:Name="textBlock2" Margin="103,20,104,0" TextWrapping="Wrap" Text="Order #1" VerticalAlignment="Top" Foreground="#FF603A17" FontSize="29.333" FontFamily="Segoe Print" TextAlignment="Center"/>
                             <ListView x:Name="listView1" Margin="32,96,32,83" SelectionMode="Single" FontSize="16" FontFamily="NanumBarunGothic" Foreground="Black" ItemContainerStyle="{StaticResource ColorfulListView}" AlternationCount="2">

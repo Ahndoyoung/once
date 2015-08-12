@@ -53,24 +53,8 @@ namespace Once_v2_2015.ViewModel
 
         #endregion
 
-        private void OnReceiveMessageAction(ViewModelMessage obj)
-        {
-            string[] arr = obj.Text.Split('^');
-
-            switch (arr[0])
-            {
-                case "t":
-
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
         public OrdersViewModel()
         {
-            Messenger.Default.Register<ViewModelMessage>(this, OnReceiveMessageAction);
         }
     }
 }
