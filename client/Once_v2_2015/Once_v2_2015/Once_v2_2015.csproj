@@ -102,8 +102,8 @@
     <Compile Include="View\MenuSettingView.xaml.cs">
       <DependentUpon>MenuSettingView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\OrdersView.xaml.cs">
-      <DependentUpon>OrdersView.xaml</DependentUpon>
+    <Compile Include="View\OrdersUC.xaml.cs">
+      <DependentUpon>OrdersUC.xaml</DependentUpon>
     </Compile>
     <Page Include="View\CounterWindow.xaml">
       <SubType>Designer</SubType>
@@ -136,7 +136,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\OrdersView.xaml">
+    <Page Include="View\OrdersUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

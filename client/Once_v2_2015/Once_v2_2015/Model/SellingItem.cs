@@ -19,6 +19,8 @@ namespace Once_v2_2015.Model
             {
                 _quantity = value;
                 RaisePropertyChanged("quantity");
+
+                total = quantity * price;
             }
         }
 

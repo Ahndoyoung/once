@@ -272,7 +272,6 @@ namespace Once_v2_2015.ViewModel
                 if (sellingItem.name == name && sellingItem.temperature == checkedTemp && sellingItem.size == checkedSize)
                 {
                     sellingItem.quantity++;
-                    sellingItem.total = sellingItem.price * sellingItem.quantity;
                     isExist = true;
                     break;
                 }
@@ -283,7 +282,6 @@ namespace Once_v2_2015.ViewModel
                 SellingItems.Add(si);
             }
             SubTotal = (int.Parse(SubTotal) + price).ToString();
-            Total = (int.Parse(SubTotal) - int.Parse(DiscountPrice)).ToString();
         }
         #endregion
 
@@ -301,7 +299,8 @@ namespace Once_v2_2015.ViewModel
             SellingItems.Clear();
             DiscountPrice = "0";
             SubTotal = "0";
-            Total = "0";
+
+            OrderNumber++;
         }
 
         #endregion
@@ -321,12 +320,10 @@ namespace Once_v2_2015.ViewModel
 
 
             SubTotal = (int.Parse(SubTotal) - SelectedSellingItem.price).ToString();
-            Total = (int.Parse(SubTotal) - int.Parse(DiscountPrice)).ToString();
 
             if (SelectedSellingItem.quantity != 1)
             {
                 SelectedSellingItem.quantity--;
-                SelectedSellingItem.total = SelectedSellingItem.price * SelectedSellingItem.quantity;
             }
             else
             {
@@ -362,6 +359,22 @@ namespace Once_v2_2015.ViewModel
 
         #endregion
 
+        #region SendOrderCommand
+
+        private RelayCommand _sendOrderCommand;
+
+        public RelayCommand SendOrderCommand
+        {
+            get { return _sendOrderCommand ?? (_sendOrderCommand = new RelayCommand(SendOrder)); }
+        }
+
+        private void SendOrder()
+        {
+            
+        }
+
+        #endregion
+
         #endregion
 
         #region Properties
@@ -382,6 +395,8 @@ namespace Once_v2_2015.ViewModel
             {
                 _discountPrice = value;
                 RaisePropertyChanged("DiscountPrice");
+
+                Total = (int.Parse(SubTotal) - int.Parse(DiscountPrice)).ToString();
             }
         }
 
@@ -394,6 +409,8 @@ namespace Once_v2_2015.ViewModel
             {
                 _subTotal = value;
                 RaisePropertyChanged("SubTotal");
+
+                Total = (int.Parse(SubTotal) - int.Parse(DiscountPrice)).ToString();
             }
         }
 
@@ -442,6 +459,32 @@ namespace Once_v2_2015.ViewModel
             {
                 _ordersVisible = value;
                 RaisePropertyChanged("OrdersVisible");
+            }
+        }
+
+        private int _orderNumber = 1;
+
+        public int OrderNumber
+        {
+            get { return _orderNumber; }
+            set
+            {
+                _orderNumber = value;
+                RaisePropertyChanged("OrderNumber");
+
+                StrOrderNumber = "Order #" + _orderNumber.ToString();
+            }
+        }
+
+        private string _strOrderNumber = "Order #1";
+
+        public string StrOrderNumber
+        {
+            get { return _strOrderNumber; }
+            set
+            {
+                _strOrderNumber = value;
+                RaisePropertyChanged("StrOrderNumber");
             }
         }
 
@@ -521,12 +564,10 @@ namespace Once_v2_2015.ViewModel
             {
                 case "ClearDiscount":
                     DiscountPrice = "0";
-                    Total = SubTotal;
                     break;
 
                 case "ApplyDiscount":
                     DiscountPrice = (int.Parse(DiscountPrice) + int.Parse(arr[1])).ToString();
-                    Total = (int.Parse(SubTotal) - int.Parse(DiscountPrice)).ToString();
                     break;
 
                 case "AddOption":
@@ -534,7 +575,6 @@ namespace Once_v2_2015.ViewModel
                     SellingItems.Add(si);
 
                     SubTotal = (int.Parse(SubTotal) + 500).ToString();
-                    Total = (int.Parse(SubTotal) - int.Parse(DiscountPrice)).ToString();
                     break;
 
                 default:

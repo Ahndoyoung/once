@@ -18,9 +18,9 @@ namespace Once_v2_2015.View
     /// <summary>
     /// OrdersView.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class OrdersView : UserControl
+    public partial class OrdersUC : UserControl
     {
-        public OrdersView()
+        public OrdersUC()
         {
             InitializeComponent();
         }
