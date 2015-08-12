@@ -333,7 +333,33 @@ namespace Once_v2_2015.ViewModel
                 SellingItems.Remove(SelectedSellingItem);
             }
         }
-        
+
+        #endregion
+
+        #region ViewOrdersCommand
+
+        private RelayCommand _viewOrdersCommand;
+
+        public RelayCommand ViewOrdersCommand
+        {
+            get { return _viewOrdersCommand ?? (_viewOrdersCommand = new RelayCommand(ViewOrders)); }
+        }
+
+        private void ViewOrders()
+        {
+            if (CounterVisible == Visibility.Visible)
+            {
+                CounterVisible = Visibility.Collapsed;
+                OrdersVisible = Visibility.Visible;
+
+            }
+            else
+            {
+                CounterVisible = Visibility.Visible;
+                OrdersVisible = Visibility.Collapsed;
+            }
+        }
+
         #endregion
 
         #endregion
@@ -392,6 +418,30 @@ namespace Once_v2_2015.ViewModel
             {
                 _selectedSellingItem = value;
                 RaisePropertyChanged("SelectedSellingItem");
+            }
+        }
+
+        private Visibility _counterVisible = Visibility.Visible;
+
+        public Visibility CounterVisible
+        {
+            get { return _counterVisible; }
+            set
+            {
+                _counterVisible = value;
+                RaisePropertyChanged("CounterVisible");
+            }
+        }
+
+        private Visibility _ordersVisible = Visibility.Collapsed;
+
+        public Visibility OrdersVisible
+        {
+            get { return _ordersVisible; }
+            set
+            {
+                _ordersVisible = value;
+                RaisePropertyChanged("OrdersVisible");
             }
         }
 
@@ -467,28 +517,28 @@ namespace Once_v2_2015.ViewModel
         {
             string[] arr = obj.Text.Split('^');
 
-            // ClearDiscount
-            if (arr[0] == "ClearDiscount")
+            switch (arr[0])
             {
-                DiscountPrice = "0";
-                Total = SubTotal;
-            }
+                case "ClearDiscount":
+                    DiscountPrice = "0";
+                    Total = SubTotal;
+                    break;
 
-            // ApplyDiscount
-            if (arr[0] == "ApplyDiscount")
-            {
-                DiscountPrice = (int.Parse(DiscountPrice) + int.Parse(arr[1])).ToString();
-                Total = (int.Parse(SubTotal) - int.Parse(DiscountPrice)).ToString();
-            }
+                case "ApplyDiscount":
+                    DiscountPrice = (int.Parse(DiscountPrice) + int.Parse(arr[1])).ToString();
+                    Total = (int.Parse(SubTotal) - int.Parse(DiscountPrice)).ToString();
+                    break;
 
-            // AddOption
-            if (arr[0] == "AddOption")
-            {
-                SellingItem si = new SellingItem(arr[1], null, null, 500);
-                SellingItems.Add(si);
+                case "AddOption":
+                    SellingItem si = new SellingItem(arr[1], null, null, 500);
+                    SellingItems.Add(si);
 
-                SubTotal = (int.Parse(SubTotal) + 500).ToString();
-                Total = (int.Parse(SubTotal) - int.Parse(DiscountPrice)).ToString();
+                    SubTotal = (int.Parse(SubTotal) + 500).ToString();
+                    Total = (int.Parse(SubTotal) - int.Parse(DiscountPrice)).ToString();
+                    break;
+
+                default:
+                    break;
             }
         }
 
