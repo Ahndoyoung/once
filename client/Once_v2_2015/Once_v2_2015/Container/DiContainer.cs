@@ -18,6 +18,7 @@ namespace Once_v2_2015.Container
             Bind<DiscountViewModel>().ToSelf().InSingletonScope().Named("DiscountVM");
             Bind<InnerMenuSettingViewModel>().ToSelf().InSingletonScope().Named("InnerMenuSettingVM");
             Bind<MenuSettingViewModel>().ToSelf().InSingletonScope().Named("MenuSettingVM");
+            Bind<OrdersViewModel>().ToSelf().InSingletonScope().Named("OrdersVM");
         }
     }
 }

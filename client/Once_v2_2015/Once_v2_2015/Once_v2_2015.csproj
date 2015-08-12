@@ -91,6 +91,7 @@
     <Compile Include="ViewModel\InnerMenuSettingViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MenuSettingViewModel.cs" />
+    <Compile Include="ViewModel\OrdersViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\DiscountUC.xaml.cs">
       <DependentUpon>DiscountUC.xaml</DependentUpon>
@@ -100,6 +101,9 @@
     </Compile>
     <Compile Include="View\MenuSettingView.xaml.cs">
       <DependentUpon>MenuSettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OrdersView.xaml.cs">
+      <DependentUpon>OrdersView.xaml</DependentUpon>
     </Compile>
     <Page Include="View\CounterWindow.xaml">
       <SubType>Designer</SubType>
@@ -129,6 +133,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\MenuSettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OrdersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
