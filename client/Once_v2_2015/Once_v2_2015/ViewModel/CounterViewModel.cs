@@ -377,6 +377,7 @@ namespace Once_v2_2015.ViewModel
 
             if (items.Count != 0)
             {
+                Border brd = new Border();
                 Grid grd = new Grid();
                 // TextBlock
                 TextBlock tb = new TextBlock();
@@ -468,15 +469,14 @@ namespace Once_v2_2015.ViewModel
                 btnC.VerticalAlignment = VerticalAlignment.Bottom;
                 btnC.Margin = new Thickness(0, 0, OrderPosition.InitBtnCRight, OrderPosition.InitBtnBottom);
 
-                //btnC.Command = LoadMenuCommand;
-                //object[] obj = new object[] { cw, i };
-                //btnC.CommandParameter = obj;
+                btnC.Command = CompleteOrderCommand;
+                object[] obj_btnC = new object[] { ov, brd };
+                btnC.CommandParameter = obj_btnC;
 
                 grd.Children.Add(btnM);
                 grd.Children.Add(btnC);
 
                 // Border
-                Border brd = new Border();
                 brd.BorderBrush = Brushes.Black;
                 brd.BorderThickness = new Thickness(1);
                 brd.HorizontalAlignment = HorizontalAlignment.Left;
@@ -492,6 +492,41 @@ namespace Once_v2_2015.ViewModel
                 SellingItems.Clear();
                 DiscountPrice = "0";
                 SubTotal = "0";
+            }
+        }
+
+        #endregion
+
+        #region CompleteOrderCommand
+
+        private RelayCommand<object> _completeOrderCommand;
+
+        public RelayCommand<object> CompleteOrderCommand
+        {
+            get { return _completeOrderCommand ?? (_completeOrderCommand = new RelayCommand<object>(CompleteOrder)); }
+        }
+
+        private void CompleteOrder(object obj)
+        {
+            object[] values = (object[]) obj;
+            OrdersUC ov = (OrdersUC) values[0];
+            Border brd = (Border) values[1];
+
+            bool isFired = false;
+            for (int i = 0; i < ov.grdOrders.Children.Count; i++)
+            {
+                if (brd == ov.grdOrders.Children[i])
+                {
+                    ov.grdOrders.Children.RemoveAt(i);
+                    ExistingOrder--;
+                    isFired = true;
+                }
+
+                if (isFired && i != ov.grdOrders.Children.Count)
+                {
+                    Border tmp = (Border)ov.grdOrders.Children[i];
+                    tmp.Margin = new Thickness(tmp.Margin.Left - OrderPosition.MarginBorderLeft, tmp.Margin.Top, 0, tmp.Margin.Bottom);
+                }
             }
         }
 
