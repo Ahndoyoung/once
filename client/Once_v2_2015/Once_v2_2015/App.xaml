@@ -65,7 +65,7 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
-        
+
         <Style TargetType="Button" x:Key="IvoryButton">
             <Setter Property="Template" Value="{StaticResource IvoryRadius}"></Setter>
         </Style>

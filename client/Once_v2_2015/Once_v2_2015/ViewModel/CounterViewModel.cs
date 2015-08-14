@@ -584,6 +584,18 @@ namespace Once_v2_2015.ViewModel
             }
         }
 
+        private Visibility _cntVisible = Visibility.Collapsed;
+
+        public Visibility CntVisible
+        {
+            get { return _cntVisible; }
+            set
+            {
+                _cntVisible = value;
+                RaisePropertyChanged("CntVisible");
+            }
+        }
+
         private int _orderNumber = 1;
 
         public int OrderNumber
@@ -618,6 +630,14 @@ namespace Once_v2_2015.ViewModel
             set
             {
                 _existingOrder = value;
+                if (_existingOrder == 0)
+                {
+                    CntVisible = Visibility.Collapsed;
+                }
+                else
+                {
+                    CntVisible = Visibility.Visible;
+                }
                 RaisePropertyChanged("ExistingOrder");
             }
         }

@@ -28,6 +28,9 @@
             <Image Stretch="Fill" Opacity="0.2" Source="/Once_v2_2015;component/img/tree.png"/>
             <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="68,10,0,0" TextWrapping="Wrap" Text="Once" VerticalAlignment="Top" Foreground="White" FontFamily="Segoe Script" FontSize="64"/>
             <Button x:Name="button_Copy" Command="{Binding ViewOrdersCommand}" Style="{StaticResource BrownButton}"  Content="Orders" Margin="0,23,20,28" Foreground="#FFFBFBEF" FontSize="18.667" FontWeight="Bold" FontFamily="Segoe UI" HorizontalAlignment="Right" Width="186"/>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Right" Margin="0,0,162,43" Width="60" CornerRadius="100" Background="#FFFBFBEF" Height="60" Visibility="{Binding CntVisible}">
+                <TextBlock x:Name="textBlock3" TextWrapping="Wrap" Text="{Binding ExistingOrder}" TextAlignment="Center" VerticalAlignment="Center" Foreground="#FF603A17" FontFamily="Segoe Print" FontWeight="Bold" FontSize="21.333"/>
+            </Border>
         </Grid>
         <Grid Margin="898,113,0,0" Visibility="{Binding CounterVisible}">
             <TextBlock x:Name="textBlock1" Margin="181,25,180,0" TextWrapping="Wrap" Text="{Binding StrOrderNumber}" VerticalAlignment="Top" Foreground="#FF603A17" FontSize="29.333" FontFamily="Segoe Print" TextAlignment="Center"/>
