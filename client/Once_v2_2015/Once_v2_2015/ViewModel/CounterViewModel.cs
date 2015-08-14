@@ -359,15 +359,19 @@ namespace Once_v2_2015.ViewModel
 
         #region SendOrderCommand
 
-        private RelayCommand<OrdersUC> _sendOrderCommand;
+        private RelayCommand<object> _sendOrderCommand;
 
-        public RelayCommand<OrdersUC> SendOrderCommand
+        public RelayCommand<object> SendOrderCommand
         {
-            get { return _sendOrderCommand ?? (_sendOrderCommand = new RelayCommand<OrdersUC>(SendOrder)); }
+            get { return _sendOrderCommand ?? (_sendOrderCommand = new RelayCommand<object>(SendOrder)); }
         }
 
-        private void SendOrder(OrdersUC ov)
+        private void SendOrder(object obj)
         {
+            object[] values = (object[]) obj;
+            CounterWindow cw = (CounterWindow) values[0];
+            OrdersUC ov = (OrdersUC) values[1];
+
             var items = new ObservableCollection<SellingItem>();
             foreach (var si in SellingItems)
             {
@@ -377,121 +381,155 @@ namespace Once_v2_2015.ViewModel
 
             if (items.Count != 0)
             {
-                Border brd = new Border();
-                Grid grd = new Grid();
-                // TextBlock
-                TextBlock tb = new TextBlock();
-                tb.Margin = new Thickness(OrderPosition.InitTbLeft, OrderPosition.InitTbTop, OrderPosition.InitTbRight,
-                    0);
-                tb.VerticalAlignment = VerticalAlignment.Top;
-                tb.TextAlignment = TextAlignment.Center;
+                string way = cw.rbCash.IsChecked == true ? "현금" : "카드";
+                MessageBoxResult mbr = MessageBox.Show(Total + "원을 " + way + "(으)로 계산하시겠습니까?", "계산확인", MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
 
-                tb.Text = "Order #" + (OrderNumber++).ToString();
-                tb.FontSize = (double) new FontSizeConverter().ConvertFrom("22pt");
-                tb.FontFamily = new FontFamily("Segoe Print");
-                tb.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x60, 0x3A, 0x17));
-                grd.Children.Add(tb);
+                if (mbr == MessageBoxResult.Yes)
+                {
+                    Border brd = new Border();
+                    Grid grd = new Grid();
+                    // TextBlock
+                    TextBlock tb = new TextBlock();
+                    tb.Margin = new Thickness(OrderPosition.InitTbLeft, OrderPosition.InitTbTop,
+                        OrderPosition.InitTbRight,
+                        0);
+                    tb.VerticalAlignment = VerticalAlignment.Top;
+                    tb.TextAlignment = TextAlignment.Center;
 
-                // ListView
-                ListView lv = new ListView();
-                lv.ItemsSource = items;
-                lv.Margin = new Thickness(OrderPosition.InitLvLeft, OrderPosition.InitLvTop, OrderPosition.InitLvRight,
-                    OrderPosition.InitLvBottom);
-                lv.SelectionMode = SelectionMode.Single;
-                lv.FontSize = (double) new FontSizeConverter().ConvertFrom("13pt");
-                lv.FontFamily = new FontFamily("NanumBarunGothic");
-                lv.Foreground = Brushes.Black;
-                Style style = Application.Current.FindResource("ColorfulListView") as Style;
-                lv.ItemContainerStyle = style;
-                lv.AlternationCount = 2;
+                    tb.Text = "Order #" + (OrderNumber++).ToString();
+                    tb.FontSize = (double) new FontSizeConverter().ConvertFrom("22pt");
+                    tb.FontFamily = new FontFamily("Segoe Print");
+                    tb.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x60, 0x3A, 0x17));
+                    grd.Children.Add(tb);
 
-                GridView gv = new GridView();
-                GridViewColumn[] gvc = new GridViewColumn[2];
-                gvc[0] = new GridViewColumn();
-                gvc[1] = new GridViewColumn();
-                GridViewColumnHeader[] gvch = new GridViewColumnHeader[2];
-                gvch[0] = new GridViewColumnHeader();
-                gvch[1] = new GridViewColumnHeader();
+                    TextBlock tb1 = new TextBlock();
+                    tb1.Margin = new Thickness(0, 0, OrderPosition.InitTbWayRight, OrderPosition.InitTbBottom);
+                    tb1.VerticalAlignment = VerticalAlignment.Bottom;
+                    tb1.HorizontalAlignment = HorizontalAlignment.Right;
+                    tb1.TextAlignment = TextAlignment.Center;
 
-                gvc[0].Width = 260;
-                gvc[0].DisplayMemberBinding = new Binding("content");
-                gvch[0].Content = "Name";
-                gvch[0].FontSize = (double) new FontSizeConverter().ConvertFrom("13pt");
-                gvch[0].FontFamily = new FontFamily("Segoe UI");
-                gvc[0].Header = gvch[0];
-                gvc[1].Width = 100;
-                gvc[1].DisplayMemberBinding = new Binding("quantity");
-                gvch[1].Content = "Qty";
-                gvch[1].FontSize = (double) new FontSizeConverter().ConvertFrom("13pt");
-                gvch[1].FontFamily = new FontFamily("Segoe UI");
-                gvc[1].Header = gvch[1];
+                    tb1.Text = cw.rbCash.IsChecked == true ? "현금" : "카드";
+                    tb1.FontSize = (double) new FontSizeConverter().ConvertFrom("20pt");
+                    tb1.FontFamily = new FontFamily("Segoe UI Semibold");
+                    tb1.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x59, 0x59, 0x59));
+                    grd.Children.Add(tb1);
 
-                gv.Columns.Add(gvc[0]);
-                gv.Columns.Add(gvc[1]);
+                    TextBlock tb2 = new TextBlock();
+                    tb2.Margin = new Thickness(0, 0, OrderPosition.InitTbPriceRight, OrderPosition.InitTbBottom);
+                    tb2.VerticalAlignment = VerticalAlignment.Bottom;
+                    tb2.HorizontalAlignment = HorizontalAlignment.Right;
+                    tb2.TextAlignment = TextAlignment.Right;
 
-                lv.View = gv;
-                grd.Children.Add(lv);
+                    tb2.Text = Total;
+                    tb2.FontSize = (double) new FontSizeConverter().ConvertFrom("20pt");
+                    tb2.FontFamily = new FontFamily("Segoe UI Semibold");
+                    tb2.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x59, 0x59, 0x59));
+                    grd.Children.Add(tb2);
 
-                // Button
-                Button btnM = new Button();
-                btnM.Width = 112;
-                btnM.Height = 56;
+                    // ListView
+                    ListView lv = new ListView();
+                    lv.ItemsSource = items;
+                    lv.Margin = new Thickness(OrderPosition.InitLvLeft, OrderPosition.InitLvTop,
+                        OrderPosition.InitLvRight,
+                        OrderPosition.InitLvBottom);
+                    lv.SelectionMode = SelectionMode.Single;
+                    lv.FontSize = (double) new FontSizeConverter().ConvertFrom("13pt");
+                    lv.FontFamily = new FontFamily("NanumBarunGothic");
+                    lv.Foreground = Brushes.Black;
+                    Style style = Application.Current.FindResource("ColorfulListView") as Style;
+                    lv.ItemContainerStyle = style;
+                    lv.AlternationCount = 2;
 
-                Style style1 = Application.Current.FindResource("IvoryButton") as Style;
-                btnM.Style = style1;
+                    GridView gv = new GridView();
+                    GridViewColumn[] gvc = new GridViewColumn[2];
+                    gvc[0] = new GridViewColumn();
+                    gvc[1] = new GridViewColumn();
+                    GridViewColumnHeader[] gvch = new GridViewColumnHeader[2];
+                    gvch[0] = new GridViewColumnHeader();
+                    gvch[1] = new GridViewColumnHeader();
 
-                btnM.Content = "Modify";
-                btnM.FontFamily = new FontFamily("NanumBarunGothic");
-                btnM.FontSize = (double) new FontSizeConverter().ConvertFrom("11pt");
-                btnM.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x60, 0x3A, 0x17));
+                    gvc[0].Width = 260;
+                    gvc[0].DisplayMemberBinding = new Binding("content");
+                    gvch[0].Content = "Name";
+                    gvch[0].FontSize = (double) new FontSizeConverter().ConvertFrom("13pt");
+                    gvch[0].FontFamily = new FontFamily("Segoe UI");
+                    gvc[0].Header = gvch[0];
+                    gvc[1].Width = 100;
+                    gvc[1].DisplayMemberBinding = new Binding("quantity");
+                    gvch[1].Content = "Qty";
+                    gvch[1].FontSize = (double) new FontSizeConverter().ConvertFrom("13pt");
+                    gvch[1].FontFamily = new FontFamily("Segoe UI");
+                    gvc[1].Header = gvch[1];
 
-                btnM.HorizontalAlignment = HorizontalAlignment.Right;
-                btnM.VerticalAlignment = VerticalAlignment.Bottom;
-                btnM.Margin = new Thickness(0, 0, OrderPosition.InitBtnMRight, OrderPosition.InitBtnBottom);
+                    gv.Columns.Add(gvc[0]);
+                    gv.Columns.Add(gvc[1]);
 
-                //btnM.Command = LoadMenuCommand;
-                //object[] obj = new object[] { cw, i };
-                //btnM.CommandParameter = obj;
+                    lv.View = gv;
+                    grd.Children.Add(lv);
 
-                Button btnC = new Button();
-                btnC.Width = 112;
-                btnC.Height = 56;
+                    // Button
+                    Button btnM = new Button();
+                    btnM.Width = 112;
+                    btnM.Height = 56;
 
-                Style style2 = Application.Current.FindResource("BrownButton") as Style;
-                btnC.Style = style2;
+                    Style style1 = Application.Current.FindResource("IvoryButton") as Style;
+                    btnM.Style = style1;
 
-                btnC.Content = "Complete";
-                btnC.FontFamily = new FontFamily("NanumBarunGothic");
-                btnC.FontSize = (double) new FontSizeConverter().ConvertFrom("11pt");
-                btnC.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0xFB, 0xFB, 0xEF));
+                    btnM.Content = "Modify";
+                    btnM.FontFamily = new FontFamily("NanumBarunGothic");
+                    btnM.FontSize = (double) new FontSizeConverter().ConvertFrom("11pt");
+                    btnM.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x60, 0x3A, 0x17));
 
-                btnC.HorizontalAlignment = HorizontalAlignment.Right;
-                btnC.VerticalAlignment = VerticalAlignment.Bottom;
-                btnC.Margin = new Thickness(0, 0, OrderPosition.InitBtnCRight, OrderPosition.InitBtnBottom);
+                    btnM.HorizontalAlignment = HorizontalAlignment.Right;
+                    btnM.VerticalAlignment = VerticalAlignment.Bottom;
+                    btnM.Margin = new Thickness(0, 0, OrderPosition.InitBtnMRight, OrderPosition.InitBtnBottom);
 
-                btnC.Command = CompleteOrderCommand;
-                object[] obj_btnC = new object[] { ov, brd };
-                btnC.CommandParameter = obj_btnC;
+                    //btnM.Command = LoadMenuCommand;
+                    //object[] obj = new object[] { cw, i };
+                    //btnM.CommandParameter = obj;
 
-                grd.Children.Add(btnM);
-                grd.Children.Add(btnC);
+                    Button btnC = new Button();
+                    btnC.Width = 112;
+                    btnC.Height = 56;
 
-                // Border
-                brd.BorderBrush = Brushes.Black;
-                brd.BorderThickness = new Thickness(1);
-                brd.HorizontalAlignment = HorizontalAlignment.Left;
-                brd.Width = 450;
-                brd.Margin = new Thickness(OrderPosition.InitBorderLeft + OrderPosition.MarginBorderLeft * (ExistingOrder++),
-                    OrderPosition.InitBorderTop, 0, OrderPosition.InitBorderBottom);
-                brd.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xF7, 0xF1, 0xE1));
+                    Style style2 = Application.Current.FindResource("BrownButton") as Style;
+                    btnC.Style = style2;
 
-                brd.Child = grd;
+                    btnC.Content = "Complete";
+                    btnC.FontFamily = new FontFamily("NanumBarunGothic");
+                    btnC.FontSize = (double) new FontSizeConverter().ConvertFrom("11pt");
+                    btnC.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0xFB, 0xFB, 0xEF));
 
-                ov.grdOrders.Children.Add(brd);
+                    btnC.HorizontalAlignment = HorizontalAlignment.Right;
+                    btnC.VerticalAlignment = VerticalAlignment.Bottom;
+                    btnC.Margin = new Thickness(0, 0, OrderPosition.InitBtnCRight, OrderPosition.InitBtnBottom);
 
-                SellingItems.Clear();
-                DiscountPrice = "0";
-                SubTotal = "0";
+                    btnC.Command = CompleteOrderCommand;
+                    object[] obj_btnC = new object[] {ov, brd};
+                    btnC.CommandParameter = obj_btnC;
+
+                    grd.Children.Add(btnM);
+                    grd.Children.Add(btnC);
+
+                    // Border
+                    brd.BorderBrush = Brushes.Black;
+                    brd.BorderThickness = new Thickness(1);
+                    brd.HorizontalAlignment = HorizontalAlignment.Left;
+                    brd.Width = 450;
+                    brd.Margin =
+                        new Thickness(OrderPosition.InitBorderLeft + OrderPosition.MarginBorderLeft*(ExistingOrder++),
+                            OrderPosition.InitBorderTop, 0, OrderPosition.InitBorderBottom);
+                    brd.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xF7, 0xF1, 0xE1));
+
+                    brd.Child = grd;
+
+                    ov.grdOrders.Children.Add(brd);
+
+                    SellingItems.Clear();
+                    DiscountPrice = "0";
+                    SubTotal = "0";
+                }
             }
         }
 

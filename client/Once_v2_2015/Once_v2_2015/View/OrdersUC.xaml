@@ -21,7 +21,7 @@
                     <Border Visibility="Collapsed" BorderBrush="Black" BorderThickness="1" Margin="990,50,0,38" Background="#FFF4EED8" HorizontalAlignment="Left" Width="450">
                         <Grid>
                             <TextBlock x:Name="textBlock2" Margin="103,20,104,0" TextWrapping="Wrap" Text="Order #1" VerticalAlignment="Top" Foreground="#FF603A17" FontSize="29.333" FontFamily="Segoe Print" TextAlignment="Center"/>
-                            <ListView x:Name="listView1" Margin="32,96,32,83" SelectionMode="Single" FontSize="16" FontFamily="NanumBarunGothic" Foreground="Black" ItemContainerStyle="{StaticResource ColorfulListView}" AlternationCount="2">
+                            <ListView x:Name="listView1" Margin="32,96,32,127" SelectionMode="Single" FontSize="16" FontFamily="NanumBarunGothic" Foreground="Black" ItemContainerStyle="{StaticResource ColorfulListView}" AlternationCount="2">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Width="260" DisplayMemberBinding="{Binding ''}" >
@@ -35,6 +35,8 @@
                             </ListView>
                             <Button x:Name="button1" Style="{StaticResource BrownButton}" Content="Complete" HorizontalAlignment="Right" Margin="0,0,32,15" Width="112" FontFamily="Segoe UI" FontSize="14.667" Foreground="#FFFBFBEF" Height="56" VerticalAlignment="Bottom"/>
                             <Button x:Name="button_Copy1" Style="{StaticResource IvoryButton}" Content="Modify" HorizontalAlignment="Right" Margin="0,0,149,15" VerticalAlignment="Bottom" Width="112" Height="56" FontFamily="Segoe UI" FontSize="14.667" Foreground="#FF603A17"/>
+                            <TextBlock x:Name="textBlock2_Copy4" HorizontalAlignment="Right" Margin="0,0,32,87" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Segoe UI Semibold" Width="129" FontSize="26.667" Foreground="#FF595959" TextAlignment="Right" Text="0"/>
+                            <TextBlock x:Name="textBlock2_Copy" HorizontalAlignment="Right" Margin="0,0,149,87" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Segoe UI Semibold" Width="112" FontSize="26.667" Foreground="#FF595959" Text="카드" TextAlignment="Center"/>
                         </Grid>
                     </Border>
                 </Grid>

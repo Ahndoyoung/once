@@ -30,11 +30,15 @@ namespace Once_v2_2015.Class
         public const int InitTbRight = 104;
         public const int InitTbTop = 20;
 
+        public const int InitTbWayRight = 149;
+        public const int InitTbPriceRight = 32;
+        public const int InitTbBottom = 87;
+
         // ListView
         public const int InitLvLeft = 32;
         public const int InitLvRight = 32;
         public const int InitLvTop = 96;
-        public const int InitLvBottom = 83;
+        public const int InitLvBottom = 127;
 
         // Button
         public const int InitBtnMRight = 149;
