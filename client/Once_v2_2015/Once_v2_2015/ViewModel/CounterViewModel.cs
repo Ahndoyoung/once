@@ -299,6 +299,8 @@ namespace Once_v2_2015.ViewModel
             SellingItems.Clear();
             DiscountPrice = "0";
             SubTotal = "0";
+
+            ShowDetailVisible = Visibility.Collapsed;
         }
 
         #endregion
@@ -397,7 +399,7 @@ namespace Once_v2_2015.ViewModel
                     tb.VerticalAlignment = VerticalAlignment.Top;
                     tb.TextAlignment = TextAlignment.Center;
 
-                    tb.Text = "Order #" + (OrderNumber++).ToString();
+                    tb.Text = "Order #" + OrderNumber.ToString();
                     tb.FontSize = (double) new FontSizeConverter().ConvertFrom("22pt");
                     tb.FontFamily = new FontFamily("Segoe Print");
                     tb.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x60, 0x3A, 0x17));
@@ -485,9 +487,9 @@ namespace Once_v2_2015.ViewModel
                     btnM.VerticalAlignment = VerticalAlignment.Bottom;
                     btnM.Margin = new Thickness(0, 0, OrderPosition.InitBtnMRight, OrderPosition.InitBtnBottom);
 
-                    //btnM.Command = LoadMenuCommand;
-                    //object[] obj = new object[] { cw, i };
-                    //btnM.CommandParameter = obj;
+                    btnM.Command = ModifyOrderCommand;
+                    object[] obj_btnM = new object[] { OrderNumber, cw, items, Total, SubTotal, DiscountPrice, way, ov, brd };
+                    btnM.CommandParameter = obj_btnM;
 
                     Button btnC = new Button();
                     btnC.Width = 112;
@@ -525,10 +527,13 @@ namespace Once_v2_2015.ViewModel
                     brd.Child = grd;
 
                     ov.grdOrders.Children.Add(brd);
+                    OrderNumber++;
 
                     SellingItems.Clear();
                     DiscountPrice = "0";
                     SubTotal = "0";
+
+                    ShowDetailVisible = Visibility.Collapsed;
                 }
             }
         }
@@ -566,6 +571,104 @@ namespace Once_v2_2015.ViewModel
                     tmp.Margin = new Thickness(tmp.Margin.Left - OrderPosition.MarginBorderLeft, tmp.Margin.Top, 0, tmp.Margin.Bottom);
                 }
             }
+        }
+
+        #endregion
+
+        #region ModifyOrderCommand
+
+        private RelayCommand<object> _modifyOrderCommand;
+
+        public RelayCommand<object> ModifyOrderCommand
+        {
+            get { return _modifyOrderCommand ?? (_modifyOrderCommand = new RelayCommand<object>(ModifyOrder)); }
+        }
+
+        private void ModifyOrder(object obj)
+        {
+            object[] values = (object [])obj;
+            int idx = (int) values[0];
+            CounterWindow cw = (CounterWindow) values[1];
+            ObservableCollection<SellingItem> items = (ObservableCollection<SellingItem>)values[2];
+            string total = (string)values[3];
+            string subTotal = (string)values[4];
+            string discount = (string)values[5];
+            string payment = (string)values[6];
+            OrdersUC ov = (OrdersUC) values[7];
+            Border brd = (Border) values[8];
+
+
+            MessageBoxResult mbr = MessageBox.Show("Order #" + idx.ToString() + "을(를) 수정하시겠습니까?", "수정확인",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (mbr == MessageBoxResult.Yes)
+            {
+                // ShowDetail
+                ShowDetailVisible = Visibility.Visible;
+
+                object[] param = new object[] {idx, total, subTotal, discount, payment};
+                cw.btnShowDetail.CommandParameter = param;
+
+                // FireOrder
+                bool isFired = false;
+                for (int i = 0; i < ov.grdOrders.Children.Count; i++)
+                {
+                    if (brd == ov.grdOrders.Children[i])
+                    {
+                        ov.grdOrders.Children.RemoveAt(i);
+                        ExistingOrder--;
+                        isFired = true;
+                    }
+
+                    if (isFired && i != ov.grdOrders.Children.Count)
+                    {
+                        Border tmp = (Border)ov.grdOrders.Children[i];
+                        tmp.Margin = new Thickness(tmp.Margin.Left - OrderPosition.MarginBorderLeft, tmp.Margin.Top, 0, tmp.Margin.Bottom);
+                    }
+                }
+
+                // Change Window
+                ViewOrders();
+
+                // Pass Parameters
+                SellingItems.Clear();
+                foreach (var item in items)
+                {
+                    SellingItems.Add(item);
+                }
+                Total = total;
+                SubTotal = subTotal;
+                DiscountPrice = discount;
+                if (payment == "현금")
+                    cw.rbCash.IsChecked = true;
+                else if (payment == "카드")
+                    cw.rbCard.IsChecked = true;
+            }
+        }
+
+        #endregion
+
+        #region ShowDetailCommand
+
+        private RelayCommand<object> _showdetailCommand;
+
+        public RelayCommand<object> ShowDetailCommand
+        {
+            get { return _showdetailCommand ?? (_showdetailCommand = new RelayCommand<object>(ShowDetail)); }
+        }
+
+        private void ShowDetail(object obj)
+        {
+            object[] values = (object[]) obj;
+            int idx = (int) values[0];
+            string total = (string) values[1];
+            string subTotal = (string) values[2];
+            string discount = (string) values[3];
+            string payment = (string) values[4];
+
+            MessageBox.Show(
+                "Order #" + idx.ToString() + "\n\nSubTotal : " + subTotal + "\nDiscounts : " + discount +
+                "\n-------------------------\n"
+                + "Total : " + total + "\nPayment : " + payment, "원본 내역", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         #endregion
@@ -666,6 +769,18 @@ namespace Once_v2_2015.ViewModel
             {
                 _cntVisible = value;
                 RaisePropertyChanged("CntVisible");
+            }
+        }
+
+        private Visibility _showDetailVisible = Visibility.Collapsed;
+
+        public Visibility ShowDetailVisible
+        {
+            get { return _showDetailVisible; }
+            set
+            {
+                _showDetailVisible = value;
+                RaisePropertyChanged("ShowDetailVisible");
             }
         }
 
