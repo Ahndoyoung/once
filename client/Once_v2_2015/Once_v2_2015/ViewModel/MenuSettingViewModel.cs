@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Once_v2_2015.Class;
+using Once_v2_2015.View;
 
 namespace Once_v2_2015.ViewModel
 {
@@ -30,6 +31,66 @@ namespace Once_v2_2015.ViewModel
                 Text = "AddOption^ * " + str
             };
             Messenger.Default.Send(msg);
+        }
+
+        #endregion
+
+        #region TemperatureCommand
+
+        private RelayCommand<MenuSettingView> _temperatureCommand;
+
+        public RelayCommand<MenuSettingView> TemperatureCommand
+        {
+            get { return _temperatureCommand ?? (_temperatureCommand = new RelayCommand<MenuSettingView>(Temperature)); }
+        }
+
+        private void Temperature(MenuSettingView mv)
+        {
+            string text = "InnerTemperature^";
+            if (mv.rbIce.IsChecked == true)
+            {
+                text += "Ice";
+            }
+            else if (mv.rbHot.IsChecked == true)
+            {
+                text += "Hot";
+            }
+
+            var msg = new ViewModelMessage()
+            {
+                Text = text
+            };
+            Messenger.Default.Send<ViewModelMessage>(msg);
+        }
+
+        #endregion
+
+        #region InnerSizeCommand
+
+        private RelayCommand<MenuSettingView> _innerSizeCommand;
+
+        public RelayCommand<MenuSettingView> InnerSizeCommand
+        {
+            get { return _innerSizeCommand ?? (_innerSizeCommand = new RelayCommand<MenuSettingView>(InnerSize)); }
+        }
+
+        private void InnerSize(MenuSettingView mv)
+        {
+            string text = "InnerSize^";
+            if (mv.rbRegular.IsChecked == true)
+            {
+                text += "Regular";
+            }
+            else if (mv.rbLarge.IsChecked == true)
+            {
+                text += "Large";
+            }
+
+            var msg = new ViewModelMessage()
+            {
+                Text = text
+            };
+            Messenger.Default.Send<ViewModelMessage>(msg);
         }
 
         #endregion

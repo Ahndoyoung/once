@@ -9,7 +9,7 @@
              d:DesignHeight="300" d:DesignWidth="300" Width="800" Height="100"
              DataContext="{Binding InnerMenuSettingVM, Source={StaticResource Locator}}">
     <Grid>
-        <Button x:Name="btnTemperature" Command="{Binding TemperatureCommand}" CommandParameter="{Binding ElementName=InnerMenuSettingView}" Style="{StaticResource IceIvoryButton}" Content="Ice" HorizontalAlignment="Left" Margin="259,10,0,0" VerticalAlignment="Top" Width="118" Height="80" Foreground="#FF603A17" FontSize="17.333" FontFamily="NanumBarunGothic"/>
-        <Button x:Name="btnSize" Command="{Binding SizeCommand}" CommandParameter="{Binding ElementName=InnerMenuSettingView}" Style="{StaticResource GrayIvoryButton}" Content="Regular" HorizontalAlignment="Left" Margin="424,10,0,0" VerticalAlignment="Top" Width="118" Height="80" Foreground="#FF603A17" FontSize="17.333" FontFamily="NanumBarunGothic"/>
+        <Button x:Name="btnTemperature" Command="{Binding TemperatureCommand}" Style="{Binding BtnTempStyle}" Content="{Binding StrTemp}" HorizontalAlignment="Left" Margin="259,10,0,0" VerticalAlignment="Top" Width="118" Height="80" Foreground="#FF603A17" FontSize="17.333" FontFamily="NanumBarunGothic"/>
+        <Button x:Name="btnSize" Command="{Binding SizeCommand}" Style="{Binding BtnSizeStyle}" Content="{Binding StrSize}" HorizontalAlignment="Left" Margin="424,10,0,0" VerticalAlignment="Top" Width="118" Height="80" Foreground="#FF603A17" FontSize="17.333" FontFamily="NanumBarunGothic"/>
     </Grid>
 </UserControl>

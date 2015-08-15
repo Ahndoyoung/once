@@ -18,34 +18,32 @@ namespace Once_v2_2015.ViewModel
 
         #region TemperatureCommand
 
-        private RelayCommand<InnerMenuSettingUC> _temperatureCommand;
+        private RelayCommand _temperatureCommand;
 
-        public RelayCommand<InnerMenuSettingUC> TemperatureCommand
+        public RelayCommand TemperatureCommand
         {
             get
             {
-                return _temperatureCommand ?? (_temperatureCommand = new RelayCommand<InnerMenuSettingUC>(Temperature));
+                return _temperatureCommand ?? (_temperatureCommand = new RelayCommand(Temperature));
             }
         }
 
-        private void Temperature(InnerMenuSettingUC ims)
+        private void Temperature()
         {
-            if (ims.btnTemperature.Content.ToString() == "Ice")
+            if (StrTemp == "Ice")
             {
-                ims.btnTemperature.Content = "Hot";
-                Style style = Application.Current.FindResource("HotIvoryButton") as Style;
-                ims.btnTemperature.Style = style;
+                StrTemp = "Hot";
+                BtnTempStyle = Application.Current.FindResource("HotIvoryButton") as Style;
             }
             else
             {
-                ims.btnTemperature.Content = "Ice";
-                Style style = Application.Current.FindResource("IceIvoryButton") as Style;
-                ims.btnTemperature.Style = style;
+                StrTemp = "Ice";
+                BtnTempStyle = Application.Current.FindResource("IceIvoryButton") as Style;
             }
 
             var msg = new ViewModelMessage()
             {
-                Text = "Temperature^" + ims.btnTemperature.Content.ToString()
+                Text = "Temperature^" + StrTemp
             };
             Messenger.Default.Send(msg);
         }
@@ -54,34 +52,32 @@ namespace Once_v2_2015.ViewModel
 
         #region SizeCommand
 
-        private RelayCommand<InnerMenuSettingUC> _sizeCommand;
+        private RelayCommand _sizeCommand;
 
-        public RelayCommand<InnerMenuSettingUC> SizeCommand
+        public RelayCommand SizeCommand
         {
             get
             {
-                return _sizeCommand ?? (_sizeCommand = new RelayCommand<InnerMenuSettingUC>(Size));
+                return _sizeCommand ?? (_sizeCommand = new RelayCommand(Size));
             }
         }
 
-        private void Size(InnerMenuSettingUC ims)
+        private void Size()
         {
-            if (ims.btnSize.Content.ToString() == "Regular")
+            if (StrSize == "Regular")
             {
-                ims.btnSize.Content = "Large";
-                Style style = Application.Current.FindResource("YellowIvoryButton") as Style;
-                ims.btnSize.Style = style;
+                StrSize = "Large";
+                BtnSizeStyle = Application.Current.FindResource("YellowIvoryButton") as Style;
             }
             else
             {
-                ims.btnSize.Content = "Regular";
-                Style style = Application.Current.FindResource("GrayIvoryButton") as Style;
-                ims.btnSize.Style = style;
+                StrSize = "Regular";
+                BtnSizeStyle = Application.Current.FindResource("GrayIvoryButton") as Style;
             }
 
             var msg = new ViewModelMessage()
             {
-                Text = "Size^" + ims.btnSize.Content.ToString()
+                Text = "Size^" + StrSize
             };
             Messenger.Default.Send(msg);
         }
@@ -90,9 +86,95 @@ namespace Once_v2_2015.ViewModel
 
         #endregion
 
+        #region Properties
+
+        private Style _btnTempStyle = Application.Current.FindResource("IceIvoryButton") as Style;
+
+        public Style BtnTempStyle
+        {
+            get { return _btnTempStyle; }
+            set
+            {
+                _btnTempStyle = value;
+                RaisePropertyChanged("BtnTempStyle");
+            }
+        }
+
+        private Style _btnSizeStyle = Application.Current.FindResource("GrayIvoryButton") as Style;
+
+        public Style BtnSizeStyle
+        {
+            get { return _btnSizeStyle; }
+            set
+            {
+                _btnSizeStyle = value;
+                RaisePropertyChanged("BtnSizeStyle");
+            }
+        }
+
+        private string _strTemp = "Ice";
+
+        public string StrTemp
+        {
+            get { return _strTemp; }
+            set
+            {
+                _strTemp = value;
+                RaisePropertyChanged("StrTemp");
+            }
+        }
+
+        private string _strSize = "Regular";
+
+        public string StrSize
+        {
+            get { return _strSize; }
+            set
+            {
+                _strSize = value;
+                RaisePropertyChanged("StrSize");
+            }
+        }
+
+        #endregion
+
+        private void OnReceiveMessageAction(ViewModelMessage obj)
+        {
+            string[] strArr = obj.Text.Split('^');
+            switch (strArr[0])
+            {
+                case "InnerTemperature":
+                    if (strArr[1] == "Ice")
+                    {
+                        StrTemp = "Ice";
+                        BtnTempStyle = Application.Current.FindResource("IceIvoryButton") as Style;
+                    }
+                    else if (strArr[1] == "Hot")
+                    {
+                        StrTemp = "Hot";
+                        BtnTempStyle = Application.Current.FindResource("HotIvoryButton") as Style;
+                    }
+                    break;
+                case "InnerSize":
+                    if (strArr[1] == "Regular")
+                    {
+                        StrSize = "Regular";
+                        BtnSizeStyle = Application.Current.FindResource("GrayIvoryButton") as Style;
+                    }
+                    else if (strArr[1] == "Large")
+                    {
+                        StrSize = "Large";
+                        BtnSizeStyle = Application.Current.FindResource("YellowIvoryButton") as Style;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public InnerMenuSettingViewModel()
         {
-            
+            Messenger.Default.Register<ViewModelMessage>(this, OnReceiveMessageAction);
         }
     }
 }
