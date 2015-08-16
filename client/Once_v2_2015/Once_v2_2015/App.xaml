@@ -70,6 +70,36 @@
             <Setter Property="Template" Value="{StaticResource IvoryRadius}"></Setter>
         </Style>
 
+        <!-- WhippingButton -->
+        <ControlTemplate TargetType="Button" x:Key="WhippingRadius">
+            <Border x:Name="ButtonBackground" CornerRadius="20" BorderBrush="#FF292929" BorderThickness="1">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FFFAF49E" Offset="0"/>
+                        <GradientStop Color="#FFDDBF8C" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" TargetName="ButtonBackground">
+                        <Setter.Value>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFD4D084" Offset="0"/>
+                                <GradientStop Color="#FF9C8762" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style TargetType="Button" x:Key="WhippingButton">
+            <Setter Property="Template" Value="{StaticResource WhippingRadius}"></Setter>
+        </Style>
+
         <!-- StripeRadio -->
         <Style TargetType="{x:Type RadioButton}" x:Key="StripeRadio">
             <Setter Property="Template">

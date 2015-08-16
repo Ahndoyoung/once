@@ -111,21 +111,21 @@ namespace Once_v2_2015.ViewModel
                     if (col == MenuPosition.CntPerRow)
                         row++;
                     col = col % MenuPosition.CntPerRow;
-                    
+
                     int left = MenuPosition.InitLeft + MenuPosition.MarginLeft * col;
                     int right = MenuPosition.InitRight - MenuPosition.MarginLeft * col;
-                    int y = MenuPosition.InitY + MenuPosition.MarginTop*row;
+                    int y = MenuPosition.InitY + MenuPosition.MarginTop * row;
 
                     Button btn = new Button();
                     btn.Width = 180;
                     btn.Height = 130;
 
-                    Style style = Application.Current.FindResource("IvoryButton") as Style;
+                    Style style = (categories[idx].menuList[i].isWhipping == true) ? Application.Current.FindResource("WhippingButton") as Style : Application.Current.FindResource("IvoryButton") as Style;
                     btn.Style = style;
 
                     btn.Content = categories[idx].menuList[i].name.Replace('^', '\n');
                     btn.FontFamily = new FontFamily("NanumBarunGothic");
-                    btn.FontSize = (double) new FontSizeConverter().ConvertFrom("13pt");
+                    btn.FontSize = (double)new FontSizeConverter().ConvertFrom("13pt");
                     btn.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x60, 0x3A, 0x17));
 
                     btn.HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -151,7 +151,7 @@ namespace Once_v2_2015.ViewModel
                     event_left.Actions.Add(invoke_left);
                     triggers.Add(event_left);
 
-                    if (name[0] == '@')
+                    if (categories[idx].menuList[i].isWhipping == true)
                     {
                         object[] right_ob = new object[] { cw, name, "right" };
                         var invoke_right = new InvokeCommandAction { CommandParameter = right_ob };
@@ -297,8 +297,8 @@ namespace Once_v2_2015.ViewModel
                 }
             }
 
-            if(way == "right")
-                name = name.Substring(1, name.Length - 1);
+            if (way == "right")
+                name += "\n * No Whipping";
             bool isExist = false;
             foreach (var sellingItem in SellingItems)
             {
