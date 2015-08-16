@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Interactivity;
 using System.Windows.Media;
 using System.Xml;
 using System.Xml.Serialization;
@@ -130,10 +131,38 @@ namespace Once_v2_2015.ViewModel
                     btn.VerticalAlignment = VerticalAlignment.Top;
                     btn.Margin = new Thickness(left, y, right, 0);
 
-                    btn.Command = AddMenuItemCommand;
+                    //btn.Command = AddMenuItemCommand;
+                    //string name = categories[idx].menuList[i].name;
+                    //object[] ob = new object[] {cw, name};
+                    //btn.CommandParameter = ob;
+
+                    var triggers = Interaction.GetTriggers(btn);
+
                     string name = categories[idx].menuList[i].name;
-                    object[] ob = new object[] {cw, name};
-                    btn.CommandParameter = ob;
+                    object[] left_ob = new object[] { cw, name, "left" };
+                    var invoke_left = new InvokeCommandAction { CommandParameter = left_ob };
+                    var binding_left = new Binding { Path = new PropertyPath("AddMenuItemCommand") };
+                    BindingOperations.SetBinding(invoke_left, InvokeCommandAction.CommandProperty, binding_left);
+                    var event_left = new System.Windows.Interactivity.EventTrigger
+                    {
+                        EventName = "PreviewMouseLeftButtonDown"
+                    };
+                    event_left.Actions.Add(invoke_left);
+                    triggers.Add(event_left);
+
+                    if (name[0] == '@')
+                    {
+                        object[] right_ob = new object[] { cw, name, "right" };
+                        var invoke_right = new InvokeCommandAction { CommandParameter = right_ob };
+                        var binding_right = new Binding { Path = new PropertyPath("AddMenuItemCommand") };
+                        BindingOperations.SetBinding(invoke_right, InvokeCommandAction.CommandProperty, binding_right);
+                        var event_right = new System.Windows.Interactivity.EventTrigger
+                        {
+                            EventName = "PreviewMouseRightButtonDown"
+                        };
+                        event_right.Actions.Add(invoke_right);
+                        triggers.Add(event_right);
+                    }
 
                     cw.grdInnerMenu.Children.Add(btn);
 
@@ -216,6 +245,7 @@ namespace Once_v2_2015.ViewModel
             object[] values = (object[])obj;
             CounterWindow cw = (CounterWindow)values[0];
             string name = (string)values[1];
+            string way = (string) values[2];
 
             int price = 0;
 
@@ -252,7 +282,7 @@ namespace Once_v2_2015.ViewModel
                 {
                     checkedTemp = 'h';
                 }
-            }            
+            }
             char? checkedSize = null;
             if (!isNullSize)
             {
@@ -266,6 +296,8 @@ namespace Once_v2_2015.ViewModel
                 }
             }
 
+            if(way == "right")
+                name = name.Substring(1, name.Length - 1);
             bool isExist = false;
             foreach (var sellingItem in SellingItems)
             {

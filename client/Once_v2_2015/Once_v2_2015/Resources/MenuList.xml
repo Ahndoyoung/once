@@ -136,13 +136,13 @@
         <price>3200</price>
       </MenuItem>
       <MenuItem>
-        <name>카페모카</name>
+        <name>@카페모카</name>
         <temperature>104</temperature>
         <size>114</size>
         <price>3500</price>
       </MenuItem>
       <MenuItem>
-        <name>카페모카</name>
+        <name>@카페모카</name>
         <temperature>105</temperature>
         <size>114</size>
         <price>3500</price>
@@ -376,13 +376,13 @@
         <price>5200</price>
       </MenuItem>
       <MenuItem>
-        <name>카페모카</name>
+        <name>@카페모카</name>
         <temperature>104</temperature>
         <size>108</size>
         <price>5500</price>
       </MenuItem>
       <MenuItem>
-        <name>카페모카</name>
+        <name>@카페모카</name>
         <temperature>105</temperature>
         <size>108</size>
         <price>5500</price>
