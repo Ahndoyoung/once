@@ -433,6 +433,8 @@ namespace Once_v2_2015.ViewModel
                     tb.TextAlignment = TextAlignment.Center;
 
                     tb.Text = "Order #" + OrderNumber.ToString();
+                    if (ShowDetailVisible == Visibility.Visible)
+                        tb.Text += " (M)";
                     tb.FontSize = (double) new FontSizeConverter().ConvertFrom("22pt");
                     tb.FontFamily = new FontFamily("Segoe Print");
                     tb.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x60, 0x3A, 0x17));
