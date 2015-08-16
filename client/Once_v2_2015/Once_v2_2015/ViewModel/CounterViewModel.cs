@@ -103,9 +103,9 @@ namespace Once_v2_2015.ViewModel
             int col = 0;
             for (int i = 0; i < categories[idx].menuList.Count; i++)
             {
-                if ((categories[idx].menuList[i].temperature == 'i' && categories[idx].menuList[i].size == 'r')
-                    || (categories[idx].menuList[i].temperature == 'i' && categories[idx].menuList[i].size == null)
-                    || (categories[idx].menuList[i].temperature == null && categories[idx].menuList[i].size == 'r')
+                if ((categories[idx].menuList[i].temperature == 'I' && categories[idx].menuList[i].size == 'R')
+                    || (categories[idx].menuList[i].temperature == 'I' && categories[idx].menuList[i].size == null)
+                    || (categories[idx].menuList[i].temperature == null && categories[idx].menuList[i].size == 'R')
                     || (categories[idx].menuList[i].temperature == null && categories[idx].menuList[i].size == null))
                 {
                     if (col == MenuPosition.CntPerRow)
@@ -278,11 +278,11 @@ namespace Once_v2_2015.ViewModel
             {
                 if (cw.InnerMenuSettingView.btnTemperature.Content.ToString() == "Ice")
                 {
-                    checkedTemp = 'i';
+                    checkedTemp = 'I';
                 }
                 else if (cw.InnerMenuSettingView.btnTemperature.Content.ToString() == "Hot")
                 {
-                    checkedTemp = 'h';
+                    checkedTemp = 'H';
                 }
             }
             char? checkedSize = null;
@@ -290,11 +290,11 @@ namespace Once_v2_2015.ViewModel
             {
                 if (cw.InnerMenuSettingView.btnSize.Content.ToString() == "Regular")
                 {
-                    checkedSize = 'r';
+                    checkedSize = 'R';
                 }
                 else if (cw.InnerMenuSettingView.btnSize.Content.ToString() == "Large")
                 {
-                    checkedSize = 'l';
+                    checkedSize = 'L';
                 }
             }
 

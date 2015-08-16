@@ -45,17 +45,17 @@ namespace Once_v2_2015.Model
             total = price * quantity;
 
             string temp = null;
-            if (temperature == 'i')
+            if (temperature == 'I')
                 temp = "Ice";
-            else if (temperature == 'h')
+            else if (temperature == 'H')
                 temp = "Hot";
             else
                 temp = "None";
 
             string s = null;
-            if (size == 'r')
+            if (size == 'R')
                 s = "Regular";
-            else if (size == 'l')
+            else if (size == 'L')
                 s = "Large";
             else
                 s = "None";
