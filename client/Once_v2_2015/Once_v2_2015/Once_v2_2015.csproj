@@ -93,6 +93,9 @@
     <Compile Include="ViewModel\MenuSettingViewModel.cs" />
     <Compile Include="ViewModel\OrdersViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\AdjustmentWindow.xaml.cs">
+      <DependentUpon>AdjustmentWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DiscountUC.xaml.cs">
       <DependentUpon>DiscountUC.xaml</DependentUpon>
     </Compile>
@@ -105,6 +108,10 @@
     <Compile Include="View\OrdersUC.xaml.cs">
       <DependentUpon>OrdersUC.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AdjustmentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CounterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

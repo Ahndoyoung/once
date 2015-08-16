@@ -58,6 +58,7 @@ namespace Once_v2_2015.ViewModel
             categories = LoadCategory(Properties.Resources.MenuList);
             SetCategory(cw);
 
+            menuSettingView = new MenuSettingView();
             cw.grdOutterMenuSetting.Children.Add(menuSettingView);
             int idx = cw.grdOutterMenuSetting.Children.IndexOf(menuSettingView);
             cw.grdOutterMenuSetting.Children[idx].Visibility = Visibility.Collapsed;
@@ -864,7 +865,7 @@ namespace Once_v2_2015.ViewModel
 
         #endregion
 
-        public MenuSettingView menuSettingView = new MenuSettingView();
+        public MenuSettingView menuSettingView = null;
 
         public List<Category> categories = new List<Category>();
 
