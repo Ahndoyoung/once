@@ -103,29 +103,29 @@ namespace Once_v2_2015.ViewModel
             int col = 0;
             for (int i = 0; i < categories[idx].menuList.Count; i++)
             {
-                if ((categories[idx].menuList[i].temperature == 'i' && categories[idx].menuList[i].size == 'r')
-                    || (categories[idx].menuList[i].temperature == 'i' && categories[idx].menuList[i].size == null)
-                    || (categories[idx].menuList[i].temperature == null && categories[idx].menuList[i].size == 'r')
+                if ((categories[idx].menuList[i].temperature == 'I' && categories[idx].menuList[i].size == 'R')
+                    || (categories[idx].menuList[i].temperature == 'I' && categories[idx].menuList[i].size == null)
+                    || (categories[idx].menuList[i].temperature == null && categories[idx].menuList[i].size == 'R')
                     || (categories[idx].menuList[i].temperature == null && categories[idx].menuList[i].size == null))
                 {
                     if (col == MenuPosition.CntPerRow)
                         row++;
                     col = col % MenuPosition.CntPerRow;
-                    
+
                     int left = MenuPosition.InitLeft + MenuPosition.MarginLeft * col;
                     int right = MenuPosition.InitRight - MenuPosition.MarginLeft * col;
-                    int y = MenuPosition.InitY + MenuPosition.MarginTop*row;
+                    int y = MenuPosition.InitY + MenuPosition.MarginTop * row;
 
                     Button btn = new Button();
                     btn.Width = 180;
                     btn.Height = 130;
 
-                    Style style = Application.Current.FindResource("IvoryButton") as Style;
+                    Style style = (categories[idx].menuList[i].isWhipping == true) ? Application.Current.FindResource("WhippingButton") as Style : Application.Current.FindResource("IvoryButton") as Style;
                     btn.Style = style;
 
                     btn.Content = categories[idx].menuList[i].name.Replace('^', '\n');
                     btn.FontFamily = new FontFamily("NanumBarunGothic");
-                    btn.FontSize = (double) new FontSizeConverter().ConvertFrom("13pt");
+                    btn.FontSize = (double)new FontSizeConverter().ConvertFrom("13pt");
                     btn.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x60, 0x3A, 0x17));
 
                     btn.HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -140,7 +140,8 @@ namespace Once_v2_2015.ViewModel
                     var triggers = Interaction.GetTriggers(btn);
 
                     string name = categories[idx].menuList[i].name;
-                    object[] left_ob = new object[] { cw, name, "left" };
+                    string whip = categories[idx].menuList[i].isWhipping == true ? "whipping" : "none";
+                    object[] left_ob = new object[] { cw, name, whip };
                     var invoke_left = new InvokeCommandAction { CommandParameter = left_ob };
                     var binding_left = new Binding { Path = new PropertyPath("AddMenuItemCommand") };
                     BindingOperations.SetBinding(invoke_left, InvokeCommandAction.CommandProperty, binding_left);
@@ -151,9 +152,9 @@ namespace Once_v2_2015.ViewModel
                     event_left.Actions.Add(invoke_left);
                     triggers.Add(event_left);
 
-                    if (name[0] == '@')
+                    if (categories[idx].menuList[i].isWhipping == true)
                     {
-                        object[] right_ob = new object[] { cw, name, "right" };
+                        object[] right_ob = new object[] { cw, name, "none" };
                         var invoke_right = new InvokeCommandAction { CommandParameter = right_ob };
                         var binding_right = new Binding { Path = new PropertyPath("AddMenuItemCommand") };
                         BindingOperations.SetBinding(invoke_right, InvokeCommandAction.CommandProperty, binding_right);
@@ -277,11 +278,11 @@ namespace Once_v2_2015.ViewModel
             {
                 if (cw.InnerMenuSettingView.btnTemperature.Content.ToString() == "Ice")
                 {
-                    checkedTemp = 'i';
+                    checkedTemp = 'I';
                 }
                 else if (cw.InnerMenuSettingView.btnTemperature.Content.ToString() == "Hot")
                 {
-                    checkedTemp = 'h';
+                    checkedTemp = 'H';
                 }
             }
             char? checkedSize = null;
@@ -289,16 +290,16 @@ namespace Once_v2_2015.ViewModel
             {
                 if (cw.InnerMenuSettingView.btnSize.Content.ToString() == "Regular")
                 {
-                    checkedSize = 'r';
+                    checkedSize = 'R';
                 }
                 else if (cw.InnerMenuSettingView.btnSize.Content.ToString() == "Large")
                 {
-                    checkedSize = 'l';
+                    checkedSize = 'L';
                 }
             }
 
-            if(way == "right")
-                name = name.Substring(1, name.Length - 1);
+            if (way == "whipping")
+                name += "\n * 휘핑크림";
             bool isExist = false;
             foreach (var sellingItem in SellingItems)
             {
@@ -433,6 +434,8 @@ namespace Once_v2_2015.ViewModel
                     tb.TextAlignment = TextAlignment.Center;
 
                     tb.Text = "Order #" + OrderNumber.ToString();
+                    if (ShowDetailVisible == Visibility.Visible)
+                        tb.Text += " (M)";
                     tb.FontSize = (double) new FontSizeConverter().ConvertFrom("22pt");
                     tb.FontFamily = new FontFamily("Segoe Print");
                     tb.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x60, 0x3A, 0x17));

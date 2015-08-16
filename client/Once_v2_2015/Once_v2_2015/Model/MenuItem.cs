@@ -13,5 +13,6 @@ namespace Once_v2_2015.Model
         public char? temperature { get; set; }
         public char? size { get; set; }
         public int price { get; set; }
+        public bool isWhipping { get; set; }
     }
 }

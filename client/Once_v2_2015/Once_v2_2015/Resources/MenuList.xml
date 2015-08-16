@@ -5,519 +5,605 @@
     <menuList>
       <MenuItem>
         <name>아메리카노</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>2000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>아메리카노</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>2000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>바닐라^아메리카노</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>2500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>바닐라^아메리카노</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>2500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>헤이즐넛^아메리카노</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>2500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>헤이즐넛^아메리카노</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>2500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>아이리쉬^아메리카노</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>2500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>아이리쉬^아메리카노</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>2500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>카페라떼</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>2700</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>카페라떼</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>2700</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>바닐라^카페라떼</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>바닐라^카페라떼</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>메이플^카페라떼</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>메이플^카페라떼</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>헤이즐넛^카페라떼</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>헤이즐넛^카페라떼</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>캬라멜^카페라떼</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>캬라멜^카페라떼</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>아이리쉬^카페라떼</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>아이리쉬^카페라떼</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>허니^카페라떼</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>허니^카페라떼</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@카페모카</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <name>카페모카</name>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@카페모카</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <name>카페모카</name>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@민트^카페모카</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <name>민트^카페모카</name>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@민트^카페모카</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <name>민트^카페모카</name>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@화이트^카페모카</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <name>화이트^카페모카</name>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@화이트^카페모카</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <name>화이트^카페모카</name>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@캬라멜^카페모카</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <name>캬라멜^카페모카</name>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@캬라멜^카페모카</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <name>캬라멜^카페모카</name>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@허니^카페모카</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <name>허니^카페모카</name>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@허니^카페모카</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <name>허니^카페모카</name>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>카푸치노</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>2700</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>카푸치노</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>2700</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>모카치노</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>모카치노</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>캬라멜^마키야또</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>캬라멜^마키야또</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>허니^마키야또</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>허니^마키야또</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>아메리카노</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>3000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>아메리카노</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>3000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>바닐라^아메리카노</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>바닐라^아메리카노</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>헤이즐넛^아메리카노</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>헤이즐넛^아메리카노</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>아이리쉬^아메리카노</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>아이리쉬^아메리카노</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>카페라떼</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>4200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>카페라떼</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>4200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>바닐라^카페라떼</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>바닐라^카페라떼</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>메이플^카페라떼</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>메이플^카페라떼</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>헤이즐넛^카페라떼</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>헤이즐넛^카페라떼</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>캬라멜^카페라떼</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>캬라멜^카페라떼</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>아이리쉬^카페라떼</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>아이리쉬^카페라떼</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>허니^카페라떼</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>허니^카페라떼</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@카페모카</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <name>카페모카</name>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@카페모카</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <name>카페모카</name>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@민트^카페모카</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <name>민트^카페모카</name>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@민트^카페모카</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <name>민트^카페모카</name>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@화이트^카페모카</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <name>화이트^카페모카</name>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@화이트^카페모카</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <name>화이트^카페모카</name>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@캬라멜^카페모카</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <name>캬라멜^카페모카</name>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@캬라멜^카페모카</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <name>캬라멜^카페모카</name>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@허니^카페모카</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <name>허니^카페모카</name>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@허니^카페모카</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <name>허니^카페모카</name>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>카푸치노</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>4200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>카푸치노</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>4200</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>모카치노</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>모카치노</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>캬라멜^마키야또</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>캬라멜^마키야또</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>허니^마키야또</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>허니^마키야또</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>에스프레소</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>2000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@에스프레소^콘 파냐</name>
+        <name>에스프레소^콘 파냐</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>2500</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>에스프레소^마키야또</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>2500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>샤커레토</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>더블 샷</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>아포가토</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>5000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
     </menuList>
   </Category>
@@ -526,531 +612,619 @@
     <menuList>
       <MenuItem>
         <name>스팀 / 콜드^밀크</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>2800</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>스팀 / 콜드^밀크</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>2800</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>바닐라^밀크</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>바닐라^밀크</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>메이플^밀크</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>메이플^밀크</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>헤이즐넛^밀크</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>헤이즐넛^밀크</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>캬라멜^밀크</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>캬라멜^밀크</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>아이리쉬^밀크</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>아이리쉬^밀크</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>허니^밀크</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>허니^밀크</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@그린티 라떼</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <name>그린티 라떼</name>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3800</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@그린티 라떼</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <name>그린티 라떼</name>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3800</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@민트^그린티 라떼</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <name>민트^그린티 라떼</name>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@민트^그린티 라떼</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <name>민트^그린티 라떼</name>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@고구마 라떼</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <name>고구마 라떼</name>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3800</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@고구마 라떼</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <name>고구마 라떼</name>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3800</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@마론 라떼</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <name>마론 라떼</name>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@마론 라떼</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <name>마론 라떼</name>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@티라미수 라떼</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <name>티라미수 라떼</name>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@티라미수 라떼</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <name>티라미수 라떼</name>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@핫 / 아이스^쵸코</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <name>핫 / 아이스^쵸코</name>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@핫 / 아이스^쵸코</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <name>핫 / 아이스^쵸코</name>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@화이트 쵸코</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <name>화이트 쵸코</name>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3800</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@화이트 쵸코</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <name>화이트 쵸코</name>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3800</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@민트 쵸코</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <name>민트 쵸코</name>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3800</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@민트 쵸코</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <name>민트 쵸코</name>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3800</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@캬라멜 쵸코</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <name>캬라멜 쵸코</name>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@캬라멜 쵸코</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <name>캬라멜 쵸코</name>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@허니 쵸코</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <name>허니 쵸코</name>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@허니 쵸코</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <name>허니 쵸코</name>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>스팀 / 콜드^밀크</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>스팀 / 콜드^밀크</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>바닐라^밀크</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>바닐라^밀크</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>메이플^밀크</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>메이플^밀크</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>헤이즐넛^밀크</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>헤이즐넛^밀크</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>캬라멜^밀크</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>캬라멜^밀크</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>아이리쉬^밀크</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>아이리쉬^밀크</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>허니^밀크</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>허니^밀크</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@그린티 라떼</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <name>그린티 라떼</name>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5800</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@그린티 라떼</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <name>그린티 라떼</name>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5800</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@민트^그린티 라떼</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <name>민트^그린티 라떼</name>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@민트^그린티 라떼</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <name>민트^그린티 라떼</name>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@고구마 라떼</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <name>고구마 라떼</name>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5800</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@고구마 라떼</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <name>고구마 라떼</name>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5800</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@마론 라떼</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <name>마론 라떼</name>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@마론 라떼</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <name>마론 라떼</name>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@티라미수 라떼</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <name>티라미수 라떼</name>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@티라미수 라떼</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <name>티라미수 라떼</name>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@핫 / 아이스^쵸코</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <name>핫 / 아이스^쵸코</name>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@핫 / 아이스^쵸코</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <name>핫 / 아이스^쵸코</name>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@화이트 쵸코</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <name>화이트 쵸코</name>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5800</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@화이트 쵸코</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <name>화이트 쵸코</name>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5800</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@민트 쵸코</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <name>민트 쵸코</name>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5800</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@민트 쵸코</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <name>민트 쵸코</name>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5800</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@캬라멜 쵸코</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <name>캬라멜 쵸코</name>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@캬라멜 쵸코</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <name>캬라멜 쵸코</name>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@허니 쵸코</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <name>허니 쵸코</name>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
-        <name>@허니 쵸코</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <name>허니 쵸코</name>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>true</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>복숭아^아이스 티</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>2800</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>레몬^아이스 티</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>2800</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>레몬^에이드</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>라임^에이드</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>유자^에이드</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>오렌지^에이드</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>자몽^에이드</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>유자^슬러쉬</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>4500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>오렌지쥬스</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>복숭아^아이스 티</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>레몬^아이스 티</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>레몬^에이드</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>라임^에이드</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>유자^에이드</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>오렌지^에이드</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>자몽^에이드</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>유자^슬러쉬</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>6500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>오렌지쥬스</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>미숫가루^(물)</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>3000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>미숫가루^(우유)</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
     </menuList>
   </Category>
@@ -1060,230 +1234,268 @@
       <MenuItem>
         <name>실론</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>2800</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>얼 그레이</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>2800</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>잉글리쉬^블랙퍼스트</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>2800</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>다즐링</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>2800</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>망고 매직</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>2800</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>애플^리프레쉬</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>2800</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>스트로베리^센세이션</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>2800</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>레이디^그레이</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>2800</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>루이보스</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>2800</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>카모마일</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>2800</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>페퍼민트</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>2800</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>스트로베리^&amp;^망고</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>2800</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>마테차</name>
         <temperature xsi:nil="true" />
-        <size>114</size>
+        <size>82</size>
         <price>2800</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>밀크 티</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>밀크 티</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>유자 차</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>유자 차</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>3500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>레몬 차</name>
-        <temperature>104</temperature>
-        <size>114</size>
+        <temperature>72</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>레몬 차</name>
-        <temperature>105</temperature>
-        <size>114</size>
+        <temperature>73</temperature>
+        <size>82</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>실론</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>얼 그레이</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>잉글리쉬^블랙퍼스트</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>다즐링</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>망고 매직</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>애플^리프레쉬</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>스트로베리^센세이션</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>레이디^그레이</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>루이보스</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>카모마일</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>페퍼민트</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>스트로베리^&amp;^망고</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>마테차</name>
         <temperature xsi:nil="true" />
-        <size>108</size>
+        <size>76</size>
         <price>4000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>밀크 티</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>밀크 티</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>유자 차</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>유자 차</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>레몬 차</name>
-        <temperature>104</temperature>
-        <size>108</size>
+        <temperature>72</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
-    <MenuItem>
+      <MenuItem>
         <name>레몬 차</name>
-        <temperature>105</temperature>
-        <size>108</size>
+        <temperature>73</temperature>
+        <size>76</size>
         <price>6000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
     </menuList>
   </Category>
@@ -1295,84 +1507,98 @@
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>4500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>베일리스^밀크</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>4500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>블랙^러시안</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>4500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>스크류^드라이버</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>4500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>보드카^크랜베리</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>4500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>화이트^러시안</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>5000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>데킬라^선라이즈</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>5000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>피치^크러쉬</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>5000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>마드라스</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>5000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>쿠바^리브레</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>5000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>미도리^샤워</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>아이리쉬^커피</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>6000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>예거마이스터^쿨러</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>6500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>잭 콕</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>6500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
     </menuList>
   </Category>
@@ -1384,24 +1610,28 @@
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>1000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>허니^브레드</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>5500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>팥빙수</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>9000</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
       <MenuItem>
         <name>허니 브레드^아메리카노 2</name>
         <temperature xsi:nil="true" />
         <size xsi:nil="true" />
         <price>8500</price>
+        <isWhipping>false</isWhipping>
       </MenuItem>
     </menuList>
   </Category>

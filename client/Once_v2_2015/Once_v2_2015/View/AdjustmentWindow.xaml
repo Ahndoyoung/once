@@ -6,7 +6,5 @@
         xmlns:local="clr-namespace:Once_v2_2015.View"
         mc:Ignorable="d"
         Title="Once" Height="1000" Width="1500">
-    <Grid>
-
-    </Grid>
+    <Grid/>
 </Window>
