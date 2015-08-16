@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,6 +16,7 @@ using System.Xml.Serialization;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Newtonsoft.Json;
 using Once_v2_2015.Class;
 using Once_v2_2015.Model;
 using Once_v2_2015.View;
@@ -565,6 +567,22 @@ namespace Once_v2_2015.ViewModel
                     ov.grdOrders.Children.Add(brd);
                     OrderNumber++;
 
+                    // JSON
+                    try
+                    {
+                        string request = JsonConvert.SerializeObject(items);
+                        //string uri = "";
+                        //WebClient webClient = new WebClient();
+                        //webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
+                        //webClient.Encoding = UTF8Encoding.UTF8;
+                        //string response = webClient.UploadString(uri, request);
+                    }
+                    catch (Exception err)
+                    {
+                        Console.WriteLine(err.ToString());
+                    }
+
+                    // init
                     SellingItems.Clear();
                     DiscountPrice = "0";
                     SubTotal = "0";
