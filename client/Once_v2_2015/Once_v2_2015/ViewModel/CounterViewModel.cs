@@ -140,7 +140,8 @@ namespace Once_v2_2015.ViewModel
                     var triggers = Interaction.GetTriggers(btn);
 
                     string name = categories[idx].menuList[i].name;
-                    object[] left_ob = new object[] { cw, name, "left" };
+                    string whip = categories[idx].menuList[i].isWhipping == true ? "whipping" : "none";
+                    object[] left_ob = new object[] { cw, name, whip };
                     var invoke_left = new InvokeCommandAction { CommandParameter = left_ob };
                     var binding_left = new Binding { Path = new PropertyPath("AddMenuItemCommand") };
                     BindingOperations.SetBinding(invoke_left, InvokeCommandAction.CommandProperty, binding_left);
@@ -153,7 +154,7 @@ namespace Once_v2_2015.ViewModel
 
                     if (categories[idx].menuList[i].isWhipping == true)
                     {
-                        object[] right_ob = new object[] { cw, name, "right" };
+                        object[] right_ob = new object[] { cw, name, "none" };
                         var invoke_right = new InvokeCommandAction { CommandParameter = right_ob };
                         var binding_right = new Binding { Path = new PropertyPath("AddMenuItemCommand") };
                         BindingOperations.SetBinding(invoke_right, InvokeCommandAction.CommandProperty, binding_right);
@@ -297,8 +298,8 @@ namespace Once_v2_2015.ViewModel
                 }
             }
 
-            if (way == "right")
-                name += "\n * No Whipping";
+            if (way == "whipping")
+                name += "\n * 휘핑크림";
             bool isExist = false;
             foreach (var sellingItem in SellingItems)
             {
