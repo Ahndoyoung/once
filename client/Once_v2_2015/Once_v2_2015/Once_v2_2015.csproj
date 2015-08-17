@@ -106,6 +106,9 @@
     <Compile Include="View\InnerMenuSettingUC.xaml.cs">
       <DependentUpon>InnerMenuSettingUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\MenuManagementWindow.xaml.cs">
+      <DependentUpon>MenuManagementWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MenuSettingView.xaml.cs">
       <DependentUpon>MenuSettingView.xaml</DependentUpon>
     </Compile>
@@ -143,6 +146,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\MenuManagementWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MenuSettingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
