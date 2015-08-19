@@ -94,6 +94,7 @@
     <Compile Include="ViewModel\DiscountViewModel.cs" />
     <Compile Include="ViewModel\InnerMenuSettingViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MenuManagementViewModel.cs" />
     <Compile Include="ViewModel\MenuSettingViewModel.cs" />
     <Compile Include="ViewModel\OrdersViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

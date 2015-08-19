@@ -46,6 +46,11 @@ namespace Once_v2_2015.ViewModel
         {
             get { return Kernel.Get<OrdersViewModel>("OrdersVM"); }
         }
+
+        public MenuManagementViewModel MenuManagementVM
+        {
+            get { return Kernel.Get<MenuManagementViewModel>("MenuManagementVM"); }
+        }
         
         public static void Cleanup()
         {
