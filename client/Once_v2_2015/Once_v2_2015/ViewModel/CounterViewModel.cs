@@ -57,7 +57,7 @@ namespace Once_v2_2015.ViewModel
 
         private void Loaded(CounterWindow cw)
         {
-            categories = LoadCategory(Properties.Resources.MenuList);
+            categories = LoadCategory();
             SetCategory(cw);
 
             menuSettingView = new MenuSettingView();
@@ -890,17 +890,16 @@ namespace Once_v2_2015.ViewModel
 
         public List<Category> categories = new List<Category>();
 
-        private static List<Category> LoadCategory(string content)
+        private static List<Category> LoadCategory()
         {
             XmlSerializer serializer = null;
-            MemoryStream stream = null;
+            FileStream stream = null;
             List<Category> category = new List<Category>();
             try
             {
                 serializer = new XmlSerializer(typeof(List<Category>));
 
-                byte[] byteArr = Encoding.UTF8.GetBytes(content);
-                stream = new MemoryStream(byteArr);
+                stream = new FileStream("MenuList.xml", FileMode.Open);
                 category = (List<Category>)serializer.Deserialize(stream);
             }
             catch

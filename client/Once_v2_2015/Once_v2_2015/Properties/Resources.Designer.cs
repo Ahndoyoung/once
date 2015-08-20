@@ -59,30 +59,5 @@ namespace Once_v2_2015.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   &lt;?xml version=&quot;1.0&quot;?&gt;
-        ///&lt;ArrayOfCategory xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
-        ///  &lt;Category&gt;
-        ///    &lt;name&gt;Coffee&lt;/name&gt;
-        ///    &lt;menuList&gt;
-        ///      &lt;MenuItem&gt;
-        ///        &lt;name&gt;아메리카노&lt;/name&gt;
-        ///        &lt;temperature&gt;104&lt;/temperature&gt;
-        ///        &lt;size&gt;114&lt;/size&gt;
-        ///        &lt;price&gt;2000&lt;/price&gt;
-        ///      &lt;/MenuItem&gt;
-        ///      &lt;MenuItem&gt;
-        ///        &lt;name&gt;아메리카노&lt;/name&gt;
-        ///        &lt;temperature&gt;105&lt;/temperature&gt;
-        ///        &lt;size&gt;114&lt;/size&gt;
-        ///        &lt;price&gt;2000&lt;/price&gt;
-        ///      &lt;/MenuIte[나머지 문자열은 잘림]&quot;;과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        internal static string MenuList {
-            get {
-                return ResourceManager.GetString("MenuList", resourceCulture);
-            }
-        }
     }
 }
