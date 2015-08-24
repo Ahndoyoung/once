@@ -1,7 +1,8 @@
 using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-
+using GalaSoft.MvvmLight.Messaging;
+using Once_v2_2015.Class;
 using Once_v2_2015.View;
 
 namespace Once_v2_2015.ViewModel
@@ -22,9 +23,13 @@ namespace Once_v2_2015.ViewModel
         private void Counter(Window w)
         {
             w.Visibility = Visibility.Collapsed;
-            CounterWindow cw = new CounterWindow();
-            cw.ShowDialog();
-            w.Visibility = Visibility.Visible;
+            //CounterWindow cw = new CounterWindow();
+            //cw.ShowDialog();
+            var msg = new ViewModelMessage()
+            {
+                Text = "StartPOS"
+            };
+            Messenger.Default.Send<ViewModelMessage>(msg);
         }
 
         #endregion
@@ -68,6 +73,8 @@ namespace Once_v2_2015.ViewModel
         #endregion
 
         #endregion
+
+        private CounterWindow counterWindow = new CounterWindow();
         
         public MainViewModel()
         {

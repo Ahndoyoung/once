@@ -10,6 +10,7 @@
         x:Name="CounterView"
         mc:Ignorable="d"
         Title="Once" Height="1000" Width="1508"
+        Visibility="{Binding CounterWindowVisible}"
         DataContext="{Binding CounterVM, Source={StaticResource Locator}}" Icon="/Once_v2_2015;component/img/Pixture-Coffee-CoffeeCup-2.ico">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -23,6 +24,14 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <tb:TaskbarIcon x:Name="taskBarIcon" IconSource="../img/Pixture-Coffee-CoffeeCup-2.ico" ToolTipText="Once - POS Program">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="열기" Command="{Binding ShowCommand}"/>
+                    <MenuItem Header="종료" Command="{Binding ShutdownCommand}"/>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
         <Grid Height="113" VerticalAlignment="Top">
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">

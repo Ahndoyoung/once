@@ -94,7 +94,40 @@ namespace Once_v2_2015.ViewModel
 
         private void OnClosing(CancelEventArgs obj)
         {
-            
+            obj.Cancel = true;
+            CounterWindowVisible = Visibility.Collapsed;
+        }
+
+        #endregion
+
+        #region ShowCommand
+
+        private RelayCommand _ShowCommand;
+
+        public RelayCommand ShowCommand
+        {
+            get { return _ShowCommand ?? (_ShowCommand = new RelayCommand(Show)); }
+        }
+
+        private void Show()
+        {
+            CounterWindowVisible = Visibility.Visible;
+        }
+
+        #endregion
+
+        #region ShutdownCommand
+
+        private RelayCommand _ShutdownCommand;
+
+        public RelayCommand ShutdownCommand
+        {
+            get { return _ShutdownCommand ?? (_ShutdownCommand = new RelayCommand(Shutdown)); }
+        }
+
+        private void Shutdown()
+        {
+            Application.Current.Shutdown();
         }
 
         #endregion
@@ -845,6 +878,18 @@ namespace Once_v2_2015.ViewModel
                 RaisePropertyChanged("OrdersVisible");
             }
         }
+        
+        private Visibility _CounterWindowVisible = Visibility.Collapsed;
+
+        public Visibility CounterWindowVisible 
+        {
+            get { return _CounterWindowVisible; }
+            set
+            {
+                _CounterWindowVisible = value;
+                RaisePropertyChanged("CounterWindowVisible");
+            }
+        }
 
         private Visibility _cntVisible = Visibility.Collapsed;
 
@@ -983,12 +1028,28 @@ namespace Once_v2_2015.ViewModel
             }
         }
 
+        private void InitProperties()
+        {
+            SellingItems.Clear();
+
+            SubTotal = "0";
+            DiscountPrice = "0";
+            ExistingOrder = 0;
+
+            CounterVisible = Visibility.Visible;
+            OrdersVisible = Visibility.Collapsed;
+        }
+
         private void OnReceiveMessageAction(ViewModelMessage obj)
         {
             string[] arr = obj.Text.Split('^');
 
             switch (arr[0])
             {
+                case "StartPOS":
+                    CounterWindowVisible = Visibility.Visible;
+                    break;
+
                 case "ClearDiscount":
                     DiscountPrice = "0";
                     break;
@@ -1007,18 +1068,6 @@ namespace Once_v2_2015.ViewModel
                 default:
                     break;
             }
-        }
-
-        private void InitProperties()
-        {
-            SellingItems.Clear();
-
-            SubTotal = "0";
-            DiscountPrice = "0";
-            ExistingOrder = 0;
-
-            CounterVisible = Visibility.Visible;
-            OrdersVisible = Visibility.Collapsed;
         }
 
         public CounterViewModel()
