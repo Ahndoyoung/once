@@ -8,14 +8,14 @@
         xmlns:local="clr-namespace:Once_v2_2015.View"
         mc:Ignorable="d"
         Title="메뉴 관리" Height="554.695" Width="1137.183" ResizeMode="NoResize"
-        DataContext="{Binding MenuManagementVM, Source={StaticResource Locator}}">
+        DataContext="{Binding MenuManagementVM, Source={StaticResource Locator}}" Icon="/Once_v2_2015;component/img/Pixture-Coffee-CoffeeCup-2.ico">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding OnLoadedCommand}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
-        <ListView x:Name="listView" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" HorizontalAlignment="Left" Height="175" Margin="10,10,0,0" VerticalAlignment="Top" Width="169">
+        <ListView x:Name="listView" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" HorizontalAlignment="Left" Height="175" Margin="10,10,0,0" VerticalAlignment="Top" Width="169" SelectionMode="Single">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding OnSelectedCategoryChangedCommand}"/>
@@ -33,7 +33,7 @@
         <TextBox x:Name="textBox" Text="{Binding CategoryName}" HorizontalAlignment="Left" Height="23" Margin="10,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="button1_Copy" Command="{Binding AddCategoryCommand}" Content="추가" HorizontalAlignment="Left" Margin="135,222,0,0" VerticalAlignment="Top" Width="44" Height="23" FontWeight="Bold" FontSize="14.667"/>
         <Button x:Name="button1_Copy1" Command="{Binding ModifyCategoryCommand}" Content="수정" HorizontalAlignment="Left" Margin="135,250,0,0" VerticalAlignment="Top" Width="44" Height="23"/>
-        <ListView x:Name="listView_Copy" ItemsSource="{Binding MenuItems}" SelectedItem="{Binding SelectedMenuItem}" HorizontalAlignment="Left" Height="263" Margin="241,10,0,0" VerticalAlignment="Top" Width="496">
+        <ListView x:Name="listView_Copy" ItemsSource="{Binding MenuItems}" SelectedItem="{Binding SelectedMenuItem}" HorizontalAlignment="Left" Height="263" Margin="241,10,0,0" VerticalAlignment="Top" Width="496" SelectionMode="Single">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="200" Header="이름" DisplayMemberBinding="{Binding name}"/>

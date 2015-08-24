@@ -719,6 +719,10 @@ namespace Once_v2_2015.ViewModel
 
         private void LoadCategory()
         {
+            Categories.Clear();
+            categories.Clear();
+            cateProtoes.Clear();
+
             categories = LoadXML();
 
             foreach (var category in categories)

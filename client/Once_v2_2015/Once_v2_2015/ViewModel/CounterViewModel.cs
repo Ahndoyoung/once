@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,8 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using System.Windows.Interactivity;
 using System.Windows.Media;
 using System.Xml;
@@ -16,10 +19,20 @@ using System.Xml.Serialization;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Hardcodet.Wpf.TaskbarNotification;
 using Newtonsoft.Json;
 using Once_v2_2015.Class;
 using Once_v2_2015.Model;
 using Once_v2_2015.View;
+using Application = System.Windows.Application;
+using Binding = System.Windows.Data.Binding;
+using Button = System.Windows.Controls.Button;
+using ContextMenu = System.Windows.Controls.ContextMenu;
+using HorizontalAlignment = System.Windows.HorizontalAlignment;
+using ListView = System.Windows.Controls.ListView;
+using MessageBox = System.Windows.MessageBox;
+using SelectionMode = System.Windows.Controls.SelectionMode;
+using VerticalAlignment = System.Windows.VerticalAlignment;
 
 
 namespace Once_v2_2015.ViewModel
@@ -59,12 +72,31 @@ namespace Once_v2_2015.ViewModel
         {
             categories = LoadCategory();
             SetCategory(cw);
-
+            
             menuSettingView = new MenuSettingView();
             cw.grdOutterMenuSetting.Children.Add(menuSettingView);
             int idx = cw.grdOutterMenuSetting.Children.IndexOf(menuSettingView);
             cw.grdOutterMenuSetting.Children[idx].Visibility = Visibility.Collapsed;
+
+            // init
+            InitProperties();
         }
+        #endregion
+
+        #region OnClosingCommand
+
+        private RelayCommand<CancelEventArgs> _OnClosingCommand;
+
+        public RelayCommand<CancelEventArgs> OnClosingCommand
+        {
+            get { return _OnClosingCommand ?? (_OnClosingCommand = new RelayCommand<CancelEventArgs>(OnClosing)); }
+        }
+
+        private void OnClosing(CancelEventArgs obj)
+        {
+            
+        }
+
         #endregion
 
         #region HomeCommand
@@ -975,6 +1007,18 @@ namespace Once_v2_2015.ViewModel
                 default:
                     break;
             }
+        }
+
+        private void InitProperties()
+        {
+            SellingItems.Clear();
+
+            SubTotal = "0";
+            DiscountPrice = "0";
+            ExistingOrder = 0;
+
+            CounterVisible = Visibility.Visible;
+            OrdersVisible = Visibility.Collapsed;
         }
 
         public CounterViewModel()

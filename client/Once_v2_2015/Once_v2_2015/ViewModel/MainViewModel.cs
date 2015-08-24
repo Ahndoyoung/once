@@ -48,8 +48,27 @@ namespace Once_v2_2015.ViewModel
 
         #endregion
 
+        #region SettingCommand
+
+        private RelayCommand<Window> _SettingCommand;
+
+        public RelayCommand<Window> SettingCommand
+        {
+            get { return _SettingCommand ?? (_SettingCommand = new RelayCommand<Window>(Setting)); }
+        }
+
+        private void Setting(Window obj)
+        {
+            obj.Visibility = Visibility.Collapsed;
+            MenuManagementWindow mmw = new MenuManagementWindow();
+            mmw.ShowDialog();
+            obj.Visibility = Visibility.Visible;
+        }
+
         #endregion
 
+        #endregion
+        
         public MainViewModel()
         {
             

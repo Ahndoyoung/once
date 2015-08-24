@@ -5,13 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Once_v2_2015.View"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:cmd="http://www.galasoft.ch/mvvmlight"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
         x:Name="CounterView"
         mc:Ignorable="d"
         Title="Once" Height="1000" Width="1508"
-        DataContext="{Binding CounterVM, Source={StaticResource Locator}}">
+        DataContext="{Binding CounterVM, Source={StaticResource Locator}}" Icon="/Once_v2_2015;component/img/Pixture-Coffee-CoffeeCup-2.ico">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=CounterView}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Closing">
+            <cmd:EventToCommand Command="{Binding OnClosingCommand}" PassEventArgsToCommand="True"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid Background="#FFFBFBEF">
