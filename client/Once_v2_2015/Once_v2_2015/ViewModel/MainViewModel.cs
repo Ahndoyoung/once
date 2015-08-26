@@ -1,3 +1,4 @@
+﻿using System.Diagnostics;
 using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -10,6 +11,28 @@ namespace Once_v2_2015.ViewModel
     public class MainViewModel : ViewModelBase
     {
         #region Command
+
+        #region OnLoadedCommand
+
+        private RelayCommand _OnLoadedCommand;
+
+        public RelayCommand OnLoadedCommand
+        {
+            get { return _OnLoadedCommand ?? (_OnLoadedCommand = new RelayCommand(OnLoaded)); }
+        }
+
+        private void OnLoaded()
+        {
+            // 중복실행 방지
+            Process[] procs = Process.GetProcessesByName("Once_v2_2015");
+            if (procs.Length > 1)
+            {
+                MessageBox.Show("이미 실행 중입니다.", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
+            }
+        }
+
+        #endregion
 
         #region OnClosingCommand
 
