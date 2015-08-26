@@ -11,6 +11,22 @@ namespace Once_v2_2015.ViewModel
     {
         #region Command
 
+        #region OnClosingCommand
+
+        private RelayCommand _OnClosingCommand;
+
+        public RelayCommand OnClosingCommand
+        {
+            get { return _OnClosingCommand ?? (_OnClosingCommand = new RelayCommand(OnClosing)); }
+        }
+
+        private void OnClosing()
+        {
+            Application.Current.Shutdown();
+        }
+
+        #endregion
+
         #region CounterCommand
 
         private RelayCommand<Window> _counterCommand;
