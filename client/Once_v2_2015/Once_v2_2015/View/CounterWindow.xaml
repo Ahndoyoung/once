@@ -24,7 +24,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <tb:TaskbarIcon x:Name="taskBarIcon" IconSource="../img/Pixture-Coffee-CoffeeCup-2.ico" ToolTipText="Once - POS Program">
+        <tb:TaskbarIcon x:Name="taskBarIcon" IconSource="../img/Pixture-Coffee-CoffeeCup-2.ico" ToolTipText="Once - POS Program" Visibility="{Binding TraybarIconVisible}">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="열기" Command="{Binding ShowCommand}"/>

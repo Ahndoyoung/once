@@ -890,7 +890,19 @@ namespace Once_v2_2015.ViewModel
                 RaisePropertyChanged("CounterWindowVisible");
             }
         }
+        
+        private Visibility _TraybarIconVisible = Visibility.Collapsed;
 
+        public Visibility TraybarIconVisible
+        {
+            get { return _TraybarIconVisible; }
+            set
+            {
+                _TraybarIconVisible = value;
+                RaisePropertyChanged("TraybarIconVisible");
+            }
+        }
+        
         private Visibility _cntVisible = Visibility.Collapsed;
 
         public Visibility CntVisible
@@ -1048,6 +1060,7 @@ namespace Once_v2_2015.ViewModel
             {
                 case "StartPOS":
                     CounterWindowVisible = Visibility.Visible;
+                    TraybarIconVisible = Visibility.Visible;
                     break;
 
                 case "ClearDiscount":
