@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Forms;
@@ -79,6 +80,7 @@ namespace Once_v2_2015.ViewModel
             cw.grdOutterMenuSetting.Children[idx].Visibility = Visibility.Collapsed;
 
             // init
+            CheckDateTime();
             InitProperties();
         }
         #endregion
@@ -127,6 +129,7 @@ namespace Once_v2_2015.ViewModel
 
         private void Shutdown()
         {
+            SaveDateTime();
             Application.Current.Shutdown();
         }
 
@@ -976,6 +979,7 @@ namespace Once_v2_2015.ViewModel
         #endregion
 
         public MenuSettingView menuSettingView = null;
+        private string date_today = null;
 
         public List<Category> categories = new List<Category>();
 
@@ -1050,6 +1054,37 @@ namespace Once_v2_2015.ViewModel
 
             CounterVisible = Visibility.Visible;
             OrdersVisible = Visibility.Collapsed;
+        }
+
+        private void CheckDateTime()
+        {
+            try
+            {
+                date_today = DateTime.Today.ToShortDateString();
+                string[] values = File.ReadAllLines("DateTime_Sale.txt");
+
+                if (values[0] == DateTime.Today.ToShortDateString())
+                {
+                    // 오늘과 날짜가 같으면
+                    OrderNumber = int.Parse(values[1]);
+                }
+                else
+                {
+                    // 다르면
+                    File.WriteAllText("DateTime_Sale.txt", date_today + "\n1", Encoding.Default);
+                    CheckDateTime();
+                }
+            }
+            catch (Exception)
+            {
+                File.WriteAllText("DateTime_Sale.txt", date_today + "\n1", Encoding.Default);
+                CheckDateTime();
+            }
+        }
+
+        private void SaveDateTime()
+        {
+            File.WriteAllText("DateTime_Sale.txt", date_today + "\n" + OrderNumber.ToString(), Encoding.Default);
         }
 
         private void OnReceiveMessageAction(ViewModelMessage obj)
