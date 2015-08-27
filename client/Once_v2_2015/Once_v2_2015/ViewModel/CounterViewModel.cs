@@ -187,15 +187,15 @@ namespace Once_v2_2015.ViewModel
                     int y = MenuPosition.InitY + MenuPosition.MarginTop * row;
 
                     Button btn = new Button();
-                    btn.Width = 180;
-                    btn.Height = 130;
+                    btn.Width = MenuPosition.BtnWidth;
+                    btn.Height = MenuPosition.BtnHeight;
 
                     Style style = (categories[idx].menuList[i].isWhipping == true) ? Application.Current.FindResource("WhippingButton") as Style : Application.Current.FindResource("IvoryButton") as Style;
                     btn.Style = style;
 
                     btn.Content = categories[idx].menuList[i].name.Replace('^', '\n');
                     btn.FontFamily = new FontFamily("NanumBarunGothic");
-                    btn.FontSize = (double)new FontSizeConverter().ConvertFrom("13pt");
+                    btn.FontSize = (double)new FontSizeConverter().ConvertFrom("11pt");
                     btn.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x60, 0x3A, 0x17));
 
                     btn.HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -1015,21 +1015,21 @@ namespace Once_v2_2015.ViewModel
             for (int i = 0; i < categories.Count; i++)
             {
                 int row = i / MenuPosition.CntPerRow;
-                int col = i % 4;
+                int col = i % MenuPosition.CntPerRow;
                 int left = MenuPosition.InitLeft + MenuPosition.MarginLeft * col;
                 int right = MenuPosition.InitRight - MenuPosition.MarginLeft * col;
                 int y = MenuPosition.InitY + MenuPosition.MarginTop * row;
 
                 Button btn = new Button();
-                btn.Width = 180;
-                btn.Height = 130;
+                btn.Width = MenuPosition.BtnWidth;
+                btn.Height = MenuPosition.BtnHeight;
 
                 Style style = Application.Current.FindResource("IvoryButton") as Style;
                 btn.Style = style;
 
                 btn.Content = categories[i].name;
                 btn.FontFamily = new FontFamily("NanumBarunGothic");
-                btn.FontSize = (double)new FontSizeConverter().ConvertFrom("13pt");
+                btn.FontSize = (double)new FontSizeConverter().ConvertFrom("11pt");
                 btn.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x60, 0x3A, 0x17));
 
                 btn.HorizontalAlignment = HorizontalAlignment.Stretch;

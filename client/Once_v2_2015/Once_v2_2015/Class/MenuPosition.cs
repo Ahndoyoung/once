@@ -8,13 +8,16 @@ namespace Once_v2_2015.Class
 {
     public class MenuPosition
     {
-        public const int CntPerRow = 4;
-        public const int InitLeft = 45;
-        public const int InitRight = 656;
+        public const int CntPerRow = 5;
+        public const int InitLeft = 10;
+        public const int InitRight = 701;
         public const int InitY = 10;
-        public const int MarginLeft = 207;
+        public const int MarginLeft = 174;
         public const int MarginRight = 0;
-        public const int MarginTop = 160;
+        public const int MarginTop = 128;
+
+        public const int BtnWidth = 168;
+        public const int BtnHeight = 122;
     }
 
     public class OrderPosition

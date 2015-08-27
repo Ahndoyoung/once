@@ -115,7 +115,15 @@
             <Button x:Name="btnCategory" Style="{StaticResource BrownButton}" Content="Non-Coffee" HorizontalAlignment="Left" Margin="214,10,0,0" VerticalAlignment="Top" Width="305" Height="54" Foreground="#FFFBFBEF" FontFamily="Segoe UI" FontSize="24" FontWeight="Bold"/>
             <ScrollViewer Margin="0,87,0,0" VerticalScrollBarVisibility="Visible">
                 <Grid x:Name="grdInnerMenu">
-                    <Button x:Name="button_Copy10" Style="{StaticResource IvoryButton}"  Content="Coffee" Margin="45,490,656,0" VerticalAlignment="Top" Height="130" FontFamily="NanumBarunGothic" FontSize="17.333" Background="#FF603A17" Foreground="#FF603A17"/>
+                    <Button x:Name="button_Copy10" Style="{StaticResource IvoryButton}" Margin="10,10,701,0" VerticalAlignment="Top" Height="122" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
+                    <Button x:Name="button_Copy5" Style="{StaticResource IvoryButton}"  Content="Coffee" Margin="184,10,529,0" VerticalAlignment="Top" Height="122" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
+                    <Button x:Name="button_Copy6" Style="{StaticResource IvoryButton}"  Content="Coffee" Margin="357,10,356,0" VerticalAlignment="Top" Height="122" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
+                    <Button x:Name="button_Copy7" Style="{StaticResource IvoryButton}"  Content="Coffee" Margin="530,10,183,0" VerticalAlignment="Top" Height="122" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
+                    <Button x:Name="button_Copy8" Style="{StaticResource IvoryButton}"  Content="Coffee" Margin="703,10,10,0" VerticalAlignment="Top" Height="122" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
+                    <Button x:Name="button_Copy9" Style="{StaticResource IvoryButton}"  Content="Coffee" VerticalAlignment="Top" Height="122" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Margin="12,138,701,0"/>
+                    <Button x:Name="button_Copy11" Style="{StaticResource IvoryButton}" VerticalAlignment="Top" Height="122" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Margin="12,265,701,0"/>
+                    <Button x:Name="button_Copy12" Style="{StaticResource IvoryButton}"  Content="Coffee" VerticalAlignment="Top" Height="122" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Margin="10,392,703,0"/>
+                    <Button x:Name="button_Copy13" Style="{StaticResource IvoryButton}"  Content="Coffee" VerticalAlignment="Top" Height="122" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Margin="13,520,700,0"/>
                 </Grid>
 
             </ScrollViewer>
