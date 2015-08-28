@@ -384,6 +384,7 @@ namespace Once_v2_2015.ViewModel
             {
                 SellingItem si = new SellingItem(name, checkedTemp, checkedSize, price);
                 SellingItems.Add(si);
+                cw.lvSelling.ScrollIntoView(cw.lvSelling.Items[cw.lvSelling.Items.Count - 1]);
             }
             SubTotal = (int.Parse(SubTotal) + price).ToString();
         }
