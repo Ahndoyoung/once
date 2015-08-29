@@ -656,7 +656,7 @@ namespace Once_v2_2015.ViewModel
 
                         MenuItem mi4 = new MenuItem();
                         mi4.name = menuItemProto.name;
-                        mi4.temperature = 'I';
+                        mi4.temperature = 'H';
                         mi4.size = 'L';
                         mi4.isWhipping = menuItemProto.whip;
                         mi4.price = mi4.size == 'L' ? menuItemProto.priceL : menuItemProto.price;

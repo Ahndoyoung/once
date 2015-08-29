@@ -323,26 +323,30 @@ namespace Once_v2_2015.ViewModel
 
             bool isNullTemp = true;
             bool isNullSize = true;
+            // 메뉴이름 찾기
             foreach (var category in categories)
             {
-                foreach (var menuItem in category.menuList)
+                if (cw.btnCategory.Content.ToString() == category.name)
                 {
-                    if (menuItem.name == name)
+                    foreach (var menuItem in category.menuList)
                     {
-                        price = menuItem.price;
-                        if (menuItem.temperature != null)
+                        if (menuItem.name == name)
                         {
-                            isNullTemp = false;
+                            if (menuItem.temperature != null)
+                            {
+                                isNullTemp = false;
+                            }
+                            if (menuItem.size != null)
+                            {
+                                isNullSize = false;
+                            }
+                            break;
                         }
-                        if (menuItem.size != null)
-                        {
-                            isNullSize = false;
-                        }
-                        break;
                     }
                 }
             }
 
+            // 온도, 사이즈 체크
             char? checkedTemp = null;
             if (!isNullTemp)
             {
@@ -368,6 +372,21 @@ namespace Once_v2_2015.ViewModel
                 }
             }
 
+            // 가격 체크
+            foreach (var category in categories)
+            {
+                if (cw.btnCategory.Content.ToString() == category.name)
+                {
+                    foreach (var menuItem in category.menuList)
+                    {
+                        if (menuItem.name == name && menuItem.temperature == checkedTemp && menuItem.size == checkedSize)
+                        {
+                            price = menuItem.price;
+                        }
+                    }
+                }
+            }
+
             if (way == "whipping")
                 name += "\n * 휘핑크림";
             bool isExist = false;
@@ -388,6 +407,7 @@ namespace Once_v2_2015.ViewModel
             }
             SubTotal = (int.Parse(SubTotal) + price).ToString();
         }
+
         #endregion
 
         #region CancelOrderCommand
