@@ -114,6 +114,9 @@
     <Compile Include="ViewModel\MenuSettingViewModel.cs" />
     <Compile Include="ViewModel\OrdersViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\AdjustmentUC.xaml.cs">
+      <DependentUpon>AdjustmentUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AdjustmentWindow.xaml.cs">
       <DependentUpon>AdjustmentWindow.xaml</DependentUpon>
     </Compile>
@@ -132,6 +135,10 @@
     <Compile Include="View\OrdersUC.xaml.cs">
       <DependentUpon>OrdersUC.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AdjustmentUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AdjustmentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -234,9 +241,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\hundred.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\recipe1.png" />
