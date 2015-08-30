@@ -24,7 +24,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <tb:TaskbarIcon x:Name="taskBarIcon" IconSource="../img/Pixture-Coffee-CoffeeCup-2.ico" ToolTipText="Once - POS Program" Visibility="{Binding TraybarIconVisible}">
+        <tb:TaskbarIcon x:Name="taskBarIcon" IconSource="../img/Pixture-Coffee-CoffeeCup-2.ico" ToolTipText="Once - POS Program">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="TrayMouseDoubleClick">
                     <i:InvokeCommandAction Command="{Binding ShowCommand}"/>
@@ -50,7 +50,7 @@
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Right" Margin="0,0,162,43" Width="60" CornerRadius="100" Background="#FFFBFBEF" Height="60" Visibility="{Binding CntVisible}">
                 <TextBlock x:Name="textBlock3" TextWrapping="Wrap" Text="{Binding ExistingOrder}" TextAlignment="Center" VerticalAlignment="Center" Foreground="#FF603A17" FontFamily="Segoe Print" FontWeight="Bold" FontSize="21.333"/>
             </Border>
-            <Button x:Name="button" Command="{Binding ReadDocxCommand}"  Style="{StaticResource BrownButton}" Margin="0,23,211,28" HorizontalAlignment="Right" Width="62">
+            <Button x:Name="button" Command="{Binding ReadDocxCommand}"  Style="{StaticResource BrownButton}" Margin="0,23,237,28" HorizontalAlignment="Right" Width="62">
                 <Image Source="../img/recipe1.png" Height="40" Width="41"/>
             </Button>
         </Grid>

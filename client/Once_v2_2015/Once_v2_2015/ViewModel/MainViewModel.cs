@@ -52,18 +52,16 @@ namespace Once_v2_2015.ViewModel
 
         #region CounterCommand
 
-        private RelayCommand<Window> _counterCommand;
+        private RelayCommand _counterCommand;
 
-        public RelayCommand<Window> CounterCommand
+        public RelayCommand CounterCommand
         {
-            get { return _counterCommand ?? (_counterCommand = new RelayCommand<Window>(Counter)); }
+            get { return _counterCommand ?? (_counterCommand = new RelayCommand(Counter)); }
         }
 
-        private void Counter(Window w)
+        private void Counter()
         {
-            w.Visibility = Visibility.Collapsed;
-            //CounterWindow cw = new CounterWindow();
-            //cw.ShowDialog();
+            MainWindowVisible = Visibility.Collapsed;
             var msg = new ViewModelMessage()
             {
                 Text = "StartPOS"
@@ -75,49 +73,86 @@ namespace Once_v2_2015.ViewModel
 
         #region AdjustmentCommand
 
-        private RelayCommand<Window> _adjustmentCommand;
+        private RelayCommand _adjustmentCommand;
 
-        public RelayCommand<Window> AdjustmentCommand
+        public RelayCommand AdjustmentCommand
         {
-            get { return _adjustmentCommand ?? (_adjustmentCommand = new RelayCommand<Window>(Adjustment)); }
+            get { return _adjustmentCommand ?? (_adjustmentCommand = new RelayCommand(Adjustment)); }
         }
 
-        private void Adjustment(Window w)
+        private void Adjustment()
         {
-            w.Visibility = Visibility.Collapsed;
+            MainWindowVisible = Visibility.Collapsed;
             AdjustmentWindow aw = new AdjustmentWindow();
             aw.ShowDialog();
-            w.Visibility = Visibility.Visible;
+            MainWindowVisible = Visibility.Visible;
         }
 
         #endregion
 
         #region SettingCommand
 
-        private RelayCommand<Window> _SettingCommand;
+        private RelayCommand _SettingCommand;
 
-        public RelayCommand<Window> SettingCommand
+        public RelayCommand SettingCommand
         {
-            get { return _SettingCommand ?? (_SettingCommand = new RelayCommand<Window>(Setting)); }
+            get { return _SettingCommand ?? (_SettingCommand = new RelayCommand(Setting)); }
         }
 
-        private void Setting(Window obj)
+        private void Setting()
         {
-            obj.Visibility = Visibility.Collapsed;
+            MainWindowVisible = Visibility.Collapsed;
             MenuManagementWindow mmw = new MenuManagementWindow();
             mmw.ShowDialog();
-            obj.Visibility = Visibility.Visible;
+            MainWindowVisible = Visibility.Visible;
         }
 
         #endregion
+
+        #endregion
+
+        #region Properties
+        
+        private Visibility _MainWindowVisible = Visibility.Visible;
+
+        public Visibility MainWindowVisible
+        {
+            get { return _MainWindowVisible; }
+            set
+            {
+                try
+                {
+                    _MainWindowVisible = value;
+                    RaisePropertyChanged("MainWindowVisible");
+                }
+                catch
+                {
+                }
+            }
+        }
 
         #endregion
 
         private CounterWindow counterWindow = new CounterWindow();
-        
+
+        private void OnReceiveMessageAction(ViewModelMessage obj)
+        {
+            string[] arr = obj.Text.Split('^');
+
+            switch (arr[0])
+            {
+                case "ShowMain":
+                    MainWindowVisible = Visibility.Visible;
+                    break;
+                case "HideMain":
+                    MainWindowVisible = Visibility.Collapsed;
+                    break;
+            }
+        }
+
         public MainViewModel()
         {
-            
+            Messenger.Default.Register<ViewModelMessage>(this, OnReceiveMessageAction);
         }
     }
 }
