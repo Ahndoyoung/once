@@ -12,6 +12,8 @@ using System.Windows.Markup.Primitives;
 using System.Xml.Serialization;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
+using Once_v2_2015.Class;
 using Once_v2_2015.Model;
 using Once_v2_2015.View;
 // ReSharper disable InconsistentNaming
@@ -715,6 +717,11 @@ namespace Once_v2_2015.ViewModel
             }
 
             SaveXML(saveCate);
+            var msg = new ViewModelMessage()
+            {
+                Text = "ReloadMenu"
+            };
+            Messenger.Default.Send<ViewModelMessage>(msg);
         }
 
         private void LoadCategory()

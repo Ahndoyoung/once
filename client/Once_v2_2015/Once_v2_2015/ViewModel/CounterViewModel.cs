@@ -86,6 +86,17 @@ namespace Once_v2_2015.ViewModel
             // init
             CheckDateTime();
             InitProperties();
+            counterWindow = cw; // need modify
+        }
+
+        private void ReloadMenu()
+        {
+            // need modify
+            if (counterWindow != null)
+            {
+                categories = LoadCategory();
+                SetCategory(counterWindow);
+            }
         }
         #endregion
 
@@ -1029,6 +1040,7 @@ namespace Once_v2_2015.ViewModel
 
         #endregion
 
+        public CounterWindow counterWindow = null; // need modify
         public MenuSettingView menuSettingView = null;
         private string date_today = null;
 
@@ -1163,6 +1175,9 @@ namespace Once_v2_2015.ViewModel
                     SubTotal = (int.Parse(SubTotal) + 500).ToString();
                     break;
 
+                case "ReloadMenu":
+                    ReloadMenu();
+                    break;
                 default:
                     break;
             }
