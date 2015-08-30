@@ -22,12 +22,16 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Hardcodet.Wpf.TaskbarNotification;
 using Newtonsoft.Json;
+using Microsoft.Office.Interop.Word;
 using Once_v2_2015.Class;
 using Once_v2_2015.Model;
 using Once_v2_2015.View;
 using Application = System.Windows.Application;
 using Binding = System.Windows.Data.Binding;
 using Button = System.Windows.Controls.Button;
+using Category = Once_v2_2015.Model.Category;
+using Style = System.Windows.Style;
+using Border = System.Windows.Controls.Border;
 using ContextMenu = System.Windows.Controls.ContextMenu;
 using HorizontalAlignment = System.Windows.HorizontalAlignment;
 using ListView = System.Windows.Controls.ListView;
@@ -812,6 +816,34 @@ namespace Once_v2_2015.ViewModel
                 "Order #" + idx.ToString() + "\n\nSubTotal : " + subTotal + "\nDiscounts : " + discount +
                 "\n-------------------------\n"
                 + "Total : " + total + "\nPayment : " + payment, "원본 내역", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        #endregion
+
+        #region ReadDocxCommand
+
+        private RelayCommand _ReadDocxCommand;
+
+        public RelayCommand ReadDocxCommand
+        {
+            get { return _ReadDocxCommand ?? (_ReadDocxCommand = new RelayCommand(ReadDocx)); }
+        }
+
+        private void ReadDocx()
+        {
+            Microsoft.Office.Interop.Word.Application ap = new Microsoft.Office.Interop.Word.Application();
+
+            try
+            {
+                string path = AppDomain.CurrentDomain.BaseDirectory;
+                Document doc = ap.Documents.Open(path + "Recipe.docx", ReadOnly: true, Visible: false);
+                doc.Activate();
+                ap.Visible = true;
+            }
+            catch (Exception err)
+            {
+                
+            }
         }
 
         #endregion
