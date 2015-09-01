@@ -1,0 +1,16 @@
+{
+  "name": "test_gallery",
+  "version": "1.0.0",
+  "description": "test photo gallery",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kangdo",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.3.3",
+    "express": "^4.13.3",
+    "instagram-node": "^0.5.7"
+  }
+}
