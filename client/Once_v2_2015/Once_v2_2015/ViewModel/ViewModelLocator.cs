@@ -51,7 +51,12 @@ namespace Once_v2_2015.ViewModel
         {
             get { return Kernel.Get<MenuManagementViewModel>("MenuManagementVM"); }
         }
-        
+
+        public AdjustmentUCViewModel AdjustmentUCVM
+        {
+            get { return Kernel.Get<AdjustmentUCViewModel>("AdjustmentUCVM"); }
+        }
+
         public static void Cleanup()
         {
             
