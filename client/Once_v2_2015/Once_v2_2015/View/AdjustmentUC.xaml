@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="Once_v2_2015.View.AdjustmentUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Once_v2_2015.View"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Width="1492" Height="857"
+             DataContext="{Binding AdjustmentUCVM, Source={StaticResource Locator}}">
+    <Grid Background="#FFFBFBEF">
+        <Calendar x:Name="Cal" Style="{StaticResource StyleCalendar}" Margin="57,56,0,0" VerticalAlignment="Top" Height="300" Width="300" HorizontalAlignment="Left" SelectionMode="SingleRange">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectedDatesChanged">
+                    <i:InvokeCommandAction Command="{Binding OnSelectedDatesChangedCommand}" CommandParameter="{Binding SelectedDates, ElementName=Cal}"></i:InvokeCommandAction>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Calendar>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="46,36,0,0" TextWrapping="Wrap" Text="일별 조회" VerticalAlignment="Top" FontFamily="NanumBarunGothic" FontSize="17.333" Foreground="#FF595959"/>
+        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="46,371,0,0" TextWrapping="Wrap" Text="기간별 조회" VerticalAlignment="Top" FontFamily="NanumBarunGothic" FontSize="17.333" Foreground="#FF595959"/>
+        <Button x:Name="button" Command="{Binding PeriodCommand}" CommandParameter="1week" Content="1주" HorizontalAlignment="Left" Margin="57,398,0,0" VerticalAlignment="Top" Width="50" BorderBrush="#FF603A17" Background="{x:Null}" Foreground="#FF603A17" FontFamily="NanumBarunGothic" FontSize="14.667" Height="28"/>
+        <Button x:Name="button_Copy" Command="{Binding PeriodCommand}" CommandParameter="1month" Content="1달" HorizontalAlignment="Left" Margin="112,398,0,0" VerticalAlignment="Top" Width="50" BorderBrush="#FF603A17" Background="{x:Null}" Foreground="#FF603A17" FontFamily="NanumBarunGothic" FontSize="14.667" Height="28"/>
+        <Button x:Name="button_Copy1" Command="{Binding PeriodCommand}" CommandParameter="3month" Content="3개월" HorizontalAlignment="Left" Margin="167,398,0,0" VerticalAlignment="Top" Width="65" BorderBrush="#FF603A17" Background="{x:Null}" Foreground="#FF603A17" FontFamily="NanumBarunGothic" FontSize="14.667" Height="28"/>
+        <Button x:Name="button_Copy2" Command="{Binding PeriodCommand}" CommandParameter="6month" Content="6개월" HorizontalAlignment="Left" Margin="237,398,0,0" VerticalAlignment="Top" Width="65" BorderBrush="#FF603A17" Background="{x:Null}" Foreground="#FF603A17" FontFamily="NanumBarunGothic" FontSize="14.667" Height="28"/>
+        <Button x:Name="button_Copy3" Command="{Binding PeriodCommand}" CommandParameter="1year" Content="1년" HorizontalAlignment="Left" Margin="307,398,0,0" VerticalAlignment="Top" Width="50" BorderBrush="#FF603A17" Background="{x:Null}" Foreground="#FF603A17" FontFamily="NanumBarunGothic" FontSize="14.667" Height="28"/>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="762" Margin="406,36,0,0" VerticalAlignment="Top" Width="489" Foreground="Black" FontSize="21.333" FontFamily="NanumBarunGothic">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="120" DisplayMemberBinding="{Binding }" >
+                        <GridViewColumnHeader TextElement.FontSize="16" FontFamily="Segoe UI">판매일</GridViewColumnHeader>
+                    </GridViewColumn>
+                    <GridViewColumn Width="120" DisplayMemberBinding="{Binding }" >
+                        <GridViewColumnHeader TextElement.FontSize="16" FontFamily="Segoe UI">판매시간</GridViewColumnHeader>
+                    </GridViewColumn>
+                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding }" >
+                        <GridViewColumnHeader TextElement.FontSize="16" FontFamily="Segoe UI">판매금액</GridViewColumnHeader>
+                    </GridViewColumn>
+                    <GridViewColumn Width="120" DisplayMemberBinding="{Binding }" >
+                        <GridViewColumnHeader TextElement.FontSize="16" FontFamily="Segoe UI">결제방법</GridViewColumnHeader>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="button_Copy4" Command="{Binding LookupCommand}"  Style="{StaticResource IvoryButton}" Content="조  회" HorizontalAlignment="Left" Margin="57,510,0,0" VerticalAlignment="Top" Width="300" BorderBrush="#FF603A17" Background="{x:Null}" Foreground="#FF603A17" FontFamily="NanumBarunGothic" FontSize="21.333" Height="100"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="143,442,0,0" TextWrapping="Wrap" Text="{Binding StartYear}" VerticalAlignment="Top" Width="68" TextAlignment="Center" FontSize="14.667"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="215,443,0,0" TextWrapping="Wrap" Text="년" VerticalAlignment="Top" FontSize="13.333"/>
+        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="238,442,0,0" TextWrapping="Wrap" Text="{Binding StartMonth}" VerticalAlignment="Top" Width="38" TextAlignment="Center" FontSize="14.667"/>
+        <TextBlock x:Name="textBlock1_Copy" HorizontalAlignment="Left" Margin="279,443,0,0" TextWrapping="Wrap" Text="월" VerticalAlignment="Top" FontSize="13.333"/>
+        <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Height="23" Margin="303,442,0,0" TextWrapping="Wrap" Text="{Binding StartDay}" VerticalAlignment="Top" Width="38" TextAlignment="Center" FontSize="14.667"/>
+        <TextBlock x:Name="textBlock1_Copy1" HorizontalAlignment="Left" Margin="344,443,0,0" TextWrapping="Wrap" Text="일" VerticalAlignment="Top" FontSize="13.333"/>
+        <TextBox x:Name="textBox_Copy2" HorizontalAlignment="Left" Height="23" Margin="143,476,0,0" TextWrapping="Wrap" Text="{Binding EndYear}" VerticalAlignment="Top" Width="68" TextAlignment="Center" FontSize="14.667"/>
+        <TextBlock x:Name="textBlock1_Copy2" HorizontalAlignment="Left" Margin="215,477,0,0" TextWrapping="Wrap" Text="년" VerticalAlignment="Top" FontSize="13.333"/>
+        <TextBox x:Name="textBox_Copy3" HorizontalAlignment="Left" Height="23" Margin="238,476,0,0" TextWrapping="Wrap" Text="{Binding EndMonth}" VerticalAlignment="Top" Width="38" TextAlignment="Center" FontSize="14.667"/>
+        <TextBlock x:Name="textBlock1_Copy3" HorizontalAlignment="Left" Margin="279,477,0,0" TextWrapping="Wrap" Text="월" VerticalAlignment="Top" FontSize="13.333"/>
+        <TextBox x:Name="textBox_Copy4" HorizontalAlignment="Left" Height="23" Margin="303,476,0,0" TextWrapping="Wrap" Text="{Binding EndDay}" VerticalAlignment="Top" Width="38" TextAlignment="Center" FontSize="14.667"/>
+        <TextBlock x:Name="textBlock1_Copy4" HorizontalAlignment="Left" Margin="344,477,0,0" TextWrapping="Wrap" Text="일" VerticalAlignment="Top" FontSize="13.333"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="122,474,0,0" TextWrapping="Wrap" Text="~" VerticalAlignment="Top" FontSize="17.333"/>
+        <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="46,637,0,0" TextWrapping="Wrap" Text="매상 합계 :" VerticalAlignment="Top" FontFamily="NanumBarunGothic" FontSize="17.333" Foreground="#FF595959"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="39" Margin="143,626,0,0" TextWrapping="Wrap" Text="100000" VerticalAlignment="Top" Width="215" TextAlignment="Right" IsReadOnly="True" FontSize="26.667" Background="Yellow"/>
+        <TextBox x:Name="textBox1_Copy" HorizontalAlignment="Left" Height="33" Margin="202,670,0,0" TextWrapping="Wrap" Text="100000" VerticalAlignment="Top" Width="156" TextAlignment="Right" IsReadOnly="True" FontSize="21.333"/>
+        <TextBlock x:Name="textBlock_Copy2" HorizontalAlignment="Left" Margin="96,679,0,0" TextWrapping="Wrap" Text="현금 합계 :" VerticalAlignment="Top" FontFamily="NanumBarunGothic" FontSize="17.333" Foreground="#FF595959"/>
+        <TextBox x:Name="textBox1_Copy1" HorizontalAlignment="Left" Height="33" Margin="202,708,0,0" TextWrapping="Wrap" Text="100000" VerticalAlignment="Top" Width="156" TextAlignment="Right" IsReadOnly="True" FontSize="21.333"/>
+        <TextBlock x:Name="textBlock_Copy3" HorizontalAlignment="Left" Margin="96,717,0,0" TextWrapping="Wrap" Text="카드 합계 :" VerticalAlignment="Top" FontFamily="NanumBarunGothic" FontSize="17.333" Foreground="#FF595959"/>
+        <ListView x:Name="listView_Copy" Height="537" Margin="914,36,42,0" VerticalAlignment="Top" Foreground="Black" FontFamily="NanumBarunGothic" FontSize="21.333">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="220" DisplayMemberBinding="{Binding }" >
+                        <GridViewColumnHeader TextElement.FontSize="16" FontFamily="Segoe UI">Name</GridViewColumnHeader>
+                    </GridViewColumn>
+                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding }" >
+                        <GridViewColumnHeader TextElement.FontSize="16" FontFamily="Segoe UI">Each</GridViewColumnHeader>
+                    </GridViewColumn>
+                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding }" >
+                        <GridViewColumnHeader TextElement.FontSize="16" FontFamily="Segoe UI">Qty</GridViewColumnHeader>
+                    </GridViewColumn>
+                    <GridViewColumn Width="120" DisplayMemberBinding="{Binding }" >
+                        <GridViewColumnHeader TextElement.FontSize="16" FontFamily="Segoe UI">Total</GridViewColumnHeader>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBox x:Name="textBox1_Copy2" HorizontalAlignment="Left" Height="33" Margin="1293,583,0,0" TextWrapping="Wrap" Text="100000" VerticalAlignment="Top" Width="156" TextAlignment="Right" IsReadOnly="True" FontSize="21.333"/>
+        <TextBlock x:Name="textBlock_Copy4" HorizontalAlignment="Left" Margin="1187,592,0,0" TextWrapping="Wrap" Text="합계 금액 :" VerticalAlignment="Top" FontFamily="NanumBarunGothic" FontSize="17.333" Foreground="#FF595959"/>
+
+    </Grid>
+</UserControl>
