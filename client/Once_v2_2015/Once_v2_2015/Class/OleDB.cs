@@ -65,11 +65,11 @@ namespace Once_v2_2015.Class
                     cmd.ExecuteNonQuery();
                     // 결제 정보
                     cmd.CommandText =
-                        "CREATE TABLE RECEIPT([RECEIPT_NUM] identity primary key, [RECEIPT_DATE] datetime, [RECEIPT_TYPE] char, [RECEIPT_DISCOUNT] int DEFAULT 0, [RECEIPT_SUBTOTAL] int, [RECEIPT_AMOUNT] int)";
+                        "CREATE TABLE RECEIPT([RECEIPT_NUM] identity primary key, [RECEIPT_DATE] DATETIME, [RECEIPT_TYPE] char, [RECEIPT_DISCOUNT] int DEFAULT 0, [RECEIPT_SUBTOTAL] int, [RECEIPT_AMOUNT] int)";
                     cmd.ExecuteNonQuery();
                     // 판매 (메뉴) 정보 (외래키 : MENU_NUM, RECEIPT_NUM)
                     cmd.CommandText =
-                        "CREATE TABLE SALE([SALE_NUM] IDENTITY PRIMARY KEY, [MENU_NUM] INT, [SALE_DATE] DATETIME, [RECEIPT_NUM] INT, [SALE_QUANTITY] INT)";
+                        "CREATE TABLE SALE([SALE_NUM] IDENTITY PRIMARY KEY, [MENU_NUM] INT, [RECEIPT_NUM] INT, [SALE_QUANTITY] INT)";
                     cmd.ExecuteNonQuery();
                     cmd.CommandText =
                         "ALTER TABLE SALE ADD CONSTRAINT MENU_FK FOREIGN KEY (MENU_NUM) REFERENCES MENU(MENU_NUM)";
