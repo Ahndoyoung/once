@@ -740,14 +740,14 @@ namespace Once_v2_2015.ViewModel
                     isFired = true;
 
                     // 결제
-                    string dt = DateTime.Now.ToString();
+                    DateTime dt = DateTime.Now;
                     string query =
                         string.Format("INSERT INTO RECEIPT(RECEIPT_DATE, RECEIPT_TYPE, RECEIPT_DISCOUNT, RECEIPT_SUBTOTAL, RECEIPT_AMOUNT)" +
-                        "VALUES('{0}', '{1}', {2}, {3}, {4})", dt, way, money[0], money[1], money[2]);
+                        "VALUES(Now(), '{0}', {1}, {2}, {3})", way, money[0], money[1], money[2]);
                     OleDB.NonQuery(query);
 
                     query =
-                        string.Format("SELECT RECEIPT_NUM FROM RECEIPT WHERE RECEIPT_DATE = '{0}'", dt);
+                        string.Format("SELECT TOP 1 RECEIPT_NUM FROM RECEIPT ORDER BY RECEIPT_NUM DESC");
                     OleDbConnection conn = new OleDbConnection(OleDB.connPath);
                     OleDbCommand cmd = new OleDbCommand(query, conn);
                     int idx = -1;
@@ -767,13 +767,12 @@ namespace Once_v2_2015.ViewModel
                     // 메뉴
                     foreach (var si in items)
                     {
-                        string name = si.name.Split('\n')[0];
                         char temp = si.temperature != null ? (char)si.temperature : 'N';
                         char size = si.size != null ? (char) si.size : 'N';
                         char whip = si.isWhipping == true ? 'T' : 'F';
                         query =
                            string.Format("INSERT INTO SALE(MENU_NAME, MENU_TEMP, MENU_SIZE, MENU_WHIP, MENU_PRICE, SALE_QUANTITY, RECEIPT_NUM)" +
-                           "VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')", name, temp, size, whip, si.price, si.quantity, idx);
+                           "VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')", si.name, temp, size, whip, si.price, si.quantity, idx);
                         OleDB.NonQuery(query);
                     }
                 }

@@ -54,7 +54,7 @@ namespace Once_v2_2015.Class
                     
                     // 결제 정보
                     cmd.CommandText =
-                        "CREATE TABLE RECEIPT([RECEIPT_NUM] identity primary key, [RECEIPT_DATE] char, [RECEIPT_TYPE] char, [RECEIPT_DISCOUNT] int DEFAULT 0, [RECEIPT_SUBTOTAL] int, [RECEIPT_AMOUNT] int)";
+                        "CREATE TABLE RECEIPT([RECEIPT_NUM] identity primary key, [RECEIPT_DATE] DATETIME, [RECEIPT_TYPE] char, [RECEIPT_DISCOUNT] int DEFAULT 0, [RECEIPT_SUBTOTAL] int, [RECEIPT_AMOUNT] int)";
                     cmd.ExecuteNonQuery();
                     // 판매 (메뉴) 정보
                     cmd.CommandText =
