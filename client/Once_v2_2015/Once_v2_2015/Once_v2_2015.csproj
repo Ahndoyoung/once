@@ -100,6 +100,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Class\MenuPosition.cs" />
+    <Compile Include="Class\OleDB.cs" />
     <Compile Include="Class\PassThroughConverter.cs" />
     <Compile Include="Class\ViewModelMessage.cs" />
     <Compile Include="Container\DiContainer.cs" />

@@ -30,6 +30,8 @@ namespace Once_v2_2015.ViewModel
                 MessageBox.Show("이미 실행 중입니다.", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
                 Application.Current.Shutdown();
             }
+
+            OleDB.CheckDB();
         }
 
         #endregion
