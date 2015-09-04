@@ -682,6 +682,7 @@ namespace Once_v2_2015.ViewModel
 
                     ov.grdOrders.Children.Add(brd);
                     OrderNumber++;
+                    File.WriteAllText("DateTime_Sale.txt", date_today + '\n' + OrderNumber, Encoding.Default);
 
                     // JSON
                     try
@@ -697,6 +698,7 @@ namespace Once_v2_2015.ViewModel
                     {
                         Console.WriteLine(err.ToString());
                     }
+
 
                     // init
                     SellingItems.Clear();
