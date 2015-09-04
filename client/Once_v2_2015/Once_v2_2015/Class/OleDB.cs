@@ -9,7 +9,7 @@ namespace Once_v2_2015.Class
 {
     public class OleDB
     {
-        private static string connPath = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=.\CafeContents.accdb";
+        public static readonly string connPath = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=.\CafeContents.accdb";
 
         public static void CheckDB()
         {
@@ -58,7 +58,7 @@ namespace Once_v2_2015.Class
                     cmd.ExecuteNonQuery();
                     // 판매 (메뉴) 정보
                     cmd.CommandText =
-                        "CREATE TABLE SALE([SALE_NUM] IDENTITY PRIMARY KEY, [MENU_NUM] INT, [RECEIPT_NUM] INT, [SALE_QUANTITY] INT)";
+                        "CREATE TABLE SALE([SALE_NUM] IDENTITY PRIMARY KEY, [MENU_NAME] CHAR, [MENU_TEMP] CHAR, [MENU_SIZE] CHAR, [MENU_WHIP] CHAR DEFAULT F, [MENU_PRICE] INT, [SALE_QUANTITY] INT, [RECEIPT_NUM] INT)";
                     cmd.ExecuteNonQuery();
                 }
                 catch(Exception err)
@@ -72,6 +72,23 @@ namespace Once_v2_2015.Class
             }
             catch
             {
+            }
+        }
+
+        public static void NonQuery(string query)
+        {
+            OleDbConnection conn = new OleDbConnection(connPath);
+            OleDbCommand cmd = new OleDbCommand(query,conn);
+
+            try
+            {
+                conn.Open();
+
+                cmd.ExecuteNonQuery();
+            }
+            finally
+            {
+                conn.Close();
             }
         }
     }

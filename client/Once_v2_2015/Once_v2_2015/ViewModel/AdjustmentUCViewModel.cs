@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Once_v2_2015.Class;
+using Once_v2_2015.Model;
 
 namespace Once_v2_2015.ViewModel
 {
@@ -97,7 +100,81 @@ namespace Once_v2_2015.ViewModel
 
         private void Lookup()
         {
+            Receipts.Clear();
 
+            DateTime start = new DateTime(StartYear, StartMonth, StartDay);
+            DateTime end = new DateTime(EndYear, EndMonth, EndDay);
+
+            string query =
+                string.Format("SELECT * FROM RECEIPT WHERE Format([RECEIPT_DATE], \"yyyy-mm-dd\") >= '{0}' AND Format([RECEIPT_DATE], \"yyyy-mm-dd\") <= '{1}'",
+                    start.ToShortDateString(), end.ToShortDateString());
+            OleDbConnection conn = new OleDbConnection(OleDB.connPath);
+            OleDbCommand cmd = new OleDbCommand(query, conn);
+            try
+            {
+                conn.Open();
+                var read = cmd.ExecuteReader();
+                while (read.Read())
+                {
+                    // #, date, time, type, discount, subtotal, amount
+                    Receipt r = new Receipt()
+                    {
+                        num = (int)read[0],
+                        date = ((DateTime)read[1]).ToShortDateString(),
+                        time = ((DateTime)read[1]).ToShortTimeString(),
+                        type = (string)read[2],
+                        discount = (int)read[3],
+                        subtotal = (int)read[4],
+                        amount = (int)read[5]
+                    };
+                    Receipts.Add(r);
+                }
+                read.Close();
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        #endregion
+
+        #region OnSelectedReceiptChangedCommand
+
+        private RelayCommand _OnSelectedReceiptChangedCommand;
+
+        public RelayCommand OnSelectedReceiptChangedCommand
+        {
+            get { return _OnSelectedReceiptChangedCommand ?? (_OnSelectedReceiptChangedCommand = new RelayCommand(OnSelectedReceiptChanged)); }
+        }
+
+        private void OnSelectedReceiptChanged()
+        {
+            if (SelectedReceipt != null)
+            {
+                SellingItems.Clear();
+
+                string query =
+                    string.Format("SELECT * FROM SALE WHERE RECEIPT_NUM = {0}", SelectedReceipt.num);
+                OleDbConnection conn = new OleDbConnection(OleDB.connPath);
+                OleDbCommand cmd = new OleDbCommand(query, conn);
+                try
+                {
+                    conn.Open();
+                    var read = cmd.ExecuteReader();
+                    while (read.Read())
+                    {
+                        // #, MENU_NAME, MENU_TEMP, MENU_SIZE, MENU_WHIP, MENU_PRICE, SALE_QUANTITY, 
+                        SellingItem si = new SellingItem(read[1].ToString(), read[2].ToString()[0], read[3].ToString()[0], int.Parse(read[5].ToString()));
+                        SellingItems.Add(si);
+                    }
+                    read.Close();
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
         }
 
         #endregion
@@ -105,6 +182,42 @@ namespace Once_v2_2015.ViewModel
         #endregion
 
         #region Properties
+
+        private ObservableCollection<Receipt> _Receipts = new ObservableCollection<Receipt>();
+
+        public ObservableCollection<Receipt> Receipts
+        {
+            get { return _Receipts; }
+            set
+            {
+                _Receipts = value;
+                RaisePropertyChanged("Receipts");
+            }
+        }
+
+        private ObservableCollection<SellingItem> _SellingItems = new ObservableCollection<SellingItem>();
+
+        public ObservableCollection<SellingItem> SellingItems
+        {
+            get { return _SellingItems; }
+            set
+            {
+                _SellingItems = value;
+                RaisePropertyChanged("SellingItems");
+            }
+        }
+
+        private Receipt _SelectedReceipt;
+
+        public Receipt SelectedReceipt
+        {
+            get { return _SelectedReceipt; }
+            set
+            {
+                _SelectedReceipt = value;
+                RaisePropertyChanged("SelectedReceipt");
+            }
+        }
 
         private int _StartYear;
 
