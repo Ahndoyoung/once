@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.OleDb;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -660,7 +661,8 @@ namespace Once_v2_2015.ViewModel
                     btnC.Margin = new Thickness(0, 0, OrderPosition.InitBtnCRight, OrderPosition.InitBtnBottom);
 
                     btnC.Command = CompleteOrderCommand;
-                    object[] obj_btnC = new object[] {ov, brd};
+                    string[] money = new string[] {DiscountPrice, SubTotal, Total};
+                    object[] obj_btnC = new object[] {ov, brd, way, money, items};
                     btnC.CommandParameter = obj_btnC;
 
                     grd.Children.Add(btnM);
@@ -722,6 +724,9 @@ namespace Once_v2_2015.ViewModel
             object[] values = (object[]) obj;
             OrdersUC ov = (OrdersUC) values[0];
             Border brd = (Border) values[1];
+            string way = (string) values[2];
+            string[] money = (string[]) values[3];
+            ObservableCollection<SellingItem> items = (ObservableCollection<SellingItem>) values[4];
 
             bool isFired = false;
             for (int i = 0; i < ov.grdOrders.Children.Count; i++)
@@ -731,6 +736,44 @@ namespace Once_v2_2015.ViewModel
                     ov.grdOrders.Children.RemoveAt(i);
                     ExistingOrder--;
                     isFired = true;
+
+                    // 결제
+                    string dt = DateTime.Now.ToString();
+                    string query =
+                        string.Format("INSERT INTO RECEIPT(RECEIPT_DATE, RECEIPT_TYPE, RECEIPT_DISCOUNT, RECEIPT_SUBTOTAL, RECEIPT_AMOUNT)" +
+                        "VALUES('{0}', '{1}', {2}, {3}, {4})", dt, way, money[0], money[1], money[2]);
+                    OleDB.NonQuery(query);
+
+                    query =
+                        string.Format("SELECT RECEIPT_NUM FROM RECEIPT WHERE RECEIPT_DATE = '{0}'", dt);
+                    OleDbConnection conn = new OleDbConnection(OleDB.connPath);
+                    OleDbCommand cmd = new OleDbCommand(query, conn);
+                    int idx = -1;
+                    try
+                    {
+                        conn.Open();
+                        var read = cmd.ExecuteReader();
+                        while (read.Read())
+                        {
+                            idx = int.Parse(read[0].ToString());
+                        }
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                    // 메뉴
+                    foreach (var si in items)
+                    {
+                        string name = si.name.Split('\n')[0];
+                        char temp = si.temperature != null ? (char)si.temperature : 'N';
+                        char size = si.size != null ? (char) si.size : 'N';
+                        char whip = si.isWhipping == true ? 'T' : 'F';
+                        query =
+                           string.Format("INSERT INTO SALE(MENU_NAME, MENU_TEMP, MENU_SIZE, MENU_WHIP, MENU_PRICE, SALE_QUANTITY, RECEIPT_NUM)" +
+                           "VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')", name, temp, size, whip, si.price, si.quantity, idx);
+                        OleDB.NonQuery(query);
+                    }
                 }
 
                 if (isFired && i != ov.grdOrders.Children.Count)
