@@ -101,6 +101,9 @@ namespace Once_v2_2015.ViewModel
         private void Lookup()
         {
             Receipts.Clear();
+            SellingItems.Clear();
+            MoneySales = 0;
+            CardSales = 0;
 
             DateTime start = new DateTime(StartYear, StartMonth, StartDay);
             DateTime end = new DateTime(EndYear, EndMonth, EndDay);
@@ -128,8 +131,15 @@ namespace Once_v2_2015.ViewModel
                         amount = (int)read[5]
                     };
                     Receipts.Add(r);
+
+                    if (r.type.Replace(" ", "") == "현금")
+                        MoneySales += r.amount;
+                    else if (r.type.Replace(" ", "") == "카드")
+                        CardSales += r.amount;
                 }
                 read.Close();
+
+                TotalSales = MoneySales + CardSales;
             }
             finally
             {
@@ -153,6 +163,7 @@ namespace Once_v2_2015.ViewModel
             if (SelectedReceipt != null)
             {
                 SellingItems.Clear();
+                MenusSales = 0;
 
                 string query =
                     string.Format("SELECT * FROM SALE WHERE RECEIPT_NUM = {0}", SelectedReceipt.num);
@@ -165,8 +176,10 @@ namespace Once_v2_2015.ViewModel
                     while (read.Read())
                     {
                         // #, MENU_NAME, MENU_TEMP, MENU_SIZE, MENU_WHIP, MENU_PRICE, SALE_QUANTITY, 
-                        SellingItem si = new SellingItem(read[1].ToString(), read[2].ToString()[0], read[3].ToString()[0], int.Parse(read[5].ToString()));
+                        SellingItem si = new SellingItem(read[1].ToString(), read[2].ToString()[0], read[3].ToString()[0], int.Parse(read[5].ToString()), int.Parse(read[6].ToString()));
                         SellingItems.Add(si);
+
+                        MenusSales += si.total;
                     }
                     read.Close();
                 }
@@ -288,6 +301,54 @@ namespace Once_v2_2015.ViewModel
             {
                 _EndDay = value;
                 RaisePropertyChanged("EndDay");
+            }
+        }
+        
+        private int _TotalSales = 0;
+
+        public int TotalSales
+        {
+            get { return _TotalSales; }
+            set
+            {
+                _TotalSales = value;
+                RaisePropertyChanged("TotalSales");
+            }
+        }
+
+        private int _MoneySales = 0;
+
+        public int MoneySales
+        {
+            get { return _MoneySales; }
+            set
+            {
+                _MoneySales = value;
+                RaisePropertyChanged("MoneySales");
+            }
+        }
+
+        private int _CardSales = 0;
+
+        public int CardSales
+        {
+            get { return _CardSales; }
+            set
+            {
+                _CardSales = value;
+                RaisePropertyChanged("CardSales");
+            }
+        }
+
+        private int _MenusSales = 0;
+
+        public int MenusSales
+        {
+            get { return _MenusSales; }
+            set
+            {
+                _MenusSales = value;
+                RaisePropertyChanged("MenusSales");
             }
         }
 

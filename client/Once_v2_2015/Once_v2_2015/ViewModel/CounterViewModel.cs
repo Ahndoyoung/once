@@ -427,7 +427,7 @@ namespace Once_v2_2015.ViewModel
             }
             if (!isExist)
             {
-                SellingItem si = new SellingItem(name, checkedTemp, checkedSize, price);
+                SellingItem si = new SellingItem(name, checkedTemp, checkedSize, price, 1);
                 SellingItems.Add(si);
                 cw.lvSelling.ScrollIntoView(cw.lvSelling.Items[cw.lvSelling.Items.Count - 1]);
             }
@@ -1213,7 +1213,7 @@ namespace Once_v2_2015.ViewModel
                     break;
 
                 case "AddOption":
-                    SellingItem si = new SellingItem(arr[1], null, null, 500);
+                    SellingItem si = new SellingItem(arr[1], null, null, 500, 1);
                     SellingItems.Add(si);
 
                     SubTotal = (int.Parse(SubTotal) + 500).ToString();

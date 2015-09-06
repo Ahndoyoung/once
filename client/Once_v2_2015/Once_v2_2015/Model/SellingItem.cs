@@ -35,13 +35,13 @@ namespace Once_v2_2015.Model
             }
         }
 
-        public SellingItem(string _name, char? _temp, char? _size, int _price)
+        public SellingItem(string _name, char? _temp, char? _size, int _price, int _qty)
         {
             name = _name;
             temperature = _temp;
             size = _size;
             price = _price;
-            quantity = 1;
+            quantity = _qty;
             total = price * quantity;
 
             string temp = null;

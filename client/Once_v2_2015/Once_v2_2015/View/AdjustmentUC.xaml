@@ -61,10 +61,10 @@
         <TextBlock x:Name="textBlock1_Copy4" HorizontalAlignment="Left" Margin="344,477,0,0" TextWrapping="Wrap" Text="일" VerticalAlignment="Top" FontSize="13.333"/>
         <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="122,474,0,0" TextWrapping="Wrap" Text="~" VerticalAlignment="Top" FontSize="17.333"/>
         <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="46,637,0,0" TextWrapping="Wrap" Text="매상 합계 :" VerticalAlignment="Top" FontFamily="NanumBarunGothic" FontSize="17.333" Foreground="#FF595959"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="39" Margin="143,626,0,0" TextWrapping="Wrap" Text="100000" VerticalAlignment="Top" Width="215" TextAlignment="Right" IsReadOnly="True" FontSize="26.667" Background="Yellow"/>
-        <TextBox x:Name="textBox1_Copy" HorizontalAlignment="Left" Height="33" Margin="202,670,0,0" TextWrapping="Wrap" Text="100000" VerticalAlignment="Top" Width="156" TextAlignment="Right" IsReadOnly="True" FontSize="21.333"/>
+        <TextBox x:Name="textBox1" Text="{Binding TotalSales}"  HorizontalAlignment="Left" Height="39" Margin="143,626,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" TextAlignment="Right" IsReadOnly="True" FontSize="26.667" Background="Yellow"/>
+        <TextBox x:Name="textBox1_Copy" Text="{Binding MoneySales}" HorizontalAlignment="Left" Height="33" Margin="202,670,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" TextAlignment="Right" IsReadOnly="True" FontSize="21.333"/>
         <TextBlock x:Name="textBlock_Copy2" HorizontalAlignment="Left" Margin="96,679,0,0" TextWrapping="Wrap" Text="현금 합계 :" VerticalAlignment="Top" FontFamily="NanumBarunGothic" FontSize="17.333" Foreground="#FF595959"/>
-        <TextBox x:Name="textBox1_Copy1" HorizontalAlignment="Left" Height="33" Margin="202,708,0,0" TextWrapping="Wrap" Text="100000" VerticalAlignment="Top" Width="156" TextAlignment="Right" IsReadOnly="True" FontSize="21.333"/>
+        <TextBox x:Name="textBox1_Copy1" Text="{Binding CardSales}" HorizontalAlignment="Left" Height="33" Margin="202,708,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" TextAlignment="Right" IsReadOnly="True" FontSize="21.333"/>
         <TextBlock x:Name="textBlock_Copy3" HorizontalAlignment="Left" Margin="96,717,0,0" TextWrapping="Wrap" Text="카드 합계 :" VerticalAlignment="Top" FontFamily="NanumBarunGothic" FontSize="17.333" Foreground="#FF595959"/>
         <ListView x:Name="listView_Copy" ItemsSource="{Binding SellingItems}" ItemContainerStyle="{StaticResource ColorfulListView}" AlternationCount="2" Height="537" Margin="914,36,42,0" VerticalAlignment="Top" Foreground="Black" FontFamily="NanumBarunGothic" FontSize="17.333">
             <ListView.View>
@@ -84,7 +84,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBox x:Name="textBox1_Copy2" HorizontalAlignment="Left" Height="33" Margin="1293,583,0,0" TextWrapping="Wrap" Text="100000" VerticalAlignment="Top" Width="156" TextAlignment="Right" IsReadOnly="True" FontSize="21.333"/>
+        <TextBox x:Name="textBox1_Copy2" HorizontalAlignment="Left" Height="33" Margin="1293,583,0,0" TextWrapping="Wrap" Text="{Binding MenusSales}" VerticalAlignment="Top" Width="156" TextAlignment="Right" IsReadOnly="True" FontSize="21.333"/>
         <TextBlock x:Name="textBlock_Copy4" HorizontalAlignment="Left" Margin="1187,592,0,0" TextWrapping="Wrap" Text="합계 금액 :" VerticalAlignment="Top" FontFamily="NanumBarunGothic" FontSize="17.333" Foreground="#FF595959"/>
 
     </Grid>
