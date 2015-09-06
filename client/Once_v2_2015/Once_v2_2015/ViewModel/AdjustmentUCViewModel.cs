@@ -182,6 +182,10 @@ namespace Once_v2_2015.ViewModel
                         MenusSales += si.total;
                     }
                     read.Close();
+
+                    SellingItem dis = new SellingItem("# Discount", null, null, -SelectedReceipt.discount, 1);
+                    SellingItems.Add(dis);
+                    MenusSales += dis.total;
                 }
                 finally
                 {

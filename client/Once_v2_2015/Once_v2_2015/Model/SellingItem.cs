@@ -60,7 +60,7 @@ namespace Once_v2_2015.Model
             else
                 s = "None";
 
-            if (name != " * 샷" && name != " * 시럽" && name != " * 휘핑크림" && name != " * 드리즐")
+            if (name != " * 샷" && name != " * 시럽" && name != " * 휘핑크림" && name != " * 드리즐" && name != "# Discount")
                 content = name.Replace('^', ' ') + "\n - " + temp + "\n - " + s;
             else
                 content = name;
