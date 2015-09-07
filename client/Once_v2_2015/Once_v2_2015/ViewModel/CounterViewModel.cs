@@ -680,14 +680,11 @@ namespace Once_v2_2015.ViewModel
 
                     brd.Child = grd;
 
-                    ov.grdOrders.Children.Add(brd);
-                    OrderNumber++;
-                    File.WriteAllText("DateTime_Sale.txt", date_today + '\n' + OrderNumber, Encoding.Default);
-
                     // JSON
                     try
                     {
-                        string request = JsonConvert.SerializeObject(items);
+                        NumberingSI nsi = new NumberingSI(OrderNumber, items);
+                        string request = JsonConvert.SerializeObject(nsi);
                         //string uri = "";
                         //WebClient webClient = new WebClient();
                         //webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
@@ -699,7 +696,10 @@ namespace Once_v2_2015.ViewModel
                         Console.WriteLine(err.ToString());
                     }
 
-
+                    ov.grdOrders.Children.Add(brd);
+                    OrderNumber++;
+                    File.WriteAllText("DateTime_Sale.txt", date_today + '\n' + OrderNumber, Encoding.Default);
+                    
                     // init
                     SellingItems.Clear();
                     DiscountPrice = "0";

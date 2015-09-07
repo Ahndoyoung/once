@@ -106,6 +106,7 @@
     <Compile Include="Container\DiContainer.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\MenuItem.cs" />
+    <Compile Include="Model\NumberingSI.cs" />
     <Compile Include="Model\Receipt.cs" />
     <Compile Include="Model\SellingItem.cs" />
     <Compile Include="ViewModel\AdjustmentUCViewModel.cs" />

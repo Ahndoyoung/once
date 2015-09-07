@@ -178,14 +178,12 @@ namespace Once_v2_2015.ViewModel
                         // #, MENU_NAME, MENU_TEMP, MENU_SIZE, MENU_WHIP, MENU_PRICE, SALE_QUANTITY, 
                         SellingItem si = new SellingItem(read[1].ToString(), read[2].ToString()[0], read[3].ToString()[0], int.Parse(read[5].ToString()), int.Parse(read[6].ToString()));
                         SellingItems.Add(si);
-
-                        MenusSales += si.total;
                     }
                     read.Close();
 
                     SellingItem dis = new SellingItem("# Discount", null, null, -SelectedReceipt.discount, 1);
                     SellingItems.Add(dis);
-                    MenusSales += dis.total;
+                    MenusSales = SelectedReceipt.amount;
                 }
                 finally
                 {
