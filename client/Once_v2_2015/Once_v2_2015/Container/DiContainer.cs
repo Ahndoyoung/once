@@ -13,7 +13,6 @@ namespace Once_v2_2015.Container
     {
         public override void Load()
         {
-            Bind<MainViewModel>().ToSelf().InSingletonScope().Named("MainVM");
             Bind<CounterViewModel>().ToSelf().InSingletonScope().Named("CounterVM");
             Bind<DiscountViewModel>().ToSelf().InSingletonScope().Named("DiscountVM");
             Bind<InnerMenuSettingViewModel>().ToSelf().InSingletonScope().Named("InnerMenuSettingVM");

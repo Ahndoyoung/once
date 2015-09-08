@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.OleDb;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -76,6 +77,15 @@ namespace Once_v2_2015.ViewModel
 
         private void Loaded(CounterWindow cw)
         {
+            // 중복실행 방지
+            Process[] procs = Process.GetProcessesByName("Once_v2_2015");
+            if (procs.Length > 1)
+            {
+                MessageBox.Show("이미 실행 중입니다.", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
+            }
+
+            OleDB.CheckDB();
             categories = LoadCategory();
             SetCategory(cw);
             
@@ -88,6 +98,12 @@ namespace Once_v2_2015.ViewModel
             CheckDateTime();
             InitProperties();
             counterWindow = cw; // need modify
+
+            // Bind Visibility
+            Binding binding = new Binding();
+            binding.Source = this;
+            binding.Path = new PropertyPath("CounterWindowVisible");
+            BindingOperations.SetBinding(cw, CounterWindow.VisibilityProperty, binding);
         }
 
         private void ReloadMenu()
@@ -112,13 +128,9 @@ namespace Once_v2_2015.ViewModel
 
         private void OnClosing(CancelEventArgs obj)
         {
-            obj.Cancel = true;
             CounterWindowVisible = Visibility.Collapsed;
-            var msg = new ViewModelMessage()
-            {
-                Text = "ShowMain"
-            };
-            Messenger.Default.Send<ViewModelMessage>(msg);
+
+            obj.Cancel = true;
         }
 
         #endregion
@@ -135,11 +147,6 @@ namespace Once_v2_2015.ViewModel
         private void Show()
         {
             CounterWindowVisible = Visibility.Visible;
-            var msg = new ViewModelMessage()
-            {
-                Text = "HideMain"
-            };
-            Messenger.Default.Send<ViewModelMessage>(msg);
         }
 
         #endregion
@@ -155,7 +162,6 @@ namespace Once_v2_2015.ViewModel
 
         private void Shutdown()
         {
-            SaveDateTime();
             Application.Current.Shutdown();
         }
 
@@ -506,6 +512,48 @@ namespace Once_v2_2015.ViewModel
                 CounterVisible = Visibility.Visible;
                 OrdersVisible = Visibility.Collapsed;
             }
+        }
+
+        #endregion
+
+        #region ViewAdjustmentCommand
+
+        private RelayCommand _ViewAdjustmentCommand;
+
+        public RelayCommand ViewAdjustmentCommand
+        {
+            get { return _ViewAdjustmentCommand ?? (_ViewAdjustmentCommand = new RelayCommand(ViewAdjustment)); }
+        }
+
+        private void ViewAdjustment()
+        {
+            CounterWindowVisible = Visibility.Collapsed;
+            TrayVisible = Visibility.Collapsed;
+            AdjustmentWindow aw = new AdjustmentWindow();
+            aw.ShowDialog();
+            CounterWindowVisible = Visibility.Visible;
+            TrayVisible = Visibility.Visible;
+        }
+
+        #endregion
+
+        #region ViewManagementCommand
+
+        private RelayCommand _ViewManagementCommand;
+
+        public RelayCommand ViewManagementCommand
+        {
+            get { return _ViewManagementCommand ?? (_ViewManagementCommand = new RelayCommand(ViewManagement)); }
+        }
+
+        private void ViewManagement()
+        {
+            CounterWindowVisible = Visibility.Collapsed;
+            TrayVisible = Visibility.Collapsed;
+            MenuManagementWindow mmw = new MenuManagementWindow();
+            mmw.ShowDialog();
+            CounterWindowVisible = Visibility.Visible;
+            TrayVisible = Visibility.Visible;
         }
 
         #endregion
@@ -1000,9 +1048,9 @@ namespace Once_v2_2015.ViewModel
             }
         }
         
-        private Visibility _CounterWindowVisible = Visibility.Collapsed;
+        private Visibility _CounterWindowVisible = Visibility.Visible;
 
-        public Visibility CounterWindowVisible 
+        public Visibility CounterWindowVisible
         {
             get { return _CounterWindowVisible; }
             set
@@ -1035,7 +1083,19 @@ namespace Once_v2_2015.ViewModel
                 RaisePropertyChanged("ShowDetailVisible");
             }
         }
+        
+        private Visibility _TrayVisible = Visibility.Visible;
 
+        public Visibility TrayVisible
+        {
+            get { return _TrayVisible; }
+            set
+            {
+                _TrayVisible = value;
+                RaisePropertyChanged("TrayVisible");
+            }
+        }
+        
         private int _orderNumber = 1;
 
         public int OrderNumber
@@ -1188,12 +1248,7 @@ namespace Once_v2_2015.ViewModel
                 CheckDateTime();
             }
         }
-
-        private void SaveDateTime()
-        {
-            File.WriteAllText("DateTime_Sale.txt", date_today + "\n" + OrderNumber.ToString(), Encoding.Default);
-        }
-
+        
         private void OnReceiveMessageAction(ViewModelMessage obj)
         {
             string[] arr = obj.Text.Split('^');

@@ -17,11 +17,6 @@ namespace Once_v2_2015.ViewModel
             Kernel = new StandardKernel(new DiContainer());
         }
 
-        public MainViewModel MainVM
-        {
-            get { return Kernel.Get<MainViewModel>("MainVM"); }
-        }
-
         public CounterViewModel CounterVM
         {
             get { return Kernel.Get<CounterViewModel>("CounterVM"); }
