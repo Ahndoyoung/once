@@ -8,13 +8,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.net.Socket;
-import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
@@ -70,16 +67,15 @@ public class MainActivity extends Activity {
         public void run() {
             String sMsg;
             Message msg;
-            Type collectionType = new TypeToken<ArrayList<com.example.OnceReceiver.Menu>>() {
-            }.getType();
+
             while (true) {
                 try {
                     sMsg = stream.readLine();
                     System.out.println(sMsg);
-                    ArrayList<com.example.OnceReceiver.Menu> menus = new Gson().fromJson(sMsg, collectionType);
+                    SellingItems sellingItems = new Gson().fromJson(sMsg, SellingItems.class);
                     sMsg = "";
                     msg = new Message();
-                    for (com.example.OnceReceiver.Menu m : menus) {
+                    for (SellingItem m : sellingItems.getSellingItems()) {
                         sMsg += m.getContent() + "\n" + m.getQuantity() + "\n";
                     }
                     msg.obj = sMsg;

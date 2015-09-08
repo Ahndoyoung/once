@@ -4,7 +4,7 @@ import java.lang.String;
 /**
  * Created by ahndoyoung on 2015. 9. 3..
  */
-public class Menu {
+public class SellingItem {
 
     private String content;
     private int quantity;
@@ -28,15 +28,11 @@ public class Menu {
         this.content = content;
     }
 
-
-    public Menu(String content, int quantity) {
+    public SellingItem(String content, int quantity) {
 
         this.content = content;
         this.quantity = quantity;
 
     }
 
-    public Menu(){
-        content = null;
-    }
 }
