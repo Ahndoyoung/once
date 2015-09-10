@@ -304,6 +304,23 @@ namespace Once_v2_2015.ViewModel
         }
         #endregion
 
+        #region DefaultDiscountCommand
+
+        private RelayCommand _DefaultDiscountCommand;
+
+        public RelayCommand DefaultDiscountCommand
+        {
+            get { return _DefaultDiscountCommand ?? (_DefaultDiscountCommand = new RelayCommand(DefaultDiscount)); }
+        }
+
+        private void DefaultDiscount()
+        {
+            DefaultDiscountWindow ddw = new DefaultDiscountWindow();
+            ddw.ShowDialog();
+        }
+
+        #endregion
+
         #region MenuSettingCommand
 
         private RelayCommand<CounterWindow> _menuSettingCommand;
@@ -1227,10 +1244,11 @@ namespace Once_v2_2015.ViewModel
         {
             try
             {
-                date_today = DateTime.Today.ToShortDateString();
+                DateTime to = DateTime.Today;
+                date_today = string.Format("{0:yyyy-MM-dd}", to);
                 string[] values = File.ReadAllLines("DateTime_Sale.txt");
 
-                if (values[0] == DateTime.Today.ToShortDateString())
+                if (values[0] == date_today)
                 {
                     // 오늘과 날짜가 같으면
                     OrderNumber = int.Parse(values[1]);

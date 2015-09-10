@@ -29,10 +29,11 @@ namespace Once_v2_2015.ViewModel
 
         private void Period(string obj)
         {
-            string[] end = DateTime.Today.ToShortDateString().Split('-');
+            DateTime today = DateTime.Today;
+            string[] end = string.Format("{0:yyyy-MM-dd}", today).Split('-');
             EndYear = int.Parse(end[0]);
             EndMonth = int.Parse(end[1]);
-            EndDay = Int32.Parse(end[2]);
+            EndDay = int.Parse(end[2]);
 
             DateTime startDT = DateTime.Today;
             switch (obj)
@@ -54,7 +55,7 @@ namespace Once_v2_2015.ViewModel
                     break;
             }
 
-            string[] start = startDT.ToShortDateString().Split('-');
+            string[] start = string.Format("{0:yyyy-MM-dd}", startDT).Split('-');
             StartYear = int.Parse(start[0]);
             StartMonth = int.Parse(start[1]);
             StartDay = int.Parse(start[2]);
@@ -76,12 +77,12 @@ namespace Once_v2_2015.ViewModel
             var list = obj.ToList();
             list.Sort();
 
-            string[] start = list[0].ToShortDateString().Split('-');
+            string[] start = string.Format("{0:yyyy-MM-dd}", list[0]).Split('-');
             StartYear = int.Parse(start[0]);
             StartMonth = int.Parse(start[1]);
             StartDay = int.Parse(start[2]);
 
-            string[] end = list[list.Count - 1].ToShortDateString().Split('-');
+            string[] end = string.Format("{0:yyyy-MM-dd}", list[list.Count - 1]).Split('-');
             EndYear = int.Parse(end[0]);
             EndMonth = int.Parse(end[1]);
             EndDay = int.Parse(end[2]);
@@ -107,10 +108,10 @@ namespace Once_v2_2015.ViewModel
 
             DateTime start = new DateTime(StartYear, StartMonth, StartDay);
             DateTime end = new DateTime(EndYear, EndMonth, EndDay);
-
+            
             string query =
                 string.Format("SELECT * FROM RECEIPT WHERE Format([RECEIPT_DATE], \"yyyy-mm-dd\") >= '{0}' AND Format([RECEIPT_DATE], \"yyyy-mm-dd\") <= '{1}'",
-                    start.ToShortDateString(), end.ToShortDateString());
+                    string.Format("{0:yyyy-MM-dd}",start), string.Format("{0:yyyy-MM-dd}",end));
             OleDbConnection conn = new OleDbConnection(OleDB.connPath);
             OleDbCommand cmd = new OleDbCommand(query, conn);
             try
@@ -123,8 +124,8 @@ namespace Once_v2_2015.ViewModel
                     Receipt r = new Receipt()
                     {
                         num = (int)read[0],
-                        date = ((DateTime)read[1]).ToShortDateString(),
-                        time = ((DateTime)read[1]).ToShortTimeString(),
+                        date = string.Format("{0:yyyy-MM-dd}", (DateTime)read[1]),
+                        time = string.Format("{0:T}", (DateTime)read[1]),
                         type = (string)read[2],
                         discount = (int)read[3],
                         subtotal = (int)read[4],
@@ -358,7 +359,8 @@ namespace Once_v2_2015.ViewModel
 
         private void InitPeriod()
         {
-            string[] day = DateTime.Today.ToShortDateString().Split('-');
+            DateTime today = DateTime.Today;
+            string[] day = string.Format("{0:yyyy-MM-dd}", today).Split('-');
             StartYear = int.Parse(day[0]);
             StartMonth = int.Parse(day[1]);
             StartDay = int.Parse(day[2]);
@@ -369,6 +371,7 @@ namespace Once_v2_2015.ViewModel
 
         public AdjustmentUCViewModel()
         {
+            
             InitPeriod();
         }
     }
