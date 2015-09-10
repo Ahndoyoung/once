@@ -20,6 +20,7 @@ namespace Once_v2_2015.Container
             Bind<OrdersViewModel>().ToSelf().InSingletonScope().Named("OrdersVM");
             Bind<MenuManagementViewModel>().ToSelf().InSingletonScope().Named("MenuManagementVM");
             Bind<AdjustmentUCViewModel>().ToSelf().InSingletonScope().Named("AdjustmentUCVM");
+            Bind<DefaultDiscountViewModel>().ToSelf().InSingletonScope().Named("DefaultDiscountVM");
         }
     }
 }

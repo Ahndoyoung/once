@@ -88,7 +88,7 @@
             <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="20,0,0,113" TextWrapping="Wrap" Text="Sub Total :" FontFamily="Segoe UI" Width="124" FontSize="21.333" Foreground="#FF595959" Height="28" VerticalAlignment="Bottom"/>
             <TextBlock x:Name="textBlock2_Copy" HorizontalAlignment="Left" Margin="20,0,0,153" TextWrapping="Wrap" Text="Discounts :" FontFamily="Segoe UI" Width="124" FontSize="21.333" Foreground="#FF595959" Height="28" VerticalAlignment="Bottom"/>
             <TextBlock x:Name="textBlock2_Copy1" HorizontalAlignment="Right" Margin="0,0,180,112" TextWrapping="Wrap" Text="Total :" VerticalAlignment="Bottom" FontFamily="Segoe UI Semibold" Width="91" FontSize="26.667" Foreground="#FF595959"/>
-            <Button x:Name="button_Copy2" Command="{Binding DiscountCommand}" Style="{StaticResource IvoryButton}" Content="Discount" HorizontalAlignment="Left" Margin="20,0,0,186" Width="270" Foreground="#FF603A17" FontWeight="Bold" FontFamily="Segoe UI" FontSize="16" Height="62" VerticalAlignment="Bottom">
+            <Button x:Name="button_Copy2" Command="{Binding DiscountCommand}" Style="{StaticResource IvoryButton}" Content="Discount" HorizontalAlignment="Left" Margin="20,0,0,186" Width="229" Foreground="#FF603A17" FontWeight="Bold" FontFamily="Segoe UI" FontSize="16" Height="62" VerticalAlignment="Bottom">
                 <Button.CommandParameter>
                     <MultiBinding Converter="{StaticResource MyConverter}">
                         <Binding ElementName="brdDiscount"/>
@@ -116,6 +116,9 @@
             <Button x:Name="btnShowDetail" Command="{Binding ShowDetailCommand}" Style="{StaticResource IvoryButton}" Visibility="{Binding ShowDetailVisible}" Margin="0,27,22,0" Foreground="White" HorizontalAlignment="Right" Width="50" Height="50" VerticalAlignment="Top">
                 <Image Source="/Once_v2_2015;component/img/document.png" Stretch="Fill" Width="23" Height="29"/>
             </Button>
+            <Button x:Name="button2" Command="{Binding DefaultDiscountCommand}" Style="{StaticResource IvoryButton}"  HorizontalAlignment="Left" Margin="254,0,0,186" VerticalAlignment="Bottom" Width="67" Height="62">
+                <Image Source="../img/discount_no.png" Height="45" Width="65"/>
+            </Button>
         </Grid>
         <Grid HorizontalAlignment="Left" Margin="0,113,0,100" Width="898" Visibility="{Binding CounterVisible}">
             <Grid.Background>
@@ -138,7 +141,6 @@
                     <Button x:Name="button_Copy12" Style="{StaticResource IvoryButton}"  Content="Coffee" VerticalAlignment="Top" Height="122" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Margin="10,392,703,0"/>
                     <Button x:Name="button_Copy13" Style="{StaticResource IvoryButton}"  Content="Coffee" VerticalAlignment="Top" Height="122" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Margin="13,520,700,0"/>
                 </Grid>
-
             </ScrollViewer>
         </Grid>
         <Grid x:Name="grdOutterMenuSetting" Height="100" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="898" Visibility="{Binding CounterVisible}">
