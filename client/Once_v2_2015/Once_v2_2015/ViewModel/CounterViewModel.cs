@@ -12,6 +12,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
@@ -37,6 +38,7 @@ using Border = System.Windows.Controls.Border;
 using ContextMenu = System.Windows.Controls.ContextMenu;
 using HorizontalAlignment = System.Windows.HorizontalAlignment;
 using ListView = System.Windows.Controls.ListView;
+using ListViewItem = System.Windows.Controls.ListViewItem;
 using MessageBox = System.Windows.MessageBox;
 using SelectionMode = System.Windows.Controls.SelectionMode;
 using VerticalAlignment = System.Windows.VerticalAlignment;
@@ -59,7 +61,7 @@ namespace Once_v2_2015.ViewModel
 
         private void Test()
         {
-            MessageBox.Show("test");
+            
         }
         #endregion
 
@@ -88,22 +90,26 @@ namespace Once_v2_2015.ViewModel
             OleDB.CheckDB();
             categories = LoadCategory();
             SetCategory(cw);
-            
-            menuSettingView = new MenuSettingView();
-            cw.grdOutterMenuSetting.Children.Add(menuSettingView);
-            int idx = cw.grdOutterMenuSetting.Children.IndexOf(menuSettingView);
-            cw.grdOutterMenuSetting.Children[idx].Visibility = Visibility.Collapsed;
 
             // init
             CheckDateTime();
             InitProperties();
             counterWindow = cw; // need modify
 
+            if (categories.Count != 0)
+            {
+                object[] obj = new object[] {cw, 0};
+                LoadMenu(obj);
+                selectedCategory = categories[0].name;
+            }
+
             // Bind Visibility
             Binding binding = new Binding();
             binding.Source = this;
             binding.Path = new PropertyPath("CounterWindowVisible");
             BindingOperations.SetBinding(cw, CounterWindow.VisibilityProperty, binding);
+
+            OrdersVisible = Visibility.Collapsed; // 동적으로 생성되는 ListView의 Generator 시작을 위해 Visible했던걸 끔
         }
 
         private void ReloadMenu()
@@ -167,21 +173,6 @@ namespace Once_v2_2015.ViewModel
 
         #endregion
 
-        #region HomeCommand
-
-        private RelayCommand<CounterWindow> _homeCommand;
-
-        public RelayCommand<CounterWindow> HomeCommand
-        {
-            get { return _homeCommand ?? (_homeCommand = new RelayCommand<CounterWindow>(Home)); }
-        }
-
-        private void Home(CounterWindow cw)
-        {
-            SetCategory(cw);
-        }
-        #endregion
-
         #region LoadMenuCommand
 
         private RelayCommand<object> _loadMenuCommand;
@@ -198,8 +189,7 @@ namespace Once_v2_2015.ViewModel
             int idx = (int)objArr[1];
 
             cw.grdInnerMenu.Children.Clear();
-            cw.btnCategory.Visibility = Visibility.Visible;
-            cw.btnCategory.Content = categories[idx].name;
+            selectedCategory = categories[idx].name;
 
             int row = 0;
             int col = 0;
@@ -227,7 +217,7 @@ namespace Once_v2_2015.ViewModel
 
                     btn.Content = categories[idx].menuList[i].name.Replace('^', '\n');
                     btn.FontFamily = new FontFamily("NanumBarunGothic");
-                    btn.FontSize = (double)new FontSizeConverter().ConvertFrom("11pt");
+                    btn.FontSize = (double)new FontSizeConverter().ConvertFrom("15pt");
                     btn.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x60, 0x3A, 0x17));
 
                     btn.HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -321,34 +311,86 @@ namespace Once_v2_2015.ViewModel
 
         #endregion
 
-        #region MenuSettingCommand
+        #region TemperatureCommand
 
-        private RelayCommand<CounterWindow> _menuSettingCommand;
+        private RelayCommand _temperatureCommand;
 
-        public RelayCommand<CounterWindow> MenuSettingCommand
+        public RelayCommand TemperatureCommand
         {
-            get { return _menuSettingCommand ?? (_menuSettingCommand = new RelayCommand<CounterWindow>(MenuSetting)); }
+            get
+            {
+                return _temperatureCommand ?? (_temperatureCommand = new RelayCommand(Temperature));
+            }
         }
 
-        private void MenuSetting(CounterWindow cw)
+        private void Temperature()
         {
-            Grid grdOutter = cw.grdOutterMenuSetting;
-            Grid grdInner = cw.grdInnerMenuSetting;
-
-            int idx = grdOutter.Children.IndexOf(menuSettingView);
-
-            if (grdInner.Visibility != Visibility.Visible)
+            if (StrTemp == "Ice")
             {
-                grdOutter.Height -= 100;
-                grdOutter.Children[idx].Visibility = Visibility.Collapsed;
-                grdInner.Visibility = Visibility.Visible;
+                StrTemp = "Hot";
+                BtnTempStyle = Application.Current.FindResource("HotButton") as Style;
             }
             else
             {
-                grdOutter.Height += 100;
-                grdOutter.Children[idx].Visibility = Visibility.Visible;
-                grdInner.Visibility = Visibility.Collapsed;
+                StrTemp = "Ice";
+                BtnTempStyle = Application.Current.FindResource("IceButton") as Style;
             }
+
+            var msg = new ViewModelMessage()
+            {
+                Text = "Temperature^" + StrTemp
+            };
+            Messenger.Default.Send(msg);
+        }
+
+        #endregion
+
+        #region SizeCommand
+
+        private RelayCommand _sizeCommand;
+
+        public RelayCommand SizeCommand
+        {
+            get
+            {
+                return _sizeCommand ?? (_sizeCommand = new RelayCommand(Size));
+            }
+        }
+
+        private void Size()
+        {
+            if (StrSize == "Regular")
+            {
+                StrSize = "Large";
+                BtnSizeStyle = Application.Current.FindResource("GrayButton") as Style;
+            }
+            else
+            {
+                StrSize = "Regular";
+                BtnSizeStyle = Application.Current.FindResource("WhiteButton") as Style;
+            }
+
+            var msg = new ViewModelMessage()
+            {
+                Text = "Size^" + StrSize
+            };
+            Messenger.Default.Send(msg);
+        }
+
+        #endregion
+
+        #region MenuSettingCommand
+
+        private RelayCommand _menuSettingCommand;
+
+        public RelayCommand MenuSettingCommand
+        {
+            get { return _menuSettingCommand ?? (_menuSettingCommand = new RelayCommand(MenuSetting)); }
+        }
+
+        private void MenuSetting()
+        {
+            MenuSettingVisible = (MenuSettingVisible == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
         }
         #endregion
 
@@ -375,7 +417,7 @@ namespace Once_v2_2015.ViewModel
             // 메뉴이름 찾기
             foreach (var category in categories)
             {
-                if (cw.btnCategory.Content.ToString() == category.name)
+                if (selectedCategory == category.name)
                 {
                     foreach (var menuItem in category.menuList)
                     {
@@ -399,11 +441,11 @@ namespace Once_v2_2015.ViewModel
             char? checkedTemp = null;
             if (!isNullTemp)
             {
-                if (cw.InnerMenuSettingView.btnTemperature.Content.ToString() == "Ice")
+                if (cw.btnTemperature.Content.ToString() == "Ice")
                 {
                     checkedTemp = 'I';
                 }
-                else if (cw.InnerMenuSettingView.btnTemperature.Content.ToString() == "Hot")
+                else if (cw.btnTemperature.Content.ToString() == "Hot")
                 {
                     checkedTemp = 'H';
                 }
@@ -411,11 +453,11 @@ namespace Once_v2_2015.ViewModel
             char? checkedSize = null;
             if (!isNullSize)
             {
-                if (cw.InnerMenuSettingView.btnSize.Content.ToString() == "Regular")
+                if (cw.btnSize.Content.ToString() == "Regular")
                 {
                     checkedSize = 'R';
                 }
-                else if (cw.InnerMenuSettingView.btnSize.Content.ToString() == "Large")
+                else if (cw.btnSize.Content.ToString() == "Large")
                 {
                     checkedSize = 'L';
                 }
@@ -424,7 +466,7 @@ namespace Once_v2_2015.ViewModel
             // 가격 체크
             foreach (var category in categories)
             {
-                if (cw.btnCategory.Content.ToString() == category.name)
+                if (selectedCategory == category.name)
                 {
                     foreach (var menuItem in category.menuList)
                     {
@@ -453,6 +495,15 @@ namespace Once_v2_2015.ViewModel
                 SellingItem si = new SellingItem(name, checkedTemp, checkedSize, price, 1);
                 SellingItems.Add(si);
                 cw.lvSelling.ScrollIntoView(cw.lvSelling.Items[cw.lvSelling.Items.Count - 1]);
+
+                cw.lvSelling.UpdateLayout();
+                ListViewItem t =
+                    (ListViewItem)cw.lvSelling.ItemContainerGenerator.ContainerFromItem(si);
+                if(si.temperature == 'I')
+                    t.Background = new SolidColorBrush(Color.FromArgb(70, 138, 214, 240));
+                else if(si.temperature == 'H')
+                    t.Background = new SolidColorBrush(Color.FromArgb(70, 255, 214, 214));
+
             }
             SubTotal = (int.Parse(SubTotal) + price).ToString();
         }
@@ -595,7 +646,6 @@ namespace Once_v2_2015.ViewModel
             {
                 items.Add(si);
             }
-            
 
             if (items.Count != 0)
             {
@@ -649,17 +699,17 @@ namespace Once_v2_2015.ViewModel
 
                     // ListView
                     ListView lv = new ListView();
+                    lv.SetValue(VirtualizingStackPanel.IsVirtualizingProperty, false);
                     lv.ItemsSource = items;
                     lv.Margin = new Thickness(OrderPosition.InitLvLeft, OrderPosition.InitLvTop,
                         OrderPosition.InitLvRight,
                         OrderPosition.InitLvBottom);
                     lv.SelectionMode = SelectionMode.Single;
-                    lv.FontSize = (double) new FontSizeConverter().ConvertFrom("13pt");
+                    lv.FontSize = (double) new FontSizeConverter().ConvertFrom("15pt");
                     lv.FontFamily = new FontFamily("NanumBarunGothic");
                     lv.Foreground = Brushes.Black;
-                    Style style = Application.Current.FindResource("ColorfulListView") as Style;
+                    Style style = Application.Current.FindResource("LinedListView") as Style;
                     lv.ItemContainerStyle = style;
-                    lv.AlternationCount = 2;
 
                     GridView gv = new GridView();
                     GridViewColumn[] gvc = new GridViewColumn[2];
@@ -669,7 +719,7 @@ namespace Once_v2_2015.ViewModel
                     gvch[0] = new GridViewColumnHeader();
                     gvch[1] = new GridViewColumnHeader();
 
-                    gvc[0].Width = 260;
+                    gvc[0].Width = 240;
                     gvc[0].DisplayMemberBinding = new Binding("content");
                     gvch[0].Content = "Name";
                     gvch[0].FontSize = (double) new FontSizeConverter().ConvertFrom("13pt");
@@ -687,6 +737,7 @@ namespace Once_v2_2015.ViewModel
 
                     lv.View = gv;
                     grd.Children.Add(lv);
+                    
 
                     // Button
                     Button btnM = new Button();
@@ -744,6 +795,7 @@ namespace Once_v2_2015.ViewModel
                     brd.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xF7, 0xF1, 0xE1));
 
                     brd.Child = grd;
+                    ov.grdOrders.Children.Add(brd);
 
                     // JSON
                     try
@@ -761,7 +813,6 @@ namespace Once_v2_2015.ViewModel
                         Console.WriteLine(err.ToString());
                     }
 
-                    ov.grdOrders.Children.Add(brd);
                     OrderNumber++;
                     File.WriteAllText("DateTime_Sale.txt", date_today + '\n' + OrderNumber, Encoding.Default);
                     
@@ -771,6 +822,31 @@ namespace Once_v2_2015.ViewModel
                     SubTotal = "0";
 
                     ShowDetailVisible = Visibility.Collapsed;
+                    
+                    // ListViewItem 색상입히기
+                    lv.UpdateLayout();
+                    IItemContainerGenerator generator = lv.ItemContainerGenerator;
+                    GeneratorPosition position = generator.GeneratorPositionFromIndex(0);
+                    
+                    using (generator.StartAt(position, GeneratorDirection.Forward, true))
+                    {
+                        foreach (var si in items)
+                        {
+                            DependencyObject dp = generator.GenerateNext();
+                            if (dp != null)
+                            {
+                                generator.PrepareItemContainer(dp);
+                            }
+                        }
+                    }
+                    foreach (var si in items)
+                    {
+                        ListViewItem t = (ListViewItem)lv.ItemContainerGenerator.ContainerFromItem(si);
+                        if (si.temperature == 'I')
+                            t.Background = new SolidColorBrush(Color.FromArgb(70, 138, 214, 240));
+                        else if (si.temperature == 'H')
+                            t.Background = new SolidColorBrush(Color.FromArgb(70, 255, 214, 214));
+                    }
                 }
             }
         }
@@ -824,22 +900,25 @@ namespace Once_v2_2015.ViewModel
                         {
                             idx = int.Parse(read[0].ToString());
                         }
+                        read.Close();
                     }
-                    finally
+                    catch
                     {
-                        conn.Close();
                     }
                     // 메뉴
                     foreach (var si in items)
                     {
                         char temp = si.temperature != null ? (char)si.temperature : 'N';
-                        char size = si.size != null ? (char) si.size : 'N';
+                        char size = si.size != null ? (char)si.size : 'N';
                         char whip = si.isWhipping == true ? 'T' : 'F';
                         query =
                            string.Format("INSERT INTO SALE(MENU_NAME, MENU_TEMP, MENU_SIZE, MENU_WHIP, MENU_PRICE, SALE_QUANTITY, RECEIPT_NUM)" +
                            "VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')", si.name, temp, size, whip, si.price, si.quantity, idx);
-                        OleDB.NonQuery(query);
+                        cmd.CommandText = query;
+                        cmd.ExecuteNonQuery();
                     }
+
+                    conn.Close();
                 }
 
                 if (isFired && i != ov.grdOrders.Children.Count)
@@ -970,7 +1049,7 @@ namespace Once_v2_2015.ViewModel
                 doc.Activate();
                 ap.Visible = true;
             }
-            catch (Exception err)
+            catch
             {
                 
             }
@@ -1053,7 +1132,7 @@ namespace Once_v2_2015.ViewModel
             }
         }
 
-        private Visibility _ordersVisible = Visibility.Collapsed;
+        private Visibility _ordersVisible = Visibility.Visible;
 
         public Visibility OrdersVisible
         {
@@ -1076,7 +1155,19 @@ namespace Once_v2_2015.ViewModel
                 RaisePropertyChanged("CounterWindowVisible");
             }
         }
-        
+
+        private Visibility _MenuSettingVisible = Visibility.Collapsed;
+
+        public Visibility MenuSettingVisible
+        {
+            get { return _MenuSettingVisible; }
+            set
+            {
+                _MenuSettingVisible = value;
+                RaisePropertyChanged("MenuSettingVisible");
+            }
+        }
+
         private Visibility _cntVisible = Visibility.Collapsed;
 
         public Visibility CntVisible
@@ -1159,11 +1250,59 @@ namespace Once_v2_2015.ViewModel
             }
         }
 
+        private Style _btnTempStyle = Application.Current.FindResource("IceButton") as Style;
+
+        public Style BtnTempStyle
+        {
+            get { return _btnTempStyle; }
+            set
+            {
+                _btnTempStyle = value;
+                RaisePropertyChanged("BtnTempStyle");
+            }
+        }
+
+        private Style _btnSizeStyle = Application.Current.FindResource("WhiteButton") as Style;
+
+        public Style BtnSizeStyle
+        {
+            get { return _btnSizeStyle; }
+            set
+            {
+                _btnSizeStyle = value;
+                RaisePropertyChanged("BtnSizeStyle");
+            }
+        }
+
+        private string _strTemp = "Ice";
+
+        public string StrTemp
+        {
+            get { return _strTemp; }
+            set
+            {
+                _strTemp = value;
+                RaisePropertyChanged("StrTemp");
+            }
+        }
+
+        private string _strSize = "Regular";
+
+        public string StrSize
+        {
+            get { return _strSize; }
+            set
+            {
+                _strSize = value;
+                RaisePropertyChanged("StrSize");
+            }
+        }
+
         #endregion
 
         public CounterWindow counterWindow = null; // need modify
-        public MenuSettingView menuSettingView = null;
         private string date_today = null;
+        private string selectedCategory = null;
 
         public List<Category> categories = new List<Category>();
 
@@ -1193,38 +1332,38 @@ namespace Once_v2_2015.ViewModel
 
         public void SetCategory(CounterWindow cw)
         {
-            cw.grdInnerMenu.Children.Clear();
-            cw.btnCategory.Visibility = Visibility.Collapsed;
-            
+            cw.grdCategory.Children.Clear();
             for (int i = 0; i < categories.Count; i++)
             {
-                int row = i / MenuPosition.CntPerRow;
-                int col = i % MenuPosition.CntPerRow;
-                int left = MenuPosition.InitLeft + MenuPosition.MarginLeft * col;
-                int right = MenuPosition.InitRight - MenuPosition.MarginLeft * col;
-                int y = MenuPosition.InitY + MenuPosition.MarginTop * row;
+                int row = i / CategoryPosition.CntPerRow;
+                int col = i % CategoryPosition.CntPerRow;
+                int left = CategoryPosition.InitLeft + CategoryPosition.MarginLeft * col;
+                int right = CategoryPosition.InitRight - CategoryPosition.MarginLeft * col;
+                int top = CategoryPosition.InitTop + CategoryPosition.MarginTop * row;
 
                 Button btn = new Button();
-                btn.Width = MenuPosition.BtnWidth;
-                btn.Height = MenuPosition.BtnHeight;
+                btn.Width = CategoryPosition.BtnWidth;
+                btn.Height = CategoryPosition.BtnHeight;
 
-                Style style = Application.Current.FindResource("IvoryButton") as Style;
+                Style style = Application.Current.FindResource("BrownButton") as Style;
                 btn.Style = style;
 
                 btn.Content = categories[i].name;
-                btn.FontFamily = new FontFamily("NanumBarunGothic");
-                btn.FontSize = (double)new FontSizeConverter().ConvertFrom("11pt");
-                btn.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x60, 0x3A, 0x17));
+                btn.FontFamily = new FontFamily("Segoe UI");
+                btn.FontStyle = FontStyles.Oblique;
+                btn.FontWeight = FontWeights.Bold;
+                btn.FontSize = (double)new FontSizeConverter().ConvertFrom("20pt");
+                btn.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0xFE, 0xFE, 0xEF));
 
                 btn.HorizontalAlignment = HorizontalAlignment.Stretch;
                 btn.VerticalAlignment = VerticalAlignment.Top;
-                btn.Margin = new Thickness(left, y, right, 0);
+                btn.Margin = new Thickness(left, top, right, 0);
 
                 btn.Command = LoadMenuCommand;
                 object[] obj = new object[] { cw, i };
                 btn.CommandParameter = obj;
 
-                cw.grdInnerMenu.Children.Add(btn);
+                cw.grdCategory.Children.Add(btn);
             }
         }
 
@@ -1291,9 +1430,32 @@ namespace Once_v2_2015.ViewModel
 
                     SubTotal = (int.Parse(SubTotal) + 500).ToString();
                     break;
-
                 case "ReloadMenu":
                     ReloadMenu();
+                    break;
+                case "InnerTemperature":
+                    if (arr[1] == "Ice")
+                    {
+                        StrTemp = "Ice";
+                        BtnTempStyle = Application.Current.FindResource("IceButton") as Style;
+                    }
+                    else if (arr[1] == "Hot")
+                    {
+                        StrTemp = "Hot";
+                        BtnTempStyle = Application.Current.FindResource("HotButton") as Style;
+                    }
+                    break;
+                case "InnerSize":
+                    if (arr[1] == "Regular")
+                    {
+                        StrSize = "Regular";
+                        BtnSizeStyle = Application.Current.FindResource("WhiteButton") as Style;
+                    }
+                    else if (arr[1] == "Large")
+                    {
+                        StrSize = "Large";
+                        BtnSizeStyle = Application.Current.FindResource("GrayButton") as Style;
+                    }
                     break;
                 default:
                     break;
