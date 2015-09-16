@@ -502,7 +502,7 @@ namespace Once_v2_2015.ViewModel
                 if(si.temperature == 'I')
                     t.Background = new SolidColorBrush(Color.FromArgb(70, 138, 214, 240));
                 else if(si.temperature == 'H')
-                    t.Background = new SolidColorBrush(Color.FromArgb(70, 255, 214, 214));
+                    t.Background = new SolidColorBrush(Color.FromArgb(100, 255, 214, 214));
 
             }
             SubTotal = (int.Parse(SubTotal) + price).ToString();
@@ -825,27 +825,13 @@ namespace Once_v2_2015.ViewModel
                     
                     // ListViewItem 색상입히기
                     lv.UpdateLayout();
-                    IItemContainerGenerator generator = lv.ItemContainerGenerator;
-                    GeneratorPosition position = generator.GeneratorPositionFromIndex(0);
-                    
-                    using (generator.StartAt(position, GeneratorDirection.Forward, true))
-                    {
-                        foreach (var si in items)
-                        {
-                            DependencyObject dp = generator.GenerateNext();
-                            if (dp != null)
-                            {
-                                generator.PrepareItemContainer(dp);
-                            }
-                        }
-                    }
                     foreach (var si in items)
                     {
                         ListViewItem t = (ListViewItem)lv.ItemContainerGenerator.ContainerFromItem(si);
                         if (si.temperature == 'I')
                             t.Background = new SolidColorBrush(Color.FromArgb(70, 138, 214, 240));
                         else if (si.temperature == 'H')
-                            t.Background = new SolidColorBrush(Color.FromArgb(70, 255, 214, 214));
+                            t.Background = new SolidColorBrush(Color.FromArgb(100, 255, 214, 214));
                     }
                 }
             }
