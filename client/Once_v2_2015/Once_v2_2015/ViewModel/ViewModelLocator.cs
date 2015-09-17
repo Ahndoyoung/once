@@ -27,11 +27,6 @@ namespace Once_v2_2015.ViewModel
             get { return Kernel.Get<DiscountViewModel>("DiscountVM"); }
         }
 
-        public InnerMenuSettingViewModel InnerMenuSettingVM
-        {
-            get { return Kernel.Get<InnerMenuSettingViewModel>("InnerMenuSettingVM"); }
-        }
-
         public MenuSettingViewModel MenuSettingVM
         {
             get { return Kernel.Get<MenuSettingViewModel>("MenuSettingVM"); }

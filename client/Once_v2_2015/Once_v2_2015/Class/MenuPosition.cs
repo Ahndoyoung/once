@@ -6,6 +6,20 @@ using System.Threading.Tasks;
 
 namespace Once_v2_2015.Class
 {
+    public class CategoryPosition
+    {
+        public const int CntPerRow = 5;
+        public const int InitLeft = 10;
+        public const int InitRight = 704;
+        public const int InitTop = 10;
+        public const int MarginLeft = 170;
+        public const int MarginRight = 0;
+        public const int MarginTop = 79;
+
+        public const int BtnWidth = 165;
+        public const int BtnHeight = 74;
+    }
+
     public class MenuPosition
     {
         public const int CntPerRow = 5;
@@ -14,10 +28,10 @@ namespace Once_v2_2015.Class
         public const int InitY = 10;
         public const int MarginLeft = 174;
         public const int MarginRight = 0;
-        public const int MarginTop = 128;
+        public const int MarginTop = 120;
 
         public const int BtnWidth = 168;
-        public const int BtnHeight = 122;
+        public const int BtnHeight = 115;
     }
 
     public class OrderPosition

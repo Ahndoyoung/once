@@ -6,6 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              d1p1:Ignorable="d" 
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
              xmlns:class="clr-namespace:Once_v2_2015.Class">
     <Application.Resources>
         <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:Once_v2_2015.ViewModel" />
@@ -70,6 +71,142 @@
             <Setter Property="Template" Value="{StaticResource IvoryRadius}"></Setter>
         </Style>
 
+        <!-- IceButton -->
+        <ControlTemplate TargetType="Button" x:Key="IceRadius">
+            <Border x:Name="ButtonBackground" CornerRadius="20" BorderBrush="#FF292929" BorderThickness="1">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FF3CDBFF" Offset="0"/>
+                        <GradientStop Color="#FF1E43C1" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" TargetName="ButtonBackground">
+                        <Setter.Value>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF10A8CB" Offset="0"/>
+                                <GradientStop Color="#FF05248D" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style TargetType="Button" x:Key="IceButton">
+            <Setter Property="Template" Value="{StaticResource IceRadius}"></Setter>
+        </Style>
+
+        <!-- HotButton -->
+        <ControlTemplate TargetType="Button" x:Key="HotRadius">
+            <Border x:Name="ButtonBackground" CornerRadius="20" BorderBrush="#FF292929" BorderThickness="1">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FFEA4D4D" Offset="0"/>
+                        <GradientStop Color="#FF991818" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" TargetName="ButtonBackground">
+                        <Setter.Value>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFB62121" Offset="0"/>
+                                <GradientStop Color="#FF630808" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style TargetType="Button" x:Key="HotButton">
+            <Setter Property="Template" Value="{StaticResource HotRadius}"></Setter>
+        </Style>
+
+        <!-- WhiteButton -->
+        <ControlTemplate TargetType="Button" x:Key="WhiteRadius">
+            <Border x:Name="ButtonBackground" CornerRadius="20" BorderBrush="#FF292929" BorderThickness="1">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="White" Offset="0"/>
+                        <GradientStop Color="#FFB6B6B6" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ContentPresenter.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="Foreground" Value="#FF2D2D2D"/>
+                        </Style>
+                    </ContentPresenter.Resources>
+                </ContentPresenter>
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" TargetName="ButtonBackground">
+                        <Setter.Value>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFE8E8E8"/>
+                                <GradientStop Color="#FF939393" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style TargetType="Button" x:Key="WhiteButton">
+            <Setter Property="Template" Value="{StaticResource WhiteRadius}"></Setter>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+
+        <!-- GrayButton -->
+        <ControlTemplate TargetType="Button" x:Key="GrayRadius">
+            <Border x:Name="ButtonBackground" CornerRadius="20" BorderBrush="#FF292929" BorderThickness="1">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FF515151" Offset="0"/>
+                        <GradientStop Color="#FF2E2E2E" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ContentPresenter.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Style>
+                    </ContentPresenter.Resources>
+                </ContentPresenter>
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" TargetName="ButtonBackground">
+                        <Setter.Value>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF343434" Offset="0"/>
+                                <GradientStop Color="Black" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style TargetType="Button" x:Key="GrayButton">
+            <Setter Property="Template" Value="{StaticResource GrayRadius}"></Setter>
+        </Style>
+
         <!-- WhippingButton -->
         <ControlTemplate TargetType="Button" x:Key="WhippingRadius">
             <Border x:Name="ButtonBackground" CornerRadius="20" BorderBrush="#FF292929" BorderThickness="1">
@@ -107,12 +244,9 @@
                     <ControlTemplate TargetType="{x:Type RadioButton}">
                         <BulletDecorator Cursor="Hand">
                             <!--Text element-->
-                            <Border Width="100" Height="62" CornerRadius="3" BorderBrush="#FFE2E2E2" BorderThickness="1">
+                            <Border Name="MyBorder" Width="100" Height="62" CornerRadius="3" BorderBrush="#FFE2E2E2" BorderThickness="1">
                                 <Grid>
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <!--We don't need any bullet, cause our border is the switching element-->
-                                    <Border Margin="10,50,10,5" Background="#FFCDCDCD" CornerRadius="1" Name="RadioMark" />
-                                    <!-- To change the apearance to button stripe 2, edit the margins! -->
                                 </Grid>
 
                                 <Border.Background>
@@ -127,7 +261,14 @@
                         <!--If item is checked, trigger the visibility of the mark-->
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="true">
-                                <Setter TargetName="RadioMark" Property="Background" Value="Gold"/>
+                                <Setter TargetName="MyBorder" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                            <GradientStop Color="#FFC59971" Offset="0"/>
+                                            <GradientStop Color="#FF603A17" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -184,75 +325,12 @@
             <Setter Property="BorderThickness" Value="0,0,0,1" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         </Style>
-
-        <!-- IceIvoryButton -->
-        <Style TargetType="Button" x:Key="IceIvoryButton">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="ButtonBackground" CornerRadius="20" BorderBrush="#FF292929" BorderThickness="1">
-                            <Border.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                                    <GradientStop Color="#FFF4EED8" Offset="0"/>
-                                    <GradientStop Color="#FFC1AB94" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Border.Background>
-                            <Grid>
-                                <Border Margin="18,60,18,10" Background="#FF63BFFF" CornerRadius="1"/>
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Grid>
-                        </Border>
-
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" TargetName="ButtonBackground">
-                                    <Setter.Value>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#FFCDC39D" Offset="0"/>
-                                            <GradientStop Color="#FF745C44" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- HotIvoryButton -->
-        <Style TargetType="Button" x:Key="HotIvoryButton">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="ButtonBackground" CornerRadius="20" BorderBrush="#FF292929" BorderThickness="1">
-                            <Border.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                                    <GradientStop Color="#FFF4EED8" Offset="0"/>
-                                    <GradientStop Color="#FFC1AB94" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Border.Background>
-                            <Grid>
-                                <Border Margin="18,60,18,10" Background="#FFCF3333" CornerRadius="1"/>
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Grid>
-                        </Border>
-
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" TargetName="ButtonBackground">
-                                    <Setter.Value>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#FFCDC39D" Offset="0"/>
-                                            <GradientStop Color="#FF745C44" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+        
+        <!-- LinedListView -->
+        <Style x:Key="LinedListView" TargetType="{x:Type ListViewItem}">
+            <Setter Property="BorderBrush" Value="Gray" />
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         </Style>
 
         <!-- YellowIvoryButton -->
@@ -289,7 +367,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <!-- GrayIvoryButton -->
         <Style TargetType="Button" x:Key="GrayIvoryButton">
             <Setter Property="Template">
@@ -337,6 +415,44 @@
                                   BorderBrush="{TemplateBinding BorderBrush}"
                                   BorderThickness="{TemplateBinding BorderThickness}"/>
                         </Viewbox>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- LeftScrollViewer -->
+        <Style x:Key="LeftScrollViewer" TargetType="{x:Type ScrollViewer}">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <ScrollContentPresenter Grid.Column="1"/>
+
+                            <ScrollBar Name="PART_VerticalScrollBar"
+                        Value="{TemplateBinding VerticalOffset}"
+                        Maximum="{TemplateBinding ScrollableHeight}"
+                        ViewportSize="{TemplateBinding ViewportHeight}"
+                        Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+                            <ScrollBar Name="PART_HorizontalScrollBar"
+                        Orientation="Horizontal"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Value="{TemplateBinding HorizontalOffset}"
+                        Maximum="{TemplateBinding ScrollableWidth}"
+                        ViewportSize="{TemplateBinding ViewportWidth}"
+                        Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
+
+                        </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
