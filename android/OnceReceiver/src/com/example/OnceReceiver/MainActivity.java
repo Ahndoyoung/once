@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
@@ -55,7 +56,7 @@ public class MainActivity extends Activity {
 
             cThread = new ChatThread();
             cThread.start();
-        } catch (Exception err) {
+        } catch (IOException err) {
             System.out.println(err);
             Toast.makeText(getApplicationContext(), "연결실패", Toast.LENGTH_LONG).show();
 
@@ -81,9 +82,8 @@ public class MainActivity extends Activity {
                     msg.obj = sMsg;
                     mHandler.sendMessage(msg);
                     System.out.println(sMsg);
-                } catch (Exception err) {
+                } catch (NullPointerException|IOException err) {
                     System.out.println(err);
-
                 }
             }
         }
