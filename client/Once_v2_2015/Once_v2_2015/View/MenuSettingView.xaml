@@ -5,22 +5,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Once_v2_2015.View"
-             mc:Ignorable="d" Width="591.964" Height="153.076"
+             mc:Ignorable="d" Width="205.973" Height="144.253"
              DataContext="{Binding MenuSettingVM, Source={StaticResource Locator}}">
     <Grid>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="13,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Segoe UI" FontSize="24" Foreground="#FF603A17" FontWeight="Bold"><Run Text="Temperature"/></TextBlock>
-        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="112,93,0,0" TextWrapping="Wrap" Text="Size" VerticalAlignment="Top" FontFamily="Segoe UI" FontSize="24" Foreground="#FF603A17" FontWeight="Bold"/>
-        <Grid HorizontalAlignment="Left" Height="60" Margin="166,10,0,0" VerticalAlignment="Top" Width="218">
-            <RadioButton x:Name="rbIce" Command="{Binding TemperatureCommand}" CommandParameter="{Binding ElementName=_MenuSettingView}" Style="{StaticResource StripeRadio_small}" IsChecked="{Binding IsIce, Mode=OneWay}"  Content="Ice" VerticalAlignment="Bottom" FontFamily="NanumBarunGothic" FontSize="14.667" Foreground="#FF603A17" HorizontalAlignment="Right" Width="84" Margin="0,0,134,8" Height="48"/>
-            <RadioButton x:Name="rbHot" Command="{Binding TemperatureCommand}" CommandParameter="{Binding ElementName=_MenuSettingView}" Style="{StaticResource StripeRadio_small}" IsChecked="{Binding IsHot, Mode=OneWay}"  Content="Hot" VerticalAlignment="Bottom" FontFamily="NanumBarunGothic" FontSize="14.667" Foreground="#FF603A17" HorizontalAlignment="Right" Width="84" Margin="0,0,45,8" Height="48"/>
-        </Grid>
-        <Grid HorizontalAlignment="Left" Height="60" Margin="166,84,0,0" VerticalAlignment="Top" Width="218">
-            <RadioButton x:Name="rbRegular" Command="{Binding InnerSizeCommand}" CommandParameter="{Binding ElementName=_MenuSettingView}" Style="{StaticResource StripeRadio_small}" IsChecked="{Binding IsRegular, Mode=OneWay}"  Content="Regular" VerticalAlignment="Bottom" FontFamily="NanumBarunGothic" FontSize="14.667" Foreground="#FF603A17" HorizontalAlignment="Right" Width="84" Margin="0,0,134,8" Height="48"/>
-            <RadioButton x:Name="rbLarge" Command="{Binding InnerSizeCommand}" CommandParameter="{Binding ElementName=_MenuSettingView}" Style="{StaticResource StripeRadio_small}" IsChecked="{Binding IsLarge, Mode=OneWay}"  Content="Large" VerticalAlignment="Bottom" FontFamily="NanumBarunGothic" FontSize="14.667" Foreground="#FF603A17" HorizontalAlignment="Right" Width="84" Margin="0,0,45,8" Height="48"/>
-        </Grid>
-        <Button x:Name="button" Style="{StaticResource IvoryButton}" Command="{Binding AddOptionCommand}" CommandParameter="샷" Content="샷" HorizontalAlignment="Left" Margin="389,15,0,0" VerticalAlignment="Top" Width="91" Height="60" FontFamily="NanumBarunGothic" FontSize="14.667" Background="{x:Null}" Foreground="#FF603A17"/>
-        <Button x:Name="button_Copy" Style="{StaticResource IvoryButton}" Command="{Binding AddOptionCommand}" CommandParameter="시럽" Content="시럽" HorizontalAlignment="Left" Margin="389,80,0,0" VerticalAlignment="Top" Width="91" Height="60" FontFamily="NanumBarunGothic" FontSize="14.667" Background="{x:Null}" Foreground="#FF603A17"/>
-        <Button x:Name="button_Copy1" Style="{StaticResource IvoryButton}" Command="{Binding AddOptionCommand}" CommandParameter="휘핑크림" Content="휘핑크림" HorizontalAlignment="Left" Margin="485,15,0,0" VerticalAlignment="Top" Width="91" Height="60" FontFamily="NanumBarunGothic" FontSize="14.667" Background="{x:Null}" Foreground="#FF603A17"/>
-        <Button x:Name="button_Copy2" Style="{StaticResource IvoryButton}" Command="{Binding AddOptionCommand}" CommandParameter="드리즐" Content="드리즐" HorizontalAlignment="Left" Margin="485,80,0,0" VerticalAlignment="Top" Width="91" Height="60" FontFamily="NanumBarunGothic" FontSize="14.667" Background="{x:Null}" Foreground="#FF603A17"/>
+        <Button x:Name="button" Style="{StaticResource IvoryButton}" Command="{Binding AddOptionCommand}" CommandParameter="샷" Content="샷" Margin="10,10,105,74" FontFamily="NanumBarunGothic" FontSize="14.667" Background="{x:Null}" Foreground="#FF603A17"/>
+        <Button x:Name="button_Copy" Style="{StaticResource IvoryButton}" Command="{Binding AddOptionCommand}" CommandParameter="시럽" Content="시럽" Margin="10,75,105,9" FontFamily="NanumBarunGothic" FontSize="14.667" Background="{x:Null}" Foreground="#FF603A17"/>
+        <Button x:Name="button_Copy1" Style="{StaticResource IvoryButton}" Command="{Binding AddOptionCommand}" CommandParameter="휘핑크림" Content="휘핑크림" Margin="106,10,9,74" FontFamily="NanumBarunGothic" FontSize="14.667" Background="{x:Null}" Foreground="#FF603A17"/>
+        <Button x:Name="button_Copy2" Style="{StaticResource IvoryButton}" Command="{Binding AddOptionCommand}" CommandParameter="드리즐" Content="드리즐" Margin="106,75,9,9" FontFamily="NanumBarunGothic" FontSize="14.667" Background="{x:Null}" Foreground="#FF603A17"/>
     </Grid>
 </UserControl>

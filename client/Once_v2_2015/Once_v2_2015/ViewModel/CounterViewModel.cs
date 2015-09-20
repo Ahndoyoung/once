@@ -502,7 +502,7 @@ namespace Once_v2_2015.ViewModel
                 if(si.temperature == 'I')
                     t.Background = new SolidColorBrush(Color.FromArgb(70, 138, 214, 240));
                 else if(si.temperature == 'H')
-                    t.Background = new SolidColorBrush(Color.FromArgb(70, 255, 214, 214));
+                    t.Background = new SolidColorBrush(Color.FromArgb(100, 255, 214, 214));
 
             }
             SubTotal = (int.Parse(SubTotal) + price).ToString();
@@ -560,25 +560,26 @@ namespace Once_v2_2015.ViewModel
 
         #region ViewOrdersCommand
 
-        private RelayCommand _viewOrdersCommand;
+        private RelayCommand<CounterWindow> _viewOrdersCommand;
 
-        public RelayCommand ViewOrdersCommand
+        public RelayCommand<CounterWindow> ViewOrdersCommand
         {
-            get { return _viewOrdersCommand ?? (_viewOrdersCommand = new RelayCommand(ViewOrders)); }
+            get { return _viewOrdersCommand ?? (_viewOrdersCommand = new RelayCommand<CounterWindow>(ViewOrders)); }
         }
 
-        private void ViewOrders()
+        private void ViewOrders(CounterWindow cw)
         {
             if (CounterVisible == Visibility.Visible)
             {
                 CounterVisible = Visibility.Collapsed;
                 OrdersVisible = Visibility.Visible;
-
+                cw.btnChangeMode.Content = "POS";
             }
             else
             {
                 CounterVisible = Visibility.Visible;
                 OrdersVisible = Visibility.Collapsed;
+                cw.btnChangeMode.Content = "Orders";
             }
         }
 
@@ -825,27 +826,13 @@ namespace Once_v2_2015.ViewModel
                     
                     // ListViewItem 색상입히기
                     lv.UpdateLayout();
-                    IItemContainerGenerator generator = lv.ItemContainerGenerator;
-                    GeneratorPosition position = generator.GeneratorPositionFromIndex(0);
-                    
-                    using (generator.StartAt(position, GeneratorDirection.Forward, true))
-                    {
-                        foreach (var si in items)
-                        {
-                            DependencyObject dp = generator.GenerateNext();
-                            if (dp != null)
-                            {
-                                generator.PrepareItemContainer(dp);
-                            }
-                        }
-                    }
                     foreach (var si in items)
                     {
                         ListViewItem t = (ListViewItem)lv.ItemContainerGenerator.ContainerFromItem(si);
                         if (si.temperature == 'I')
                             t.Background = new SolidColorBrush(Color.FromArgb(70, 138, 214, 240));
                         else if (si.temperature == 'H')
-                            t.Background = new SolidColorBrush(Color.FromArgb(70, 255, 214, 214));
+                            t.Background = new SolidColorBrush(Color.FromArgb(100, 255, 214, 214));
                     }
                 }
             }
@@ -983,7 +970,7 @@ namespace Once_v2_2015.ViewModel
                 }
 
                 // Change Window
-                ViewOrders();
+                ViewOrders(cw);
 
                 // Pass Parameters
                 SellingItems.Clear();
@@ -1432,30 +1419,6 @@ namespace Once_v2_2015.ViewModel
                     break;
                 case "ReloadMenu":
                     ReloadMenu();
-                    break;
-                case "InnerTemperature":
-                    if (arr[1] == "Ice")
-                    {
-                        StrTemp = "Ice";
-                        BtnTempStyle = Application.Current.FindResource("IceButton") as Style;
-                    }
-                    else if (arr[1] == "Hot")
-                    {
-                        StrTemp = "Hot";
-                        BtnTempStyle = Application.Current.FindResource("HotButton") as Style;
-                    }
-                    break;
-                case "InnerSize":
-                    if (arr[1] == "Regular")
-                    {
-                        StrSize = "Regular";
-                        BtnSizeStyle = Application.Current.FindResource("WhiteButton") as Style;
-                    }
-                    else if (arr[1] == "Large")
-                    {
-                        StrSize = "Large";
-                        BtnSizeStyle = Application.Current.FindResource("GrayButton") as Style;
-                    }
                     break;
                 default:
                     break;
