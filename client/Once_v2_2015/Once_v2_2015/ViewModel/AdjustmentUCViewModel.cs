@@ -110,7 +110,7 @@ namespace Once_v2_2015.ViewModel
             DateTime end = new DateTime(EndYear, EndMonth, EndDay);
             
             string query =
-                string.Format("SELECT * FROM RECEIPT WHERE Format([RECEIPT_DATE], \"yyyy-mm-dd\") >= '{0}' AND Format([RECEIPT_DATE], \"yyyy-mm-dd\") <= '{1}'",
+                string.Format("SELECT * FROM RECEIPT WHERE Format([RECEIPT_DATE], \"yyyy-mm-dd\") >= '{0}' AND Format([RECEIPT_DATE], \"yyyy-mm-dd\") <= '{1}' ORDER BY RECEIPT_DATE",
                     string.Format("{0:yyyy-MM-dd}",start), string.Format("{0:yyyy-MM-dd}",end));
             OleDbConnection conn = new OleDbConnection(OleDB.connPath);
             OleDbCommand cmd = new OleDbCommand(query, conn);
@@ -132,7 +132,7 @@ namespace Once_v2_2015.ViewModel
                         amount = (int)read[5]
                     };
                     Receipts.Add(r);
-
+                    
                     if (r.type.Replace(" ", "") == "현금")
                         MoneySales += r.amount;
                     else if (r.type.Replace(" ", "") == "카드")
@@ -191,6 +191,52 @@ namespace Once_v2_2015.ViewModel
                     conn.Close();
                 }
             }
+        }
+
+        #endregion
+
+        #region DeleteCommand
+
+        private RelayCommand<object>  _DeleteCommand;
+
+        public RelayCommand<object> DeleteCommand
+        {
+            get { return _DeleteCommand ?? (_DeleteCommand = new RelayCommand<object>(Delete)); }
+        }
+
+        private void Delete(object obj)
+        {
+            System.Collections.IList items = (System.Collections.IList) obj;
+            var coll = items.Cast<Receipt>();
+            List<Receipt> receipts = coll.ToList();
+
+            if (receipts.Count == 0) return;
+
+            // 암호확인
+
+            OleDbConnection conn = new OleDbConnection(OleDB.connPath);
+            OleDbCommand cmd = new OleDbCommand(null, conn);
+            conn.Open();
+            foreach (var receipt in receipts)
+            {
+                Receipts.Remove(receipt);
+
+                // Sale제거, Receipt 제거
+                try
+                {
+                    cmd.CommandText = string.Format("DELETE FROM SALE WHERE RECEIPT_NUM = {0}", receipt.num);
+                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = string.Format("DELETE FROM RECEIPT WHERE RECEIPT_NUM = {0}", receipt.num);
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            conn.Close();
+
+            SellingItems.Clear();
         }
 
         #endregion
