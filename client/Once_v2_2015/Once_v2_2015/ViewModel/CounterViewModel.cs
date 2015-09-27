@@ -815,7 +815,7 @@ namespace Once_v2_2015.ViewModel
                     }
 
                     OrderNumber++;
-                    File.WriteAllText("DateTime_Sale.txt", date_today + '\n' + OrderNumber, Encoding.Default);
+                    File.WriteAllText("DateTime_Sale.once", date_today + '\n' + OrderNumber, Encoding.Default);
                     
                     // init
                     SellingItems.Clear();
@@ -1372,7 +1372,7 @@ namespace Once_v2_2015.ViewModel
             {
                 DateTime to = DateTime.Today;
                 date_today = string.Format("{0:yyyy-MM-dd}", to);
-                string[] values = File.ReadAllLines("DateTime_Sale.txt");
+                string[] values = File.ReadAllLines("DateTime_Sale.once");
 
                 if (values[0] == date_today)
                 {
@@ -1382,13 +1382,13 @@ namespace Once_v2_2015.ViewModel
                 else
                 {
                     // 다르면
-                    File.WriteAllText("DateTime_Sale.txt", date_today + "\n1", Encoding.Default);
+                    File.WriteAllText("DateTime_Sale.once", date_today + "\n1", Encoding.Default);
                     CheckDateTime();
                 }
             }
             catch (Exception)
             {
-                File.WriteAllText("DateTime_Sale.txt", date_today + "\n1", Encoding.Default);
+                File.WriteAllText("DateTime_Sale.once", date_today + "\n1", Encoding.Default);
                 CheckDateTime();
             }
         }

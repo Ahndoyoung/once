@@ -5,12 +5,15 @@ using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using Once_v2_2015.Class;
 using Once_v2_2015.Model;
+using Once_v2_2015.View;
 
 namespace Once_v2_2015.ViewModel
 {
@@ -74,6 +77,7 @@ namespace Once_v2_2015.ViewModel
 
         private void OnSelectedDatesChanged(SelectedDatesCollection obj)
         {
+            System.Windows.Input.Mouse.Capture(null);
             var list = obj.ToList();
             list.Sort();
 
@@ -213,7 +217,13 @@ namespace Once_v2_2015.ViewModel
             if (receipts.Count == 0) return;
 
             // 암호확인
+            EnterPasswordWindow epw = new EnterPasswordWindow();
+            epw.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            epw.ShowDialog();
 
+            // 삭제작업
+            if (isDeleted == false)
+                return;
             OleDbConnection conn = new OleDbConnection(OleDB.connPath);
             OleDbCommand cmd = new OleDbCommand(null, conn);
             conn.Open();
@@ -235,8 +245,8 @@ namespace Once_v2_2015.ViewModel
                 }
             }
             conn.Close();
-
             SellingItems.Clear();
+            isDeleted = false;
         }
 
         #endregion
@@ -403,6 +413,27 @@ namespace Once_v2_2015.ViewModel
 
         #endregion
 
+        private bool isDeleted = false;
+
+        public AdjustmentUCViewModel()
+        {
+            Messenger.Default.Register<ViewModelMessage>(this, OnReceiveMessageAction);
+
+            InitPeriod();
+        }
+
+        private void OnReceiveMessageAction(ViewModelMessage obj)
+        {
+            string[] arr = obj.Text.Split('^');
+
+            switch (arr[0])
+            {
+                case "DeleteReceipt":
+                    isDeleted = true;
+                    break;
+            }
+        }
+
         private void InitPeriod()
         {
             DateTime today = DateTime.Today;
@@ -413,12 +444,6 @@ namespace Once_v2_2015.ViewModel
             EndYear = int.Parse(day[0]);
             EndMonth = int.Parse(day[1]);
             EndDay = int.Parse(day[2]);
-        }
-
-        public AdjustmentUCViewModel()
-        {
-            
-            InitPeriod();
         }
     }
 }
