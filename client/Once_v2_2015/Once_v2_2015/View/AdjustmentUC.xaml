@@ -87,7 +87,7 @@
         <TextBox x:Name="textBox1_Copy2" HorizontalAlignment="Left" Height="33" Margin="1293,583,0,0" TextWrapping="Wrap" Text="{Binding MenusSales}" VerticalAlignment="Top" Width="156" TextAlignment="Right" IsReadOnly="True" FontSize="21.333"/>
         <TextBlock x:Name="textBlock_Copy4" HorizontalAlignment="Left" Margin="1187,592,0,0" TextWrapping="Wrap" Text="합계 금액 :" VerticalAlignment="Top" FontFamily="NanumBarunGothic" FontSize="17.333" Foreground="#FF595959"/>
         <Button x:Name="button1" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedItems, ElementName=lvReceipts}"  Content="삭제" Margin="819,795,597,23"/>
-        <Button x:Name="button1_Copy1" Content="비밀번호 설정" Margin="406,795,978,23"/>
+        <Button x:Name="button1_Copy1" Command="{Binding ChangeCommand}"  Content="비밀번호 설정" Margin="406,795,978,23"/>
 
     </Grid>
 </UserControl>

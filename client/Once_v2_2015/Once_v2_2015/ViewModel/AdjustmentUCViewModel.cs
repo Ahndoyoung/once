@@ -251,6 +251,24 @@ namespace Once_v2_2015.ViewModel
 
         #endregion
 
+        #region ChangeCommand
+
+        private RelayCommand _ChangeCommand;
+
+        public RelayCommand ChangeCommand
+        {
+            get { return _ChangeCommand ?? (_ChangeCommand = new RelayCommand(Change)); }
+        }
+
+        private void Change()
+        {
+            ChangePasswordWindow cpw = new ChangePasswordWindow();
+            cpw.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            cpw.ShowDialog();
+        }
+
+        #endregion
+
         #endregion
 
         #region Properties

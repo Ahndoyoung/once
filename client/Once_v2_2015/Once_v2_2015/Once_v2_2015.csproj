@@ -112,6 +112,7 @@
     <Compile Include="Model\Receipt.cs" />
     <Compile Include="Model\SellingItem.cs" />
     <Compile Include="ViewModel\AdjustmentUCViewModel.cs" />
+    <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModel\CounterViewModel.cs" />
     <Compile Include="ViewModel\DefaultDiscountViewModel.cs" />
     <Compile Include="ViewModel\DiscountViewModel.cs" />
@@ -125,6 +126,9 @@
     </Compile>
     <Compile Include="View\AdjustmentWindow.xaml.cs">
       <DependentUpon>AdjustmentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChangePasswordWindow.xaml.cs">
+      <DependentUpon>ChangePasswordWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DefaultDiscountWindow.xaml.cs">
       <DependentUpon>DefaultDiscountWindow.xaml</DependentUpon>
@@ -149,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AdjustmentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ChangePasswordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
