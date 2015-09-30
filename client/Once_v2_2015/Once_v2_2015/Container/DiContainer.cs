@@ -20,6 +20,8 @@ namespace Once_v2_2015.Container
             Bind<MenuManagementViewModel>().ToSelf().InSingletonScope().Named("MenuManagementVM");
             Bind<AdjustmentUCViewModel>().ToSelf().InSingletonScope().Named("AdjustmentUCVM");
             Bind<DefaultDiscountViewModel>().ToSelf().InSingletonScope().Named("DefaultDiscountVM");
+            Bind<EnterPasswordViewModel>().ToSelf().InSingletonScope().Named("EnterPasswordVM");
+            Bind<ChangePasswordViewModel>().ToSelf().InSingletonScope().Named("ChangePasswordVM");
         }
     }
 }

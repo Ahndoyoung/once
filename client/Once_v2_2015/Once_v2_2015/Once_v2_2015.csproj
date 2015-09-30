@@ -104,6 +104,7 @@
     <Compile Include="Class\OleDB.cs" />
     <Compile Include="Class\PassThroughConverter.cs" />
     <Compile Include="Class\ViewModelMessage.cs" />
+    <Compile Include="Class\WATCrypt.cs" />
     <Compile Include="Container\DiContainer.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\MenuItem.cs" />
@@ -111,9 +112,11 @@
     <Compile Include="Model\Receipt.cs" />
     <Compile Include="Model\SellingItem.cs" />
     <Compile Include="ViewModel\AdjustmentUCViewModel.cs" />
+    <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModel\CounterViewModel.cs" />
     <Compile Include="ViewModel\DefaultDiscountViewModel.cs" />
     <Compile Include="ViewModel\DiscountViewModel.cs" />
+    <Compile Include="ViewModel\EnterPasswordViewModel.cs" />
     <Compile Include="ViewModel\MenuManagementViewModel.cs" />
     <Compile Include="ViewModel\MenuSettingViewModel.cs" />
     <Compile Include="ViewModel\OrdersViewModel.cs" />
@@ -124,11 +127,17 @@
     <Compile Include="View\AdjustmentWindow.xaml.cs">
       <DependentUpon>AdjustmentWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ChangePasswordWindow.xaml.cs">
+      <DependentUpon>ChangePasswordWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DefaultDiscountWindow.xaml.cs">
       <DependentUpon>DefaultDiscountWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DiscountUC.xaml.cs">
       <DependentUpon>DiscountUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EnterPasswordWindow.xaml.cs">
+      <DependentUpon>EnterPasswordWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MenuManagementWindow.xaml.cs">
       <DependentUpon>MenuManagementWindow.xaml</DependentUpon>
@@ -144,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AdjustmentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ChangePasswordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -166,6 +179,10 @@
     <Compile Include="View\CounterWindow.xaml.cs">
       <DependentUpon>CounterWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\EnterPasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MenuManagementWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
