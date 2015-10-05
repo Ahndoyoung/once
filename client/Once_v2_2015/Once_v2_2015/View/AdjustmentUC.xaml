@@ -11,6 +11,9 @@
     <Grid Background="#FFFBFBEF">
         <Calendar x:Name="Cal" Style="{StaticResource StyleCalendar}" Margin="57,56,0,0" VerticalAlignment="Top" Height="300" Width="300" HorizontalAlignment="Left" SelectionMode="SingleRange">
             <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseUp">
+                    <i:InvokeCommandAction Command="{Binding OnPreviewMouseUpCommand}"></i:InvokeCommandAction>
+                </i:EventTrigger>
                 <i:EventTrigger EventName="SelectedDatesChanged">
                     <i:InvokeCommandAction Command="{Binding OnSelectedDatesChangedCommand}" CommandParameter="{Binding SelectedDates, ElementName=Cal}"></i:InvokeCommandAction>
                 </i:EventTrigger>
