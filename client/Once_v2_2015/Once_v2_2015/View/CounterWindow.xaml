@@ -145,9 +145,7 @@
                     <Button x:Name="button_Copy17" Style="{StaticResource IvoryButton}"  Content="Coffee" Margin="184,490,529,0" VerticalAlignment="Top" Height="115" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
                 </Grid>
             </ScrollViewer>
-            <Button x:Name="button_Copy1" Command="{Binding MenuSettingCommand}" Style="{StaticResource IvoryButton}" Margin="780,172,28,0" Foreground="White" Height="60" VerticalAlignment="Top" Width="90">
-                <Image Source="../img/setting.png" Stretch="Fill" Width="45" Height="45"/>
-            </Button>
+            <Button x:Name="button_Copy1" Content="Extra"  Command="{Binding MenuSettingCommand}" Style="{StaticResource IvoryButton}" Margin="780,172,28,0" Foreground="#FF603A17" Height="60" VerticalAlignment="Top" Width="90" FontFamily="Segoe UI" FontWeight="Bold" FontSize="20"/>
             <Button x:Name="btnSize" Command="{Binding SizeCommand}" Content="{Binding StrSize}" Style="{Binding BtnSizeStyle}" Margin="395,172,123,0" VerticalAlignment="Top" Height="60" FontFamily="Segoe UI" FontSize="21.333" Foreground="White" FontWeight="Bold" Width="380"/>
             <Button x:Name="btnTemperature" Command="{Binding TemperatureCommand}"  Content="{Binding StrTemp}" Style="{Binding BtnTempStyle}" Margin="10,172,508,0" VerticalAlignment="Top" Height="60" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontFamily="Segoe UI" FontSize="21.333" Width="380"/>
             <ScrollViewer Height="172" VerticalScrollBarVisibility="Visible" VerticalAlignment="Top">

@@ -1038,7 +1038,7 @@ namespace Once_v2_2015.ViewModel
             }
             catch
             {
-                
+                MessageBox.Show("Recipe.docx 파일이 존재하지 않습니다.", "알림", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

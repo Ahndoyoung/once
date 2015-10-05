@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.OleDb;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -66,6 +64,26 @@ namespace Once_v2_2015.ViewModel
 
         #endregion
 
+        #region OnPreviewMouseUpCommand
+        /* 마우스 포커싱 없애기 */
+
+        private RelayCommand _OnPreviewMouseUpCommand;
+
+        public RelayCommand OnPreviewMouseUpCommand
+        {
+            get { return _OnPreviewMouseUpCommand ?? (_OnPreviewMouseUpCommand = new RelayCommand(OnPreviewMouseUp)); }
+        }
+
+        private void OnPreviewMouseUp()
+        {
+            if (Mouse.Captured is Calendar || Mouse.Captured is System.Windows.Controls.Primitives.CalendarItem)
+            {
+                Mouse.Capture(null);
+            }
+        }
+
+        #endregion
+
         #region OnSelectedDatesChangedCommand
 
         private RelayCommand<SelectedDatesCollection> _OnSelectedDatesChangeCommand;
@@ -78,6 +96,7 @@ namespace Once_v2_2015.ViewModel
         private void OnSelectedDatesChanged(SelectedDatesCollection obj)
         {
             System.Windows.Input.Mouse.Capture(null);
+
             var list = obj.ToList();
             list.Sort();
 
