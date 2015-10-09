@@ -4,26 +4,20 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.OleDb;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Windows;
-using System.Windows.Automation.Peers;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using System.Windows.Interactivity;
 using System.Windows.Media;
-using System.Xml;
 using System.Xml.Serialization;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Hardcodet.Wpf.TaskbarNotification;
 using Newtonsoft.Json;
 using Microsoft.Office.Interop.Word;
 using Once_v2_2015.Class;
@@ -35,7 +29,6 @@ using Button = System.Windows.Controls.Button;
 using Category = Once_v2_2015.Model.Category;
 using Style = System.Windows.Style;
 using Border = System.Windows.Controls.Border;
-using ContextMenu = System.Windows.Controls.ContextMenu;
 using HorizontalAlignment = System.Windows.HorizontalAlignment;
 using ListView = System.Windows.Controls.ListView;
 using ListViewItem = System.Windows.Controls.ListViewItem;
@@ -168,6 +161,22 @@ namespace Once_v2_2015.ViewModel
 
         private void Shutdown()
         {
+            /* 소켓통신 쓰레드 종료 */
+            if (serverThr.ThreadState != System.Threading.ThreadState.Aborted)
+            {
+                try
+                {
+                    client = null;
+                    server.Close();
+                    server = null;
+                    serverThr.Abort();
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.ToString());
+                }
+            }
+
             Application.Current.Shutdown();
         }
 
@@ -798,16 +807,19 @@ namespace Once_v2_2015.ViewModel
                     brd.Child = grd;
                     ov.grdOrders.Children.Add(brd);
 
-                    // JSON
+                    // JSON, 소켓
                     try
                     {
                         NumberingSI nsi = new NumberingSI(OrderNumber, items);
                         string request = JsonConvert.SerializeObject(nsi);
-                        //string uri = "";
+                        request += '\n';
+                        //string uri = "165.246.";
                         //WebClient webClient = new WebClient();
                         //webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
                         //webClient.Encoding = UTF8Encoding.UTF8;
                         //string response = webClient.UploadString(uri, request);
+                        byte[] bytes = Encoding.UTF8.GetBytes(request);
+                        client.Send(bytes);
                     }
                     catch (Exception err)
                     {
@@ -1291,6 +1303,11 @@ namespace Once_v2_2015.ViewModel
         private string date_today = null;
         private string selectedCategory = null;
 
+        /* 소켓 통신 */
+        private Thread serverThr = null;
+        private Socket server = null;
+        private Socket client = null;
+
         public List<Category> categories = new List<Category>();
 
         private static List<Category> LoadCategory()
@@ -1392,6 +1409,25 @@ namespace Once_v2_2015.ViewModel
                 CheckDateTime();
             }
         }
+
+        private void ListenClient()
+        {
+            server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            
+            IPEndPoint ipep = new IPEndPoint(IPAddress.Any, 9051);
+            server.Bind(ipep);
+            server.Listen(10);
+
+            try
+            {
+                client = server.Accept();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }            
+            MessageBox.Show("클라이언트 연결");
+        }
         
         private void OnReceiveMessageAction(ViewModelMessage obj)
         {
@@ -1428,6 +1464,9 @@ namespace Once_v2_2015.ViewModel
         public CounterViewModel()
         {
             Messenger.Default.Register<ViewModelMessage>(this, OnReceiveMessageAction);
+
+            serverThr = new Thread(new ThreadStart(ListenClient));
+            serverThr.Start();
         }
     }
 }
