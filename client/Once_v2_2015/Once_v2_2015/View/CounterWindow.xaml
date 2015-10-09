@@ -5,19 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Once_v2_2015.View"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:cmd="http://www.galasoft.ch/mvvmlight"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
         x:Name="CounterView"
         mc:Ignorable="d"
         Title="Once" Height="1000" Width="1508"
-        DataContext="{Binding CounterVM, Source={StaticResource Locator}}">
+        WindowStartupLocation="Manual" Left="0" Top="0"
+        DataContext="{Binding CounterVM, Source={StaticResource Locator}}" Icon="/Once_v2_2015;component/img/Pixture-Coffee-CoffeeCup-2.ico">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=CounterView}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Closing">
+            <cmd:EventToCommand Command="{Binding OnClosingCommand}" PassEventArgsToCommand="True"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid Background="#FFFBFBEF">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <tb:TaskbarIcon x:Name="taskBarIcon" IconSource="../img/Pixture-Coffee-CoffeeCup-2.ico" ToolTipText="Once - POS Program" Visibility="{Binding TrayVisible}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="TrayMouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding ShowCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="열기" Command="{Binding ShowCommand}"/>
+                    <MenuItem Header="종료" Command="{Binding ShutdownCommand}"/>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
         <Grid Height="113" VerticalAlignment="Top">
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
@@ -27,17 +46,29 @@
             </Grid.Background>
             <Image Stretch="Fill" Opacity="0.2" Source="/Once_v2_2015;component/img/tree.png"/>
             <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="68,10,0,0" TextWrapping="Wrap" Text="Once" VerticalAlignment="Top" Foreground="White" FontFamily="Segoe Script" FontSize="64"/>
-            <Button x:Name="button_Copy" Command="{Binding ViewOrdersCommand}" Style="{StaticResource BrownButton}"  Content="Orders" Margin="0,23,20,28" Foreground="#FFFBFBEF" FontSize="18.667" FontWeight="Bold" FontFamily="Segoe UI" HorizontalAlignment="Right" Width="186"/>
+            <Button x:Name="btnChangeMode" Command="{Binding ViewOrdersCommand}" CommandParameter="{Binding ElementName=CounterView}" Style="{StaticResource BrownButton}"  Content="Orders" Margin="0,23,20,28" Foreground="#FFFBFBEF" FontSize="18.667" FontWeight="Bold" FontFamily="Segoe UI" HorizontalAlignment="Right" Width="186"/>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Right" Margin="0,0,162,43" Width="60" CornerRadius="100" Background="#FFFBFBEF" Height="60" Visibility="{Binding CntVisible}">
+                <TextBlock x:Name="textBlock3" TextWrapping="Wrap" Text="{Binding ExistingOrder}" TextAlignment="Center" VerticalAlignment="Center" Foreground="#FF603A17" FontFamily="Segoe Print" FontWeight="Bold" FontSize="21.333"/>
+            </Border>
+            <Button x:Name="button" Command="{Binding ReadDocxCommand}"  Style="{StaticResource BrownButton}" Margin="0,23,237,28" HorizontalAlignment="Right" Width="62">
+                <Image Source="../img/recipe1.png" Height="40" Width="41"/>
+            </Button>
+            <Button x:Name="button1" Command="{Binding ViewAdjustmentCommand}" Style="{StaticResource IvoryButton}" HorizontalAlignment="Right" Margin="0,23,371,28" Width="62" FontWeight="Bold" FontFamily="NanumBarunGothic" FontSize="18.667" Foreground="#FF603A17">
+                <Image Source="../img/chart1.png" Height="35" Width="40"/>
+            </Button>
+            <Button x:Name="button1_Copy" Command="{Binding ViewManagementCommand}" Style="{StaticResource IvoryButton}" HorizontalAlignment="Right" Margin="0,23,304,28" Width="62">
+                <Image Source="../img/setting.png" Height="40" Width="40"/>
+            </Button>
+            <Button x:Name="btnTest" Visibility="Collapsed" Command="{Binding TestCommand}" Content="Button" HorizontalAlignment="Left" Margin="823,44,0,0" VerticalAlignment="Top" Width="75" Height="44" Background="#FFDDDDDD"/>
         </Grid>
-        <Grid Margin="898,113,0,0" Visibility="{Binding CounterVisible}">
-            <TextBlock x:Name="textBlock1" Margin="181,25,180,0" TextWrapping="Wrap" Text="Order #1" VerticalAlignment="Top" Foreground="#FF603A17" FontSize="29.333" FontFamily="Segoe Print" TextAlignment="Center"/>
-            <ListView x:Name="lvSelling" ItemsSource="{Binding SellingItems}" SelectedItem="{Binding SelectedSellingItem}" Margin="20,87,22,253" SelectionMode="Single" FontSize="16" FontFamily="NanumBarunGothic" Foreground="Black" ItemContainerStyle="{StaticResource ColorfulListView}" AlternationCount="2">
+        <Grid x:Name="grdCounter" Margin="898,113,0,0" Visibility="{Binding CounterVisible}">
+            <TextBlock x:Name="textBlock1" Margin="181,25,180,0" TextWrapping="Wrap" Text="{Binding StrOrderNumber}" VerticalAlignment="Top" Foreground="#FF603A17" FontSize="29.333" FontFamily="Segoe Print" TextAlignment="Center"/>
+            <ListView x:Name="lvSelling" ItemsSource="{Binding SellingItems}" SelectedItem="{Binding SelectedSellingItem}" Margin="20,87,22,253" SelectionMode="Single" FontSize="18" FontFamily="NanumBarunGothic" Foreground="Black" ItemContainerStyle="{StaticResource LinedListView}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseRightButtonUp">
                         <i:InvokeCommandAction Command="{Binding FireMenuItemCommand}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="220" DisplayMemberBinding="{Binding content}" >
@@ -49,7 +80,7 @@
                         <GridViewColumn Width="100" DisplayMemberBinding="{Binding quantity}" >
                             <GridViewColumnHeader TextElement.FontSize="16" FontFamily="Segoe UI">Qty</GridViewColumnHeader>
                         </GridViewColumn>
-                        <GridViewColumn Width="120" DisplayMemberBinding="{Binding total}" >
+                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding total}" >
                             <GridViewColumnHeader TextElement.FontSize="16" FontFamily="Segoe UI">Total</GridViewColumnHeader>
                         </GridViewColumn>
                     </GridView>
@@ -58,7 +89,7 @@
             <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="20,0,0,113" TextWrapping="Wrap" Text="Sub Total :" FontFamily="Segoe UI" Width="124" FontSize="21.333" Foreground="#FF595959" Height="28" VerticalAlignment="Bottom"/>
             <TextBlock x:Name="textBlock2_Copy" HorizontalAlignment="Left" Margin="20,0,0,153" TextWrapping="Wrap" Text="Discounts :" FontFamily="Segoe UI" Width="124" FontSize="21.333" Foreground="#FF595959" Height="28" VerticalAlignment="Bottom"/>
             <TextBlock x:Name="textBlock2_Copy1" HorizontalAlignment="Right" Margin="0,0,180,112" TextWrapping="Wrap" Text="Total :" VerticalAlignment="Bottom" FontFamily="Segoe UI Semibold" Width="91" FontSize="26.667" Foreground="#FF595959"/>
-            <Button x:Name="button_Copy2" Command="{Binding DiscountCommand}" Style="{StaticResource IvoryButton}" Content="Discount" HorizontalAlignment="Left" Margin="20,0,0,186" Width="270" Foreground="#FF603A17" FontWeight="Bold" FontFamily="Segoe UI" FontSize="16" Height="62" VerticalAlignment="Bottom">
+            <Button x:Name="button_Copy2" Command="{Binding DiscountCommand}" Style="{StaticResource IvoryButton}" Content="Discount" HorizontalAlignment="Left" Margin="20,0,0,186" Width="229" Foreground="#FF603A17" FontWeight="Bold" FontFamily="Segoe UI" FontSize="16" Height="62" VerticalAlignment="Bottom">
                 <Button.CommandParameter>
                     <MultiBinding Converter="{StaticResource MyConverter}">
                         <Binding ElementName="brdDiscount"/>
@@ -66,50 +97,83 @@
                     </MultiBinding>
                 </Button.CommandParameter>
             </Button>
-            <Button x:Name="button_Copy3" Command="{Binding TestCommand}" Style="{StaticResource BrownButton}"  Content="Send Order" Margin="0,0,22,10" Foreground="#FFFBFBEF" FontSize="16" FontWeight="Bold" FontFamily="Segoe UI" Height="62" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="185"/>
+            <Button x:Name="button_Copy3" Command="{Binding SendOrderCommand}" Style="{StaticResource BrownButton}"  Content="Send Order" Margin="0,0,22,10" Foreground="#FFFBFBEF" FontSize="16" FontWeight="Bold" FontFamily="Segoe UI" Height="62" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="185">
+                <Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource MyConverter}">
+                        <Binding ElementName="CounterView"/>
+                        <Binding ElementName="OrdersView"/>
+                    </MultiBinding>
+                </Button.CommandParameter>
+            </Button>
             <Button x:Name="button_Copy4" Command="{Binding CancelOrderCommand}" Style="{StaticResource IvoryButton}"  Content="Cancel Order" Margin="0,0,220,10" Foreground="#FF603A17" FontWeight="Bold" FontFamily="Segoe UI" FontSize="16" Height="62" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="185"/>
-            <RadioButton x:Name="radioButton" Style="{StaticResource StripeRadio}"  Content="카 드" Margin="0,0,22,186" VerticalAlignment="Bottom" FontFamily="NanumBarunGothic" FontSize="14.667" Foreground="#FF603A17" HorizontalAlignment="Right" Width="100"/>
-            <RadioButton x:Name="radioButton_Copy" Style="{StaticResource StripeRadio}"  Content="현 금" Margin="0,0,127,186" VerticalAlignment="Bottom" FontFamily="NanumBarunGothic" FontSize="14.667" Foreground="#FF603A17" HorizontalAlignment="Right" Width="100" IsChecked="True"/>
+            <RadioButton x:Name="rbCard" Style="{StaticResource StripeRadio}"  Content="카 드" Margin="0,0,22,186" VerticalAlignment="Bottom" FontFamily="NanumBarunGothic" FontSize="18.667" Foreground="#FF603A17" HorizontalAlignment="Right" Width="100"/>
+            <RadioButton x:Name="rbCash" Style="{StaticResource StripeRadio}"  Content="현 금" Margin="0,0,127,186" VerticalAlignment="Bottom" FontFamily="NanumBarunGothic" FontSize="18.667" Foreground="#FF603A17" HorizontalAlignment="Right" Width="100" IsChecked="True" Background="White"/>
             <Border x:Name="brdDiscount" BorderBrush="#FF707070" BorderThickness="1" Height="100" Margin="20,0,22,253" VerticalAlignment="Bottom" Visibility="Collapsed">
                 <local:DiscountUC x:Name="DiscountView" Height="Auto" Width="Auto"/>
             </Border>
             <TextBlock x:Name="textBlock2_Copy2" HorizontalAlignment="Left" Margin="149,0,0,153" TextWrapping="Wrap" Text="{Binding DiscountPrice}" FontFamily="Segoe UI" Width="100" FontSize="21.333" Foreground="#FF595959" Height="28" VerticalAlignment="Bottom" TextAlignment="Right"/>
             <TextBlock x:Name="textBlock2_Copy3" HorizontalAlignment="Left" Margin="149,0,0,113" TextWrapping="Wrap" Text="{Binding SubTotal}" FontFamily="Segoe UI" Width="100" FontSize="21.333" Foreground="#FF595959" Height="28" VerticalAlignment="Bottom" TextAlignment="Right"/>
             <TextBlock x:Name="textBlock2_Copy4" HorizontalAlignment="Right" Margin="0,0,22,112" TextWrapping="Wrap" Text="{Binding Total}" VerticalAlignment="Bottom" FontFamily="Segoe UI Semibold" Width="129" FontSize="26.667" Foreground="#FF595959" TextAlignment="Right"/>
+            <Button x:Name="btnShowDetail" Command="{Binding ShowDetailCommand}" Style="{StaticResource IvoryButton}" Visibility="{Binding ShowDetailVisible}" Margin="0,27,22,0" Foreground="White" HorizontalAlignment="Right" Width="50" Height="50" VerticalAlignment="Top">
+                <Image Source="/Once_v2_2015;component/img/document.png" Stretch="Fill" Width="23" Height="29"/>
+            </Button>
+            <Button x:Name="button2" Command="{Binding DefaultDiscountCommand}" Style="{StaticResource IvoryButton}"  HorizontalAlignment="Left" Margin="254,0,0,186" VerticalAlignment="Bottom" Width="67" Height="62">
+                <Image Source="../img/discount_no.png" Height="45" Width="65"/>
+            </Button>
         </Grid>
-        <Grid HorizontalAlignment="Left" Margin="0,113,0,100" Width="898" Visibility="{Binding CounterVisible}">
+        <Grid HorizontalAlignment="Left" Margin="0,113,0,0" Width="898" Visibility="{Binding CounterVisible}">
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFC59971" Offset="0"/>
                     <GradientStop Color="#FF603A17" Offset="1"/>
                 </LinearGradientBrush>
             </Grid.Background>
-            <Button x:Name="btnHome" Style="{StaticResource BrownButton}" Command="{Binding HomeCommand}" CommandParameter="{Binding ElementName=CounterView}" Content="TOP MENU" HorizontalAlignment="Left" Margin="27,10,0,0" VerticalAlignment="Top" Width="182" Height="54" Foreground="#FFFBFBEF" FontFamily="Segoe UI" FontSize="24" FontWeight="Bold"/>
-            <Button x:Name="btnCategory" Style="{StaticResource BrownButton}" Content="Non-Coffee" HorizontalAlignment="Left" Margin="214,10,0,0" VerticalAlignment="Top" Width="305" Height="54" Foreground="#FFFBFBEF" FontFamily="Segoe UI" FontSize="24" FontWeight="Bold"/>
-            <ScrollViewer Margin="0,87,0,0" VerticalScrollBarVisibility="Visible">
+            <ScrollViewer Margin="0,237,0,0" VerticalScrollBarVisibility="Visible">
                 <Grid x:Name="grdInnerMenu">
-                    <Button x:Name="button_Copy10" Style="{StaticResource IvoryButton}"  Content="Coffee" Margin="45,490,656,0" VerticalAlignment="Top" Height="130" FontFamily="NanumBarunGothic" FontSize="17.333" Background="#FF603A17" Foreground="#FF603A17"/>
+                    <Button x:Name="button_Copy10" Style="{StaticResource IvoryButton}" Margin="10,10,703,0" VerticalAlignment="Top" Height="110" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
+                    <Button x:Name="button_Copy5" Style="{StaticResource IvoryButton}"  Content="Coffee" Margin="184,10,529,0" VerticalAlignment="Top" Height="115" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
+                    <Button x:Name="button_Copy6" Style="{StaticResource IvoryButton}"  Content="Coffee" Margin="357,10,356,0" VerticalAlignment="Top" Height="122" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
+                    <Button x:Name="button_Copy7" Style="{StaticResource IvoryButton}"  Content="Coffee" Margin="530,10,183,0" VerticalAlignment="Top" Height="122" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
+                    <Button x:Name="button_Copy8" Style="{StaticResource IvoryButton}"  Content="Coffee" Margin="703,10,10,0" VerticalAlignment="Top" Height="122" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
+                    <Button x:Name="button_Copy9" Style="{StaticResource IvoryButton}" Margin="10,125,703,0" VerticalAlignment="Top" Height="110" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
+                    <Button x:Name="button_Copy11" Style="{StaticResource IvoryButton}" Margin="10,240,703,0" VerticalAlignment="Top" Height="110" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
+                    <Button x:Name="button_Copy12" Style="{StaticResource IvoryButton}" Margin="10,355,703,0" VerticalAlignment="Top" Height="110" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
+                    <Button x:Name="button_Copy13" Style="{StaticResource IvoryButton}" Margin="10,470,703,0" VerticalAlignment="Top" Height="110" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
+                    <Button x:Name="button_Copy14" Style="{StaticResource IvoryButton}"  Content="Coffee" Margin="184,130,529,0" VerticalAlignment="Top" Height="115" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
+                    <Button x:Name="button_Copy15" Style="{StaticResource IvoryButton}"  Content="Coffee" Margin="184,250,529,0" VerticalAlignment="Top" Height="115" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
+                    <Button x:Name="button_Copy16" Style="{StaticResource IvoryButton}"  Content="Coffee" Margin="184,370,529,0" VerticalAlignment="Top" Height="115" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
+                    <Button x:Name="button_Copy17" Style="{StaticResource IvoryButton}"  Content="Coffee" Margin="184,490,529,0" VerticalAlignment="Top" Height="115" FontFamily="NanumBarunGothic" FontSize="14.667" Background="#FF603A17" Foreground="#FF603A17" Width="168"/>
                 </Grid>
-
             </ScrollViewer>
-        </Grid>
-        <Grid x:Name="grdOutterMenuSetting" Height="100" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="898" Visibility="{Binding CounterVisible}">
-            <Grid.Background>
-                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                    <GradientStop Color="#FFF4EED8" Offset="0"/>
-                    <GradientStop Color="#FFC1AB94" Offset="1"/>
-                </LinearGradientBrush>
-            </Grid.Background>
-            <Image Stretch="Fill" Opacity="0.1" Source="/Once_v2_2015;component/img/tree.png"/>
-            <Button x:Name="button_Copy1" Command="{Binding MenuSettingCommand}" CommandParameter="{Binding ElementName=CounterView}" Style="{StaticResource IvoryButton}" Margin="0,0,10,8" Foreground="White" Height="80" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="80">
-                <Image Source="../img/setting.png" Stretch="Fill" Width="45" Height="45"/>
-            </Button>
-            <Grid x:Name="grdInnerMenuSetting" Height="100" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="803">
-                <local:InnerMenuSettingUC x:Name="InnerMenuSettingView" Margin="3,0,0,0" Width="Auto" Height="Auto"/>
-            </Grid>
+            <Button x:Name="button_Copy1" Content="Extra"  Command="{Binding MenuSettingCommand}" Style="{StaticResource IvoryButton}" Margin="780,172,28,0" Foreground="#FF603A17" Height="60" VerticalAlignment="Top" Width="90" FontFamily="Segoe UI" FontWeight="Bold" FontSize="20"/>
+            <Button x:Name="btnSize" Command="{Binding SizeCommand}" Content="{Binding StrSize}" Style="{Binding BtnSizeStyle}" Margin="395,172,123,0" VerticalAlignment="Top" Height="60" FontFamily="Segoe UI" FontSize="21.333" Foreground="White" FontWeight="Bold" Width="380"/>
+            <Button x:Name="btnTemperature" Command="{Binding TemperatureCommand}"  Content="{Binding StrTemp}" Style="{Binding BtnTempStyle}" Margin="10,172,508,0" VerticalAlignment="Top" Height="60" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontFamily="Segoe UI" FontSize="21.333" Width="380"/>
+            <ScrollViewer Height="172" VerticalScrollBarVisibility="Visible" VerticalAlignment="Top">
+                <Grid x:Name="grdCategory">
+                    <Button x:Name="btnHome_Copy1" Style="{StaticResource BrownButton}" Content="Non-Coffee" Margin="10,10,701,0" VerticalAlignment="Top" Height="74" Foreground="#FFFBFBEF" FontFamily="Segoe UI" FontSize="20" FontWeight="Bold" Width="165"/>
+                    <Button x:Name="btnHome_Copy4" Style="{StaticResource BrownButton}" Content="Non-Coffee" Margin="10,89,716,0" VerticalAlignment="Top" Height="74" Foreground="#FFFBFBEF" FontFamily="Segoe UI" FontSize="20" FontWeight="Bold"/>
+                    <Button x:Name="btnHome_Copy" Style="{StaticResource BrownButton}" Content="Non-Coffee" Margin="182,10,533,0" VerticalAlignment="Top" Height="74" Foreground="#FFFBFBEF" FontFamily="Segoe UI" FontSize="20" FontWeight="Bold" Width="165"/>
+                    <Button x:Name="btnHome_Copy2" Style="{StaticResource BrownButton}" Content="Non-Coffee" Margin="352,10,363,0" VerticalAlignment="Top" Height="74" Foreground="#FFFBFBEF" FontFamily="Segoe UI" FontSize="20" FontWeight="Bold" Width="165"/>
+                    <Button x:Name="btnHome_Copy3" Style="{StaticResource BrownButton}" Content="Non-Coffee" Margin="522,10,193,0" VerticalAlignment="Top" Height="74" Foreground="#FFFBFBEF" FontFamily="Segoe UI" FontSize="20" FontWeight="Bold" Width="165"/>
+                    <Button x:Name="btnHome_Copy5" Style="{StaticResource BrownButton}" Content="Non-Coffee" Margin="692,10,23,0" VerticalAlignment="Top" Height="74" Foreground="#FFFBFBEF" FontFamily="Segoe UI" FontSize="20" FontWeight="Bold" Width="165"/>
+                </Grid>
+            </ScrollViewer>
+            <Border Visibility="{Binding MenuSettingVisible}" Margin="570,172,123,0" Height="145" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="1" Width="205">
+                <Grid x:Name="grdMenuSetting">
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                            <GradientStop Color="#FFF4EED8" Offset="0"/>
+                            <GradientStop Color="#FFC1AB94" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Image Stretch="Fill" Opacity="0.1" Source="/Once_v2_2015;component/img/tree.png"/>
+                    <local:MenuSettingView/>
+                </Grid>
+            </Border>
+            <Border BorderThickness="1" Height="65" Margin="881,172,0,0" VerticalAlignment="Top" Background="#FFF0F0F0" BorderBrush="#FFF0F0F0" Width="17"/>
         </Grid>
         <Grid Margin="0,113,0,0" Visibility="{Binding OrdersVisible}">
-            <local:OrdersView Width="Auto" Height="Auto"/>
+            <local:OrdersUC x:Name="OrdersView" Width="Auto" Height="Auto"/>
         </Grid>
     </Grid>
 </Window>

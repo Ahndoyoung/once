@@ -7,6 +7,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
+using Once_v2_2015.Class;
 
 namespace Once_v2_2015.ViewModel
 {
@@ -29,23 +31,30 @@ namespace Once_v2_2015.ViewModel
 
         private void HorizontalScrolling(MouseWheelEventArgs e)
         {
-            ScrollViewer sv = (ScrollViewer) e.Source;
+            if (e.Source.GetType().Name == "ScrollViewer")
+            {
+                ScrollViewer sv = (ScrollViewer)e.Source;
 
-            if (e.Delta > 0)
-            {
-                sv.LineLeft();
-                sv.LineLeft();
+                if (e.Delta > 0)
+                {
+                    sv.LineLeft();
+                    sv.LineLeft();
+                }
+                else
+                {
+                    sv.LineRight();
+                    sv.LineRight();
+                }
+                e.Handled = true;
             }
-            else
-            {
-                sv.LineRight();
-                sv.LineRight();
-            }
-            e.Handled = true;
         }
 
         #endregion
 
         #endregion
+
+        public OrdersViewModel()
+        {
+        }
     }
 }

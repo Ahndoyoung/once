@@ -13,12 +13,15 @@ namespace Once_v2_2015.Container
     {
         public override void Load()
         {
-            Bind<MainViewModel>().ToSelf().InSingletonScope().Named("MainVM");
             Bind<CounterViewModel>().ToSelf().InSingletonScope().Named("CounterVM");
             Bind<DiscountViewModel>().ToSelf().InSingletonScope().Named("DiscountVM");
-            Bind<InnerMenuSettingViewModel>().ToSelf().InSingletonScope().Named("InnerMenuSettingVM");
             Bind<MenuSettingViewModel>().ToSelf().InSingletonScope().Named("MenuSettingVM");
             Bind<OrdersViewModel>().ToSelf().InSingletonScope().Named("OrdersVM");
+            Bind<MenuManagementViewModel>().ToSelf().InSingletonScope().Named("MenuManagementVM");
+            Bind<AdjustmentUCViewModel>().ToSelf().InSingletonScope().Named("AdjustmentUCVM");
+            Bind<DefaultDiscountViewModel>().ToSelf().InSingletonScope().Named("DefaultDiscountVM");
+            Bind<EnterPasswordViewModel>().ToSelf().InSingletonScope().Named("EnterPasswordVM");
+            Bind<ChangePasswordViewModel>().ToSelf().InSingletonScope().Named("ChangePasswordVM");
         }
     }
 }

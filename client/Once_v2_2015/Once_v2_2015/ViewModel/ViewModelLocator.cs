@@ -17,11 +17,6 @@ namespace Once_v2_2015.ViewModel
             Kernel = new StandardKernel(new DiContainer());
         }
 
-        public MainViewModel MainVM
-        {
-            get { return Kernel.Get<MainViewModel>("MainVM"); }
-        }
-
         public CounterViewModel CounterVM
         {
             get { return Kernel.Get<CounterViewModel>("CounterVM"); }
@@ -30,11 +25,6 @@ namespace Once_v2_2015.ViewModel
         public DiscountViewModel DiscountVM
         {
             get { return Kernel.Get<DiscountViewModel>("DiscountVM"); }
-        }
-
-        public InnerMenuSettingViewModel InnerMenuSettingVM
-        {
-            get { return Kernel.Get<InnerMenuSettingViewModel>("InnerMenuSettingVM"); }
         }
 
         public MenuSettingViewModel MenuSettingVM
@@ -46,7 +36,32 @@ namespace Once_v2_2015.ViewModel
         {
             get { return Kernel.Get<OrdersViewModel>("OrdersVM"); }
         }
-        
+
+        public MenuManagementViewModel MenuManagementVM
+        {
+            get { return Kernel.Get<MenuManagementViewModel>("MenuManagementVM"); }
+        }
+
+        public AdjustmentUCViewModel AdjustmentUCVM
+        {
+            get { return Kernel.Get<AdjustmentUCViewModel>("AdjustmentUCVM"); }
+        }
+
+        public DefaultDiscountViewModel DefaultDiscountVM
+        {
+            get { return Kernel.Get<DefaultDiscountViewModel>("DefaultDiscountVM"); }
+        }
+
+        public EnterPasswordViewModel EnterPasswordVM
+        {
+            get { return Kernel.Get<EnterPasswordViewModel>("EnterPasswordVM"); }
+        }
+
+        public ChangePasswordViewModel ChangePasswordVM
+        {
+            get { return Kernel.Get<ChangePasswordViewModel>("ChangePasswordVM"); }
+        }
+
         public static void Cleanup()
         {
             
