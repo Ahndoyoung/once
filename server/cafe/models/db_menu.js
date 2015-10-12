@@ -6,7 +6,7 @@ var crypto =require('crypto');
 
 var pool = mysql.createPool({
 	connectionLimit : 150,
-	host : "127.0.0.1",
+	host : "52.26.40.174",
 	port : 3025,
 	user: 'root',
 	password: 'once1234',
