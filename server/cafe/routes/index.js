@@ -7,8 +7,8 @@ router.get('/', function(req, res, next) {
 		res.render('index', { title: 'once', myValue: 'aaa' })
 });
 
-router.get('/musiclist', function(req, resS, next) {
-		res.render('music', { title: 'once' })
+router.get('/test', function(req, res, next) {
+		res.render('gallery', { title: 'once'})
 });
 
 

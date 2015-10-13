@@ -9,7 +9,7 @@ var keylen = 24;    //암호화 후 생성되는 key 길이 설정
 
 var pool = mysql.createPool({
 	connectionLimit : 150,
-	host : "127.0.0.1",
+	host : "52.26.40.174",
 	port : 3025,
 	user: 'root',
 	password: 'once1234',

@@ -11,6 +11,7 @@ var routes = require('./routes/index');
 var menu = require('./routes/menu');
 var notice = require('./routes/notice');
 var temp = require('./routes/temp');
+var insta_gallery = require('./routes/insta_gallery');
 
 var app = express();
 
@@ -39,7 +40,7 @@ app.use('/', routes)
 app.use('/v1/temp', temp);
 app.use('/v1/menu', menu);
 app.use('/v1/notice', notice);
-
+app.use('/v1/insta', insta_gallery);
 
 
 // catch 404 and forward to error handler
@@ -76,7 +77,7 @@ app.use(function(err, req, res, next) {
 var http = require('http');
 var https = require('https');
 
-var port80 = 80;
+var port80 = 8080;
 var port443 = 443;
 
 http.createServer(app).listen(port80, function() {
