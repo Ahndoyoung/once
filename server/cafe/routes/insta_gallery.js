@@ -9,9 +9,9 @@ instagram.use({
 	client_secret: '408bcba50eb648eb88a91a16c0a98095'
 });
 
-router.get('/', function(req, res) {
+router.get('/', function(req, res, next) {
 	if(instagram.user_media_recent('2042470368', function(err, result, pagination, remaining, limit) {
-		res.render('insta/insta_index', { grams: result });
+		res.render('gallery', { grams: result , title : 'once'});
 	}));
 });
 
