@@ -20,7 +20,7 @@ router.get('/test', function(req, res, next) {
 });
 
 router.get('/menu', function(req, res, next) {
-		res.render('test', {title : 'once'});
+		res.render('menu', {title : 'once'});
 });
 
 
