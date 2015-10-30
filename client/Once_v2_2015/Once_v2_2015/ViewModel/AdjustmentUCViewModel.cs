@@ -131,10 +131,10 @@ namespace Once_v2_2015.ViewModel
 
             DateTime start = new DateTime(StartYear, StartMonth, StartDay);
             DateTime end = new DateTime(EndYear, EndMonth, EndDay);
-            
+
             string query =
-                string.Format("SELECT * FROM RECEIPT WHERE Format([RECEIPT_DATE], \"yyyy-mm-dd\") >= '{0}' AND Format([RECEIPT_DATE], \"yyyy-mm-dd\") <= '{1}' ORDER BY RECEIPT_DATE",
-                    string.Format("{0:yyyy-MM-dd}",start), string.Format("{0:yyyy-MM-dd}",end));
+                string.Format("SELECT * FROM RECEIPT WHERE Format([RECEIPT_DATE], \"yyyy-mm-dd\") >= '{0}' AND Format([RECEIPT_DATE], \"yyyy-mm-dd\") <= '{1}' ORDER BY RECEIPT_NUM",
+                    string.Format("{0:yyyy-MM-dd}", start), string.Format("{0:yyyy-MM-dd}", end));
             OleDbConnection conn = new OleDbConnection(OleDB.connPath);
             OleDbCommand cmd = new OleDbCommand(query, conn);
             try
@@ -155,7 +155,7 @@ namespace Once_v2_2015.ViewModel
                         amount = (int)read[5]
                     };
                     Receipts.Add(r);
-                    
+
                     if (r.type.Replace(" ", "") == "현금")
                         MoneySales += r.amount;
                     else if (r.type.Replace(" ", "") == "카드")
@@ -220,7 +220,7 @@ namespace Once_v2_2015.ViewModel
 
         #region DeleteCommand
 
-        private RelayCommand<object>  _DeleteCommand;
+        private RelayCommand<object> _DeleteCommand;
 
         public RelayCommand<object> DeleteCommand
         {
@@ -229,7 +229,7 @@ namespace Once_v2_2015.ViewModel
 
         private void Delete(object obj)
         {
-            System.Collections.IList items = (System.Collections.IList) obj;
+            System.Collections.IList items = (System.Collections.IList)obj;
             var coll = items.Cast<Receipt>();
             List<Receipt> receipts = coll.ToList();
 
@@ -399,7 +399,7 @@ namespace Once_v2_2015.ViewModel
                 RaisePropertyChanged("EndDay");
             }
         }
-        
+
         private int _TotalSales = 0;
 
         public int TotalSales

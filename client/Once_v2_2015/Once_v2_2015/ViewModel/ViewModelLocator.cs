@@ -62,6 +62,16 @@ namespace Once_v2_2015.ViewModel
             get { return Kernel.Get<ChangePasswordViewModel>("ChangePasswordVM"); }
         }
 
+        public AdjustmentViewModel AdjustmentVM
+        {
+            get { return Kernel.Get<AdjustmentViewModel>("AdjustmentVM"); }
+        }
+
+        public StatisticsViewModel StatisticsVM
+        {
+            get { return Kernel.Get<StatisticsViewModel>("StatisticsVM"); }
+        }
+
         public static void Cleanup()
         {
             
