@@ -141,14 +141,24 @@ namespace Once_v2_2015.ViewModel
             {
                 conn.Open();
                 var read = cmd.ExecuteReader();
+                DateTime compareDT = DateTime.Today;
+                DateTime dt = DateTime.Today;
+                int idx = 1;
                 while (read.Read())
                 {
                     // #, date, time, type, discount, subtotal, amount
+                    dt = (DateTime)read[1];
+                    if (compareDT.ToShortDateString() != dt.ToShortDateString())
+                    {
+                        compareDT = dt;
+                        idx = 1;
+                    }
                     Receipt r = new Receipt()
                     {
-                        num = (int)read[0],
-                        date = string.Format("{0:yyyy-MM-dd}", (DateTime)read[1]),
-                        time = string.Format("{0:T}", (DateTime)read[1]),
+                        daily_num = idx++,
+                        num = (int) read[0],
+                        date = string.Format("{0:yyyy-MM-dd}", dt),
+                        time = string.Format("{0:T}", dt),
                         type = (string)read[2],
                         discount = (int)read[3],
                         subtotal = (int)read[4],

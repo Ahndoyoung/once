@@ -34,7 +34,7 @@
             </i:Interaction.Triggers>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="90" DisplayMemberBinding="{Binding num}" >
+                    <GridViewColumn Width="90" DisplayMemberBinding="{Binding daily_num}" >
                         <GridViewColumnHeader TextElement.FontSize="16" FontFamily="Segoe UI">No.</GridViewColumnHeader>
                     </GridViewColumn>
                     <GridViewColumn Width="120" DisplayMemberBinding="{Binding date}" >
