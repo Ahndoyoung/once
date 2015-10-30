@@ -8,6 +8,7 @@ namespace Once_v2_2015.Model
 {
     public class Receipt
     {
+        public int daily_num { get; set; }
         public int num { get; set; }
         public string date { get; set; }
         public string time { get; set; }

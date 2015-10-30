@@ -162,20 +162,20 @@ namespace Once_v2_2015.ViewModel
         private void Shutdown()
         {
             /* 소켓통신 쓰레드 종료 */
-            if (serverThr.ThreadState != System.Threading.ThreadState.Aborted)
-            {
-                try
-                {
-                    client = null;
-                    server.Close();
-                    server = null;
-                    serverThr.Abort();
-                }
-                catch (Exception err)
-                {
-                    MessageBox.Show(err.ToString());
-                }
-            }
+            //if (serverThr.ThreadState != System.Threading.ThreadState.Aborted)
+            //{
+            //    try
+            //    {
+            //        client = null;
+            //        server.Close();
+            //        server = null;
+            //        serverThr.Abort();
+            //    }
+            //    catch (Exception err)
+            //    {
+            //        MessageBox.Show(err.ToString());
+            //    }
+            //}
 
             Application.Current.Shutdown();
         }
@@ -1465,8 +1465,8 @@ namespace Once_v2_2015.ViewModel
         {
             Messenger.Default.Register<ViewModelMessage>(this, OnReceiveMessageAction);
 
-            serverThr = new Thread(new ThreadStart(ListenClient));
-            serverThr.Start();
+            //serverThr = new Thread(new ThreadStart(ListenClient));
+            //serverThr.Start();
         }
     }
 }

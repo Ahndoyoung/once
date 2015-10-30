@@ -7,7 +7,8 @@
              d1p1:Ignorable="d" 
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
-             xmlns:class="clr-namespace:Once_v2_2015.Class">
+             xmlns:class="clr-namespace:Once_v2_2015.Class"
+             xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit">
     <Application.Resources>
         <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:Once_v2_2015.ViewModel" />
         <class:PassThroughConverter x:Key="MyConverter"/>
@@ -456,6 +457,19 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+        
+        <!-- MyColumn -->
+        <Style x:Key="MyColumn" TargetType="{x:Type DVC:ColumnDataPoint}">
+            <Setter Property="Background" Value="#FFA60000"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <!-- MyColumn2 -->
+        <Style x:Key="MyColumn2" TargetType="{x:Type DVC:ColumnDataPoint}">
+            <Setter Property="Background" Value="#FF001EA6"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
         </Style>
     </Application.Resources>
 </Application>

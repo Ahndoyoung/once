@@ -22,6 +22,8 @@ namespace Once_v2_2015.Container
             Bind<DefaultDiscountViewModel>().ToSelf().InSingletonScope().Named("DefaultDiscountVM");
             Bind<EnterPasswordViewModel>().ToSelf().InSingletonScope().Named("EnterPasswordVM");
             Bind<ChangePasswordViewModel>().ToSelf().InSingletonScope().Named("ChangePasswordVM");
+            Bind<AdjustmentViewModel>().ToSelf().InSingletonScope().Named("AdjustmentVM");
+            Bind<StatisticsViewModel>().ToSelf().InSingletonScope().Named("StatisticsVM");
         }
     }
 }
