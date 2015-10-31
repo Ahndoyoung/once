@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ConnectException;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends Activity {
 
@@ -29,6 +32,8 @@ public class MainActivity extends Activity {
     public Button btnConnect;
     public EditText etIP;
 
+    ArrayList<SellingItems> orderList;
+    Map<Integer, View> viewTable;
     ViewGroup rootContainer;
     Scene loginScene;
     Scene viewScene;
@@ -39,8 +44,17 @@ public class MainActivity extends Activity {
 
     Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
-            // TODO display
-
+            if(msg.what == 1){
+                SellingItems val = (SellingItems) msg.obj;
+                orderList.add(val);
+                addOrder(val);
+            }else if(msg.what == 2){
+                DeleteOrder val = (DeleteOrder) msg.obj;
+                int num = val.getId();
+                View v = viewTable.get(num);
+                counter = (LinearLayout) findViewById(R.id.counterlayout);
+                counter.removeView(v);
+            }
         }
     };
 
@@ -56,7 +70,8 @@ public class MainActivity extends Activity {
 
 
         loginScene.enter();
-
+        orderList = new ArrayList<>();
+        viewTable = new HashMap<>();
 
         // API9 이상부터는 네트워크 사용 시
         if (Build.VERSION.SDK_INT > 9) {
@@ -66,6 +81,12 @@ public class MainActivity extends Activity {
 
         tvMsg = (TextView) findViewById(R.id.tvMsg);
         btnConnect = (Button) findViewById(R.id.btnConnect);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i("onDestory", "");
     }
 
     public void Connect(View v) {
@@ -104,15 +125,21 @@ public class MainActivity extends Activity {
                 try {
                     sMsg = stream.readLine();
                     System.out.println(sMsg);
-                    SellingItems sellingItems = new Gson().fromJson(sMsg, SellingItems.class);
-                    sMsg = "";
                     msg = new Message();
-                    for (SellingItem m : sellingItems.getSellingItems()) {
-                        sMsg += m.getContent() + "\n" + m.getQuantity() + "\n";
+
+                    if(sMsg.charAt(0) == '1'){
+                        sMsg = sMsg.substring(1,sMsg.length());
+                        SellingItems sellingItems = new Gson().fromJson(sMsg, SellingItems.class);
+                        msg.what = 1;
+                        msg.obj = sellingItems;
+                    }else if(sMsg.charAt(0) == '2'){
+                        sMsg = sMsg.substring(1,sMsg.length());
+                        DeleteOrder deleteOrder = new Gson().fromJson(sMsg, DeleteOrder.class);
+                        msg.what = 2;
+                        msg.obj = deleteOrder;
                     }
-                    msg.obj = sMsg;
+
                     mHandler.sendMessage(msg);
-                    System.out.println(sMsg);
                 } catch (NullPointerException|IOException err) {
                     System.out.println(err);
                     break;
@@ -128,15 +155,53 @@ public class MainActivity extends Activity {
         Log.i("add", "order: " + num);
         View v = getLayoutInflater().inflate(R.layout.order, null);
         ((TextView)v.findViewById(R.id.tvOrderNum)).setText("Order #"+num);
+        ((Button)v.findViewById(R.id.btnConfirm)).setText(num+ "# " +"완료");
+
         RelativeLayout.LayoutParams parm = new RelativeLayout.LayoutParams(750, ViewGroup.LayoutParams.MATCH_PARENT);
-        parm.setMargins(20,0,20,0);
+        parm.setMargins(15,0,15,0);
         v.setLayoutParams(parm);
+
+
         counter = (LinearLayout) findViewById(R.id.counterlayout);
         counter.addView(v, 0);
+        viewTable.put(num, v);
         num ++;
-        num++;
 
     }
 
+    public void addOrder(SellingItems arg){
+        int ordernum = arg.getId();
+        String order="";
 
+        View v = getLayoutInflater().inflate(R.layout.order, null);
+        ((TextView)v.findViewById(R.id.tvOrderNum)).setText("Order #"+ordernum);
+        ((Button)v.findViewById(R.id.btnConfirm)).setText(ordernum+ "# " +"완료");
+
+        for (SellingItem m : arg.getSellingItems()) {
+            order += m.getContent() + "\n" + m.getQuantity() + "\n";
+        }
+
+        ((TextView)v.findViewById(R.id.tvOrderNum)).setText(order);
+
+        RelativeLayout.LayoutParams parm = new RelativeLayout.LayoutParams(750, ViewGroup.LayoutParams.MATCH_PARENT);
+        parm.setMargins(15,0,15,0);
+        v.setLayoutParams(parm);
+
+
+        counter = (LinearLayout) findViewById(R.id.counterlayout);
+        counter.addView(v, 0);
+
+        viewTable.put(ordernum, v);
+
+
+    }
+
+    public void confirmOrder(View arg){
+
+        int ordernum = Integer.parseInt(((Button)arg).getText().toString().split("#")[0]);
+        Log.i("confirm: ", ""+ordernum);
+        View v = viewTable.get(ordernum);
+        counter = (LinearLayout) findViewById(R.id.counterlayout);
+        counter.removeView(v);
+    }
 }
