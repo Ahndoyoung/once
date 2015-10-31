@@ -2,6 +2,8 @@ package com.example.OnceReceiver;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.DataSetObserver;
+import android.graphics.Color;
 import android.os.*;
 import android.transition.Scene;
 import android.transition.Transition;
@@ -16,9 +18,9 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.ConnectException;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,6 +43,78 @@ public class MainActivity extends Activity {
 
     int num = 0;
 
+    private class ViewHolder{
+        public TextView tvContent;
+        public TextView tvQuantity;
+    }
+
+    class ListViewAdapter extends BaseAdapter{
+        private Context mContext = null;
+        private ArrayList<SellingItem> mListData = new ArrayList<SellingItem>();
+
+        public ListViewAdapter(Context mContext) {
+            super();
+            this.mContext = mContext;
+
+        }
+
+        @Override
+        public int getCount() {
+            return mListData.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return mListData.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        public void addItem(SellingItem sellingItem){
+            mListData.add(sellingItem);
+        }
+        public void addItem(String content, int quantity, String temp){
+            SellingItem addInfo = new SellingItem(content, quantity);
+            addInfo.setTemperature(temp);
+            mListData.add(addInfo);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder;
+            if (convertView == null) {
+                holder = new ViewHolder();
+
+                LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.orderlist_item, null);
+
+                holder.tvContent = (TextView) convertView.findViewById(R.id.tvContent);
+                holder.tvQuantity = (TextView) convertView.findViewById(R.id.tvQuantity);
+
+                convertView.setTag(holder);
+            }else{
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            SellingItem mData = mListData.get(position);
+            if(mData.getTemperature() !=null) {
+                if (mData.getTemperature().equals("I")) {
+                    holder.tvContent.setBackgroundColor(Color.argb(70, 138, 214, 240));
+                    holder.tvQuantity.setBackgroundColor(Color.argb(70, 138, 214, 240));
+                } else if (mData.getTemperature().equals("H")){
+                    holder.tvContent.setBackgroundColor(Color.argb(100, 255, 214, 214));
+                    holder.tvQuantity.setBackgroundColor(Color.argb(100, 255, 214, 214));
+                }
+            }
+            holder.tvContent.setText(mData.getContent());
+            holder.tvQuantity.setText("" + mData.getQuantity());
+
+            return convertView;
+        }
+    }
 
     Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -90,30 +164,30 @@ public class MainActivity extends Activity {
     }
 
     public void Connect(View v) {
-                    TransitionManager.go(viewScene);
+//                    TransitionManager.go(viewScene);
 
-//        try {
-//            etIP = (EditText) findViewById(R.id.etIP);
-//            String ip = etIP.getText().toString();
-//            Log.i("tcp ", "ip: " + ip);
-//            socket = new Socket(ip, 9051);
-//            stream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//
-//
-//            Toast.makeText(getApplicationContext(), "연결성공", Toast.LENGTH_LONG).show();
-//            TransitionManager.go(viewScene);
-//            cThread = new ChatThread();
-//            cThread.start();
-//
-//        } catch (IOException err) {
-//            System.out.println(err);
-//            Toast.makeText(getApplicationContext(), "연결실패", Toast.LENGTH_LONG).show();
-//            return;
-//        } catch (NullPointerException err){
-//            System.out.println(err);
-//            Toast.makeText(getApplicationContext(), "IP를 입력해주세요", Toast.LENGTH_LONG).show();
-//            return;
-//        }
+        try {
+            etIP = (EditText) findViewById(R.id.etIP);
+            String ip = etIP.getText().toString();
+            Log.i("tcp ", "ip: " + ip);
+            socket = new Socket(ip, 9051);
+            stream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+
+            Toast.makeText(getApplicationContext(), "연결성공", Toast.LENGTH_LONG).show();
+            TransitionManager.go(viewScene);
+            cThread = new ChatThread();
+            cThread.start();
+
+        } catch (IOException err) {
+            System.out.println(err);
+            Toast.makeText(getApplicationContext(), "연결실패", Toast.LENGTH_LONG).show();
+            return;
+        } catch (NullPointerException err){
+            System.out.println(err);
+            Toast.makeText(getApplicationContext(), "IP를 입력해주세요", Toast.LENGTH_LONG).show();
+            return;
+        }
     }
 
     class ChatThread extends Thread {
@@ -156,6 +230,12 @@ public class MainActivity extends Activity {
         View v = getLayoutInflater().inflate(R.layout.order, null);
         ((TextView)v.findViewById(R.id.tvOrderNum)).setText("Order #"+num);
         ((Button)v.findViewById(R.id.btnConfirm)).setText(num+ "# " +"완료");
+        ListView orderListView = (ListView)v.findViewById(R.id.listOrder);
+        ListViewAdapter orderListViewAdpater = new ListViewAdapter(v.getContext());
+        orderListView.setAdapter(orderListViewAdpater);
+
+        orderListViewAdpater.addItem("americano", 1, "I");
+        orderListViewAdpater.addItem("latte", 2, "H");
 
         RelativeLayout.LayoutParams parm = new RelativeLayout.LayoutParams(750, ViewGroup.LayoutParams.MATCH_PARENT);
         parm.setMargins(15,0,15,0);
@@ -176,12 +256,14 @@ public class MainActivity extends Activity {
         View v = getLayoutInflater().inflate(R.layout.order, null);
         ((TextView)v.findViewById(R.id.tvOrderNum)).setText("Order #"+ordernum);
         ((Button)v.findViewById(R.id.btnConfirm)).setText(ordernum+ "# " +"완료");
+        ListView orderListView = (ListView)v.findViewById(R.id.listOrder);
+        ListViewAdapter orderListViewAdpater = new ListViewAdapter(v.getContext());
+        orderListView.setAdapter(orderListViewAdpater);
+
 
         for (SellingItem m : arg.getSellingItems()) {
-            order += m.getContent() + "\n" + m.getQuantity() + "\n";
+            orderListViewAdpater.addItem(m);
         }
-
-        ((TextView)v.findViewById(R.id.tvOrderNum)).setText(order);
 
         RelativeLayout.LayoutParams parm = new RelativeLayout.LayoutParams(750, ViewGroup.LayoutParams.MATCH_PARENT);
         parm.setMargins(15,0,15,0);
@@ -203,5 +285,6 @@ public class MainActivity extends Activity {
         View v = viewTable.get(ordernum);
         counter = (LinearLayout) findViewById(R.id.counterlayout);
         counter.removeView(v);
+
     }
 }

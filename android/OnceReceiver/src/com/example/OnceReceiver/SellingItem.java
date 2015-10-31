@@ -7,11 +7,21 @@ import java.lang.String;
 public class SellingItem {
 
     private String content;
+    private String temperature;
     private int quantity;
 
     /*
         getter setter
      */
+
+    public String getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(String temperature) {
+        this.temperature = temperature;
+    }
+
     public int getQuantity() {
         return quantity;
     }
