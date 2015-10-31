@@ -2,11 +2,9 @@ package com.example.OnceReceiver;
 
 import android.app.Activity;
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.os.*;
 import android.transition.Scene;
-import android.transition.Transition;
 import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,12 +13,9 @@ import android.view.ViewGroup;
 import android.widget.*;
 import com.google.gson.Gson;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +23,8 @@ public class MainActivity extends Activity {
 
     public Socket socket = null;
     public ChatThread cThread = null;
-    public BufferedReader stream = null;
+    public BufferedReader networkReader = null;
+    public BufferedWriter networkWirter =null;
 
     public TextView tvMsg;
     public Button btnConnect;
@@ -163,6 +159,16 @@ public class MainActivity extends Activity {
         Log.i("onDestory", "");
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void Connect(View v) {
 //                    TransitionManager.go(viewScene);
 
@@ -171,8 +177,9 @@ public class MainActivity extends Activity {
             String ip = etIP.getText().toString();
             Log.i("tcp ", "ip: " + ip);
             socket = new Socket(ip, 9051);
-            stream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
+            networkReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            networkWirter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
             Toast.makeText(getApplicationContext(), "연결성공", Toast.LENGTH_LONG).show();
             TransitionManager.go(viewScene);
@@ -197,7 +204,7 @@ public class MainActivity extends Activity {
 
             while (true) {
                 try {
-                    sMsg = stream.readLine();
+                    sMsg = networkReader.readLine();
                     System.out.println(sMsg);
                     msg = new Message();
 
@@ -285,6 +292,11 @@ public class MainActivity extends Activity {
         View v = viewTable.get(ordernum);
         counter = (LinearLayout) findViewById(R.id.counterlayout);
         counter.removeView(v);
-
+        String res = "" + 2 +"{id : " + ordernum + "}";
+        try {
+            networkWirter.write(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
