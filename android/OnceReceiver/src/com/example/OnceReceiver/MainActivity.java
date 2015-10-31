@@ -84,8 +84,12 @@ public class MainActivity extends Activity {
                     System.out.println(sMsg);
                 } catch (NullPointerException|IOException err) {
                     System.out.println(err);
+                    break;
                 }
             }
+            msg = new Message();
+            msg.obj="connection fail";
+            mHandler.sendMessage(msg);
         }
     }
 
