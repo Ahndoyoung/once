@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+var menuDB = require('../models/db_menu');
 var instagram = require('instagram-node').instagram();
 
 instagram.use({
@@ -18,10 +19,16 @@ router.get('/test', function(req, res, next) {
 		res.render('gallery', { grams: result , title : 'once'});
 	}));
 });
-
-router.get('/menu', function(req, res, next) {
-		res.render('menu', {title : 'once'});
+router.get('/menu/:menu', function(req, res) {
+   var menu_category = req.params.menu;
+   menu_category = menu_category.toLowerCase();
+      menuDB.menu(menu_category, function(results){
+         res.render('menu', results);
+      })
 });
+router.get('/notice', function(req, res, next) {
+   res.render('notice', {});      
+})
 
 
 
