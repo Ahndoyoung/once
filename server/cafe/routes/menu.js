@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var fs = require('fs-extra');
 var once_db = require('../models/db_menu');
 
 router.get('/', function(req, res, next) {
