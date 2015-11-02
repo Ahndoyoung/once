@@ -24,7 +24,8 @@ router.get('/menu/:menu', function(req, res) {
 	var menu_category = req.params.menu;
 	menu_category = menu_category.toLowerCase();
 		menuDB.menu(menu_category, function(results){
-			res.render('menu', results);
+			console.log("results.results", results.results);
+			res.render('menu', {results : results.results});
 		})
 });
 
