@@ -71,19 +71,25 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i("onDestory", "");
+    protected void onResume() {
+        super.onResume();
+        try {
+            cThread.run();
+            Connector.getInstance();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onDestroy() {
+        super.onDestroy();
         try {
             Connector.getInstance().socket.close();
         } catch (IOException|NullPointerException e) {
             e.printStackTrace();
         }
+        Log.i("onDestory", "");
     }
 
     class ChatThread extends Thread {
@@ -123,7 +129,6 @@ public class MainActivity extends Activity {
 
     public void addOrder(SellingItems arg){
         int ordernum = arg.getId();
-        String order="";
 
         View v = getLayoutInflater().inflate(R.layout.order, null);
         ((TextView)v.findViewById(R.id.tvOrderNum)).setText("Order #"+ordernum);
