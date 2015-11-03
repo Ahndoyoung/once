@@ -18,9 +18,6 @@ import java.util.Map;
 
 public class MainActivity extends Activity {
 
-    public ChatThread cThread = null;
-    public SendThread sThread = null;
-
     public TextView tvMsg;
     public Button btnConnect;
     public EditText etIP;
@@ -74,9 +71,11 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         try {
-            cThread.run();
+
             Connector.getInstance();
-        } catch (IOException e) {
+            new ChatThread().execute(null, null, null);
+
+        } catch (IOException|NullPointerException e) {
             e.printStackTrace();
         }
     }
@@ -92,8 +91,9 @@ public class MainActivity extends Activity {
         Log.i("onDestory", "");
     }
 
-    class ChatThread extends Thread {
-        public void run() {
+    class ChatThread extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
             String sMsg;
             Message msg;
 
@@ -124,7 +124,9 @@ public class MainActivity extends Activity {
             msg = new Message();
             msg.obj="connection fail";
             mHandler.sendMessage(msg);
+            return null;
         }
+
     }
 
     public void addOrder(SellingItems arg){
@@ -154,7 +156,7 @@ public class MainActivity extends Activity {
 
     }
 
-    public synchronized void confirmOrder(View arg){
+    public void confirmOrder(View arg){
 
         int ordernum = Integer.parseInt(((Button)arg).getText().toString().split("#")[0]);
         Log.i("confirm: ", ""+ordernum);
@@ -164,19 +166,30 @@ public class MainActivity extends Activity {
         viewTable.remove(ordernum);
 
         confirm_msg = "" + 2 +"{\"id\" : " + ordernum + "}";
-        sThread = new SendThread();
-        sThread.run();
+
+        new SendThread().execute(confirm_msg);
 
     }
 
-    class SendThread extends Thread{
+    class SendThread extends AsyncTask<String, Void, Void>{
+        String sendmsg = null;
         @Override
-        public void run() {
+        protected Void doInBackground(String... msg) {
             try {
-                Connector.getInstance().networkWriter.write(confirm_msg);
+                sendmsg = msg[0];
+                Connector.getInstance().networkWriter.write(sendmsg);
+                Connector.getInstance().networkWriter.flush();
+
             } catch (IOException|NullPointerException e) {
                 e.printStackTrace();
             }
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            Log.i("send", sendmsg);
         }
     }
 }

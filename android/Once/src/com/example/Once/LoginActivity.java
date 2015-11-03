@@ -2,6 +2,7 @@ package com.example.Once;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.transition.TransitionManager;
 import android.util.Log;
@@ -34,24 +35,47 @@ public class LoginActivity extends Activity {
     }
 
     public void Connect(View v) {
+        Preference.putString(this, "ip", etIP.getText().toString());
+        new LoginAsyncTask().execute(null, null, null);
 
-        try {
 
-            Connector.ip = etIP.getText().toString();
-            Connector.getInstance();
-            Preference.putString(this, "ip", etIP.getText().toString());
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            Toast.makeText(getApplicationContext(), "연결성공", Toast.LENGTH_LONG).show();
-            startActivity(intent);
 
-        } catch (IOException err) {
-            System.out.println(err);
-            Toast.makeText(getApplicationContext(), "연결실패", Toast.LENGTH_LONG).show();
-            return;
-        } catch (NullPointerException err){
-            System.out.println(err);
-            Toast.makeText(getApplicationContext(), "IP를 입력해주세요", Toast.LENGTH_LONG).show();
-            return;
+
+    }
+
+    class LoginAsyncTask extends AsyncTask<Void, Void, Void> {
+
+        int state;
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+
+                Connector.ip = etIP.getText().toString();
+                Connector.getInstance();
+                state = 0;
+            } catch (IOException err) {
+                System.out.println(err);
+//            Toast.makeText(getApplicationContext(), "연결실패", Toast.LENGTH_LONG).show();
+                state = -1;
+
+            } catch (NullPointerException err) {
+                System.out.println(err);
+//            Toast.makeText(getApplicationContext(), "IP를 입력해주세요", Toast.LENGTH_LONG).show();
+                state = -1;
+
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if(state != -1) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
         }
     }
+
+
+
 }
