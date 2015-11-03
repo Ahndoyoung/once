@@ -167,9 +167,7 @@ namespace Once_v2_2015.ViewModel
             {
                 try
                 {
-                    client = null;
-                    server.Close();
-                    server = null;
+                    serverSocket.Stop();
                     serverThr.Abort();
                 }
                 catch (Exception err)
@@ -814,9 +812,7 @@ namespace Once_v2_2015.ViewModel
                         NumberingSI nsi = new NumberingSI(OrderNumber, items);
                         string request = ShowDetailVisible != Visibility.Visible ? "1" : "3";
                         request += JsonConvert.SerializeObject(nsi);
-                        request += '\n';
-                        byte[] bytes = Encoding.UTF8.GetBytes(request);
-                        client.Send(bytes);
+                        writer.WriteLine(request);
                     }
                     catch (Exception err)
                     {
@@ -884,9 +880,7 @@ namespace Once_v2_2015.ViewModel
                     {
                         DeleteOrder del = new DeleteOrder(orderNum);
                         string request = "2" + JsonConvert.SerializeObject(del);
-                        request += '\n';
-                        byte[] bytes = Encoding.UTF8.GetBytes(request);
-                        client.Send(bytes);
+                        writer.WriteLine(request);
                     }
                     catch (Exception err)
                     {
@@ -995,9 +989,7 @@ namespace Once_v2_2015.ViewModel
                         {
                             DeleteOrder del = new DeleteOrder(orderNum);
                             string request = "2" + JsonConvert.SerializeObject(del);
-                            request += '\n';
-                            byte[] bytes = Encoding.UTF8.GetBytes(request);
-                            client.Send(bytes);
+                            writer.WriteLine(request);
                         }
                         catch (Exception err)
                         {
@@ -1360,8 +1352,10 @@ namespace Once_v2_2015.ViewModel
 
         /* 소켓 통신 */
         private Thread serverThr = null;
-        private Socket server = null;
-        private Socket client = null;
+        private TcpListener serverSocket = null;
+        private TcpClient clientSocket = null;
+        private StreamWriter writer = null;
+        private StreamReader reader = null;
 
         public List<Category> categories = new List<Category>();
 
@@ -1467,12 +1461,8 @@ namespace Once_v2_2015.ViewModel
 
         private void ListenClient()
         {
-            server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            //server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-
-            IPEndPoint ipep = new IPEndPoint(IPAddress.Any, 6623);
-            server.Bind(ipep);
-            server.Listen(10);
+            serverSocket = new TcpListener(IPAddress.Any, 6623);
+            serverSocket.Start();
 
             while (true)
             {
@@ -1480,7 +1470,10 @@ namespace Once_v2_2015.ViewModel
                 try
                 {
                     // 연결 성공
-                    client = server.Accept();
+                    clientSocket = serverSocket.AcceptTcpClient();
+                    writer = new StreamWriter(clientSocket.GetStream(), Encoding.UTF8);
+                    writer.AutoFlush = true;
+                    reader = new StreamReader(clientSocket.GetStream(), Encoding.UTF8);
                     ConnectionBrush = Brushes.LawnGreen;
                 }
                 catch (Exception e)
@@ -1491,18 +1484,28 @@ namespace Once_v2_2015.ViewModel
                 while (true)
                 {
                     // 클라이언트로부터 버퍼를 받음
-                    byte[] bytes = new byte[1024];
                     Console.WriteLine("before if");
-                    
-                    if (client.Receive(bytes) == 0)
+                    string str = null;
+                    try
                     {
-                        // 클라이언트가 종료
-                        Console.WriteLine("in if");
+                        str = reader.ReadLine();
+
+                        if (str[0] == '2')
+                        {
+                            str = str.Substring(1, str.Length - 1);
+                        }
+                    }
+                    catch
+                    {
+                    }
+                    if (str == null || str == "")
+                    {
                         ConnectionBrush = Brushes.Red;
+                        writer.Close();
+                        reader.Close();
+                        clientSocket.Close();
                         break;
                     }
-
-                    string str = Encoding.UTF8.GetString(bytes);
                     Console.WriteLine(str);
                 }
             }
