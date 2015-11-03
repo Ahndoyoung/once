@@ -5,11 +5,6 @@
               android:layout_height="match_parent" android:background="#FFFBFBEF"
         >
 
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Button" android:onClick="addOrder"
-            android:id="@+id/button"/>
     <HorizontalScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

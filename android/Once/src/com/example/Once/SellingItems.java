@@ -1,4 +1,4 @@
-package com.example.OnceReceiver;
+package com.example.Once;
 
 import java.util.ArrayList;
 
