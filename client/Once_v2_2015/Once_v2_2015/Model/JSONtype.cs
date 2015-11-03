@@ -18,4 +18,14 @@ namespace Once_v2_2015.Model
             sellingItems = _si;
         }
     }
+
+    public class DeleteOrder
+    {
+        public int id { get; set; }
+
+        public DeleteOrder(int _id)
+        {
+            id = _id;
+        }
+    }
 }

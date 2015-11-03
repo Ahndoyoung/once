@@ -85,6 +85,7 @@ namespace Once_v2_2015.ViewModel
             SetCategory(cw);
 
             // init
+            ServerIP = GetIP(); // 서버아이피
             CheckDateTime();
             InitProperties();
             counterWindow = cw; // need modify
@@ -807,17 +808,13 @@ namespace Once_v2_2015.ViewModel
                     brd.Child = grd;
                     ov.grdOrders.Children.Add(brd);
 
-                    // JSON, 소켓
+                    // JSON 주문 보내기
                     try
                     {
                         NumberingSI nsi = new NumberingSI(OrderNumber, items);
-                        string request = JsonConvert.SerializeObject(nsi);
+                        string request = ShowDetailVisible != Visibility.Visible ? "1" : "3";
+                        request += JsonConvert.SerializeObject(nsi);
                         request += '\n';
-                        //string uri = "165.246.";
-                        //WebClient webClient = new WebClient();
-                        //webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
-                        //webClient.Encoding = UTF8Encoding.UTF8;
-                        //string response = webClient.UploadString(uri, request);
                         byte[] bytes = Encoding.UTF8.GetBytes(request);
                         client.Send(bytes);
                     }
@@ -878,6 +875,23 @@ namespace Once_v2_2015.ViewModel
                     ov.grdOrders.Children.RemoveAt(i);
                     ExistingOrder--;
                     isFired = true;
+
+                    // JSON 주문 완료
+                    Grid grd = (Grid) brd.Child;
+                    TextBlock tb = (TextBlock) grd.Children[0];
+                    int orderNum = int.Parse(tb.Text.Split('#')[1].Split(' ')[0]); // 주문완료할 주문번호
+                    try
+                    {
+                        DeleteOrder del = new DeleteOrder(orderNum);
+                        string request = "2" + JsonConvert.SerializeObject(del);
+                        request += '\n';
+                        byte[] bytes = Encoding.UTF8.GetBytes(request);
+                        client.Send(bytes);
+                    }
+                    catch (Exception err)
+                    {
+                        Console.WriteLine(err.ToString());
+                    }
 
                     // 결제
                     DateTime dt = DateTime.Now;
@@ -972,6 +986,23 @@ namespace Once_v2_2015.ViewModel
                         ov.grdOrders.Children.RemoveAt(i);
                         ExistingOrder--;
                         isFired = true;
+
+                        // JSON 주문 완료
+                        Grid grd = (Grid)brd.Child;
+                        TextBlock tb = (TextBlock)grd.Children[0];
+                        int orderNum = int.Parse(tb.Text.Split('#')[1].Split(' ')[0]); // 주문완료할 주문번호
+                        try
+                        {
+                            DeleteOrder del = new DeleteOrder(orderNum);
+                            string request = "2" + JsonConvert.SerializeObject(del);
+                            request += '\n';
+                            byte[] bytes = Encoding.UTF8.GetBytes(request);
+                            client.Send(bytes);
+                        }
+                        catch (Exception err)
+                        {
+                            Console.WriteLine(err.ToString());
+                        }
                     }
 
                     if (isFired && i != ov.grdOrders.Children.Count)
@@ -1297,6 +1328,30 @@ namespace Once_v2_2015.ViewModel
             }
         }
 
+        private string _ServerIP;
+
+        public string ServerIP
+        {
+            get { return _ServerIP; }
+            set
+            {
+                _ServerIP = value;
+                RaisePropertyChanged("ServerIP");
+            }
+        }
+
+        private Brush _ConnectionBrush = Brushes.Red;
+
+        public Brush ConnectionBrush
+        {
+            get { return _ConnectionBrush; }
+            set
+            {
+                _ConnectionBrush = value;
+                RaisePropertyChanged("ConnectionBrush");
+            }
+        }
+
         #endregion
 
         public CounterWindow counterWindow = null; // need modify
@@ -1413,22 +1468,58 @@ namespace Once_v2_2015.ViewModel
         private void ListenClient()
         {
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            
-            IPEndPoint ipep = new IPEndPoint(IPAddress.Any, 9051);
+            //server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+
+            IPEndPoint ipep = new IPEndPoint(IPAddress.Any, 6623);
             server.Bind(ipep);
             server.Listen(10);
 
-            try
+            while (true)
             {
-                client = server.Accept();
+                // 계속 클라이언트 요청을 기다림
+                try
+                {
+                    // 연결 성공
+                    client = server.Accept();
+                    ConnectionBrush = Brushes.LawnGreen;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
+
+                while (true)
+                {
+                    // 클라이언트로부터 버퍼를 받음
+                    byte[] bytes = new byte[1024];
+                    Console.WriteLine("before if");
+                    
+                    if (client.Receive(bytes) == 0)
+                    {
+                        // 클라이언트가 종료
+                        Console.WriteLine("in if");
+                        ConnectionBrush = Brushes.Red;
+                        break;
+                    }
+
+                    string str = Encoding.UTF8.GetString(bytes);
+                    Console.WriteLine(str);
+                }
             }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
-            }            
-            MessageBox.Show("클라이언트 연결");
         }
-        
+
+        private string GetIP()
+        {
+            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+            string ip = null;
+            for (int i = 0; i < host.AddressList.Length; i++)
+            {
+                if (host.AddressList[i].AddressFamily == AddressFamily.InterNetwork)
+                    ip = host.AddressList[i].ToString();
+            }
+            return ip;
+        }
+
         private void OnReceiveMessageAction(ViewModelMessage obj)
         {
             string[] arr = obj.Text.Split('^');

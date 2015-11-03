@@ -60,6 +60,19 @@
                 <Image Source="../img/setting.png" Height="40" Width="40"/>
             </Button>
             <Button x:Name="btnTest" Visibility="Collapsed" Command="{Binding TestCommand}" Content="Button" HorizontalAlignment="Left" Margin="823,44,0,0" VerticalAlignment="Top" Width="75" Height="44" Background="#FFDDDDDD"/>
+            <Border BorderBrush="Black" BorderThickness="1" Margin="0,23,440,28" HorizontalAlignment="Right" Width="239" CornerRadius="20">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFF4EED8" Offset="0"/>
+                        <GradientStop Color="#FFC1AB94" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="11,18,0,0" TextWrapping="Wrap" Text="서버 IP" VerticalAlignment="Top" Foreground="#FF603A17" FontWeight="Bold" FontSize="17.333"/>
+                    <TextBlock x:Name="textBlock4_Copy" HorizontalAlignment="Left" Margin="76,18,0,0" TextWrapping="Wrap" Text="{Binding ServerIP}" VerticalAlignment="Top" Foreground="#FF603A17" FontWeight="Bold" FontSize="17.333"/>
+                    <Border x:Name="brdConnection" BorderThickness="1" HorizontalAlignment="Left" Height="15" Margin="211,24,0,0" VerticalAlignment="Top" Width="15" Background="{Binding ConnectionBrush}"/>
+                </Grid>
+            </Border>
         </Grid>
         <Grid x:Name="grdCounter" Margin="898,113,0,0" Visibility="{Binding CounterVisible}">
             <TextBlock x:Name="textBlock1" Margin="181,25,180,0" TextWrapping="Wrap" Text="{Binding StrOrderNumber}" VerticalAlignment="Top" Foreground="#FF603A17" FontSize="29.333" FontFamily="Segoe Print" TextAlignment="Center"/>
