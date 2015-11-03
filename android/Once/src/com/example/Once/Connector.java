@@ -19,7 +19,6 @@ public class Connector {
     private Connector() throws IOException {
 
         socket = new Socket(ip, port);
-        socket.setSendBufferSize(1024);
         networkReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         networkWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         printWriter = new PrintWriter(networkWriter, true);

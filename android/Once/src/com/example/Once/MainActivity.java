@@ -1,6 +1,8 @@
 package com.example.Once;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -49,6 +51,9 @@ public class MainActivity extends Activity {
                 SellingItems val = (SellingItems) msg.obj;
                 orderList.add(val);
                 addOrder(val, true);
+            }else if(msg.what == -1){
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         }
     };
@@ -80,19 +85,14 @@ public class MainActivity extends Activity {
         super.onResume();
         try {
 
-            if(Connector.getInstance().socket.getKeepAlive() == false) {
-                Connector.disConnect();
-            }else{
-                Log.i("Connection", "Allive");
-            }
-
             Connector.getInstance();
             new ChatThread().execute(null, null, null);
 
         } catch (IOException|NullPointerException e) {
             e.printStackTrace();
+            finish();
         }
-
+        Log.i("onResume", "");
     }
 
     @Override
@@ -119,18 +119,23 @@ public class MainActivity extends Activity {
                     System.out.println(sMsg);
                     msg = new Message();
 
-                    if(sMsg.charAt(0) == '1'){
-                        sMsg = sMsg.substring(1,sMsg.length());
+                    System.out.println(sMsg);
+
+                    System.out.println("method" + sMsg.charAt(0));
+                    System.out.println("method" + sMsg.charAt(1));
+
+                    if(sMsg.charAt(1) == '1'){
+                        sMsg = sMsg.substring(2,sMsg.length());
                         SellingItems sellingItems = new Gson().fromJson(sMsg, SellingItems.class);
                         msg.what = 1;
                         msg.obj = sellingItems;
-                    }else if(sMsg.charAt(0) == '2'){
-                        sMsg = sMsg.substring(1,sMsg.length());
+                    }else if(sMsg.charAt(1) == '2'){
+                        sMsg = sMsg.substring(2,sMsg.length());
                         DeleteOrder deleteOrder = new Gson().fromJson(sMsg, DeleteOrder.class);
                         msg.what = 2;
                         msg.obj = deleteOrder;
-                    }else if(sMsg.charAt(0) == '3'){
-                        sMsg = sMsg.substring(1,sMsg.length());
+                    }else if(sMsg.charAt(1) == '3'){
+                        sMsg = sMsg.substring(2,sMsg.length());
                         SellingItems sellingItems = new Gson().fromJson(sMsg, SellingItems.class);
                         msg.what = 3;
                         msg.obj = sellingItems;
@@ -143,7 +148,7 @@ public class MainActivity extends Activity {
                 }
             }
             msg = new Message();
-            msg.obj="connection fail";
+            msg.what = -1;
             mHandler.sendMessage(msg);
             return null;
         }
@@ -193,7 +198,7 @@ public class MainActivity extends Activity {
 
         confirm_msg = "" + 2 +"{\"id\" : " + ordernum + "}";
 
-        new SendThread().execute(confirm_msg);
+        new SendThread().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, confirm_msg);
 
     }
 
@@ -215,5 +220,13 @@ public class MainActivity extends Activity {
         protected void onPostExecute(Void aVoid) {
             Log.i("send", sendmsg);
         }
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    private void StartAsyncTaskInParallel(SendThread task) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        else
+            task.execute();
     }
 }
