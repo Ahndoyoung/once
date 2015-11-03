@@ -18,11 +18,8 @@ import java.util.Map;
 
 public class MainActivity extends Activity {
 
-    public Socket socket = null;
     public ChatThread cThread = null;
     public SendThread sThread = null;
-    public BufferedReader networkReader = null;
-    public BufferedWriter networkWriter =null;
 
     public TextView tvMsg;
     public Button btnConnect;
@@ -31,11 +28,8 @@ public class MainActivity extends Activity {
     ArrayList<SellingItems> orderList;
     Map<Integer, View> viewTable;
     ViewGroup rootContainer;
-    Scene loginScene;
-    Scene viewScene;
     LinearLayout counter;
 
-    int num = 0;
     String confirm_msg;
 
     Handler mHandler = new Handler() {
@@ -59,14 +53,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.main);
+        setContentView(R.layout.view);
         rootContainer = (ViewGroup) findViewById(R.id.rootContainer);
         counter = (LinearLayout) findViewById(R.id.counterlayout);
-        loginScene = Scene.getSceneForLayout(rootContainer, R.layout.login, this);
-        viewScene = Scene.getSceneForLayout(rootContainer, R.layout.view, this);
 
-
-        loginScene.enter();
         orderList = new ArrayList<>();
         viewTable = new HashMap<>();
 
@@ -90,37 +80,9 @@ public class MainActivity extends Activity {
     protected void onStop() {
         super.onStop();
         try {
-            socket.close();
+            Connector.getInstance().socket.close();
         } catch (IOException|NullPointerException e) {
             e.printStackTrace();
-        }
-    }
-
-    public void Connect(View v) {
-
-
-        try {
-            etIP = (EditText) findViewById(R.id.etIP);
-            String ip = etIP.getText().toString();
-            Log.i("tcp ", "ip: " + ip);
-            socket = new Socket(ip, 6623);
-
-            networkReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            networkWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-
-            Toast.makeText(getApplicationContext(), "연결성공", Toast.LENGTH_LONG).show();
-            TransitionManager.go(viewScene);
-            cThread = new ChatThread();
-            cThread.start();
-
-        } catch (IOException err) {
-            System.out.println(err);
-            Toast.makeText(getApplicationContext(), "연결실패", Toast.LENGTH_LONG).show();
-            return;
-        } catch (NullPointerException err){
-            System.out.println(err);
-            Toast.makeText(getApplicationContext(), "IP를 입력해주세요", Toast.LENGTH_LONG).show();
-            return;
         }
     }
 
@@ -131,7 +93,7 @@ public class MainActivity extends Activity {
 
             while (true) {
                 try {
-                    sMsg = networkReader.readLine();
+                    sMsg = Connector.getInstance().networkReader.readLine();
                     System.out.println(sMsg);
                     msg = new Message();
 
@@ -185,10 +147,9 @@ public class MainActivity extends Activity {
 
         viewTable.put(ordernum, v);
 
-
     }
 
-    public void confirmOrder(View arg){
+    public synchronized void confirmOrder(View arg){
 
         int ordernum = Integer.parseInt(((Button)arg).getText().toString().split("#")[0]);
         Log.i("confirm: ", ""+ordernum);
@@ -201,14 +162,13 @@ public class MainActivity extends Activity {
         sThread = new SendThread();
         sThread.run();
 
-
     }
 
     class SendThread extends Thread{
         @Override
         public void run() {
             try {
-                networkWriter.write(confirm_msg);
+                Connector.getInstance().networkWriter.write(confirm_msg);
             } catch (IOException|NullPointerException e) {
                 e.printStackTrace();
             }
