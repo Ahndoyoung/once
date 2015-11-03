@@ -48,7 +48,6 @@
 				alignment: 'center',
 				noOpenerFade: true
 			});
-
 		// Off-Canvas Navigation.
 
 			// Navigation Button.

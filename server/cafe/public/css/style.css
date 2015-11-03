@@ -1,11 +1,6 @@
 body {
-	padding-top: 50px;
+	//padding-top: 20px;
 }
-
-footer {
-	padding: 50px;
-}
-
 .instagram-pic {
 	position: relative;
 	padding: 10px;
@@ -38,4 +33,9 @@ footer {
 
 .instagram-bar .comments {
 	float: right;
+}
+#insta-wrapper{
+	height:800px;
+	position:relative;
+	
 }

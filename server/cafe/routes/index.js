@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 var menuDB = require('../models/db_menu');
+var noticeDB = require('../models/db_notice');
+
 var instagram = require('instagram-node').instagram();
 
 instagram.use({
@@ -20,13 +22,21 @@ router.get('/test', function(req, res, next) {
 	}));
 });
 
+
 router.get('/menu/:menu', function(req, res) {
 	var menu_category = req.params.menu;
 	menu_category = menu_category.toLowerCase();
 		menuDB.menu(menu_category, function(results){
-			console.log("results.results", results.results);
 			res.render('menu', {results : results.results});
 		})
+});
+
+
+router.get('/notice/:page', function( req, res) {
+	var page = req.params.page;
+	noticeDB.notice(page, function(results) {
+		res.render('notice',{notice : results.results});
+	});
 });
 
 
@@ -41,7 +51,10 @@ router.get('/notice', function(req, res, next) {
 	// 만약 view/insta에 있는 ejs파일로 연결 시킬거면
 	//			insta/notice 이런식으로 하면 됨.
 	//뒤에 {}는 넘겨줄 객체, 근데 넘겨줄게 없어서 빈 객체
-})
+});
 
+router.get('/introduction', function(req, res, next) {
+	res.render('introduction', {});		//
+});
 
 module.exports = router;
