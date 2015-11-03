@@ -4,16 +4,13 @@ import android.app.Activity;
 import android.os.*;
 import android.transition.Scene;
 import android.transition.TransitionManager;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import com.google.gson.Gson;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,8 +20,9 @@ public class MainActivity extends Activity {
 
     public Socket socket = null;
     public ChatThread cThread = null;
+    public SendThread sThread = null;
     public BufferedReader networkReader = null;
-    public BufferedWriter networkWirter =null;
+    public BufferedWriter networkWriter =null;
 
     public TextView tvMsg;
     public Button btnConnect;
@@ -38,7 +36,7 @@ public class MainActivity extends Activity {
     LinearLayout counter;
 
     int num = 0;
-
+    String confirm_msg;
 
     Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -99,31 +97,31 @@ public class MainActivity extends Activity {
     }
 
     public void Connect(View v) {
-        TransitionManager.go(viewScene);
 
-//        try {
-//            etIP = (EditText) findViewById(R.id.etIP);
-//            String ip = etIP.getText().toString();
-//            Log.i("tcp ", "ip: " + ip);
-//            socket = new Socket(ip, 6623);
-//
-//            networkReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//            networkWirter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-//
-//            Toast.makeText(getApplicationContext(), "연결성공", Toast.LENGTH_LONG).show();
-//            TransitionManager.go(viewScene);
-//            cThread = new ChatThread();
-//            cThread.start();
-//
-//        } catch (IOException err) {
-//            System.out.println(err);
-//            Toast.makeText(getApplicationContext(), "연결실패", Toast.LENGTH_LONG).show();
-//            return;
-//        } catch (NullPointerException err){
-//            System.out.println(err);
-//            Toast.makeText(getApplicationContext(), "IP를 입력해주세요", Toast.LENGTH_LONG).show();
-//            return;
-//        }
+
+        try {
+            etIP = (EditText) findViewById(R.id.etIP);
+            String ip = etIP.getText().toString();
+            Log.i("tcp ", "ip: " + ip);
+            socket = new Socket(ip, 6623);
+
+            networkReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            networkWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+
+            Toast.makeText(getApplicationContext(), "연결성공", Toast.LENGTH_LONG).show();
+            TransitionManager.go(viewScene);
+            cThread = new ChatThread();
+            cThread.start();
+
+        } catch (IOException err) {
+            System.out.println(err);
+            Toast.makeText(getApplicationContext(), "연결실패", Toast.LENGTH_LONG).show();
+            return;
+        } catch (NullPointerException err){
+            System.out.println(err);
+            Toast.makeText(getApplicationContext(), "IP를 입력해주세요", Toast.LENGTH_LONG).show();
+            return;
+        }
     }
 
     class ChatThread extends Thread {
@@ -159,30 +157,6 @@ public class MainActivity extends Activity {
             msg.obj="connection fail";
             mHandler.sendMessage(msg);
         }
-    }
-
-    public void addOrder(View arg){
-        Log.i("add", "order: " + num);
-        View v = getLayoutInflater().inflate(R.layout.order, null);
-        ((TextView)v.findViewById(R.id.tvOrderNum)).setText("Order #"+num);
-        ((Button)v.findViewById(R.id.btnConfirm)).setText(num+ "# " +"완료");
-        ListView orderListView = (ListView)v.findViewById(R.id.listOrder);
-        ListViewAdapter orderListViewAdpater = new ListViewAdapter(v.getContext());
-        orderListView.setAdapter(orderListViewAdpater);
-
-        orderListViewAdpater.addItem("americano", 1, "I");
-        orderListViewAdpater.addItem("latte", 2, "H");
-
-        RelativeLayout.LayoutParams parm = new RelativeLayout.LayoutParams(750, ViewGroup.LayoutParams.MATCH_PARENT);
-        v.setLayoutParams(parm);
-        DisplayMetrics dm = getResources().getDisplayMetrics();
-        int size = Math.round(1000 * dm.density);
-
-        counter = (LinearLayout) findViewById(R.id.counterlayout);
-        counter.addView(v, viewTable.size());
-        viewTable.put(num, v);
-        num ++;
-
     }
 
     public void addOrder(SellingItems arg){
@@ -222,12 +196,22 @@ public class MainActivity extends Activity {
         counter = (LinearLayout) findViewById(R.id.counterlayout);
         counter.removeView(v);
         viewTable.remove(ordernum);
-        String res = "" + 2 +"{id : " + ordernum + "}";
-        try {
-            networkWirter.write(res);
-        } catch (IOException | NullPointerException e) {
-            e.printStackTrace();
-            return;
+
+        confirm_msg = "" + 2 +"{\"id\" : " + ordernum + "}";
+        sThread = new SendThread();
+        sThread.run();
+
+
+    }
+
+    class SendThread extends Thread{
+        @Override
+        public void run() {
+            try {
+                networkWriter.write(confirm_msg);
+            } catch (IOException|NullPointerException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
