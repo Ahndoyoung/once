@@ -40,82 +40,27 @@
 			<!-- Main -->
 				<div class="wrapper">
 					<div class="container" id="main">
-						<div class="row 150%">
-							<div class="8u 12u(narrower)">
-								
-							</div>
-							<div class="4u 12u(narrower)">
-
-								<!-- Sidebar -->
-									<section id="sidebar">
-										<section>
-											<header>
-												<h3>Elit sed feugiat</h3>
-											</header>
-											<p>Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur et vel
-											sem sit amet dolor neque semper magna. Lorem ipsum dolor sit amet consectetur et dolore
-											adipiscing elit. Curabitur vel sem sit.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">Magna amet nullam</a></li>
-											</ul>
-										</section>
-										<section>
-											<a href="#" class="image featured"><img src="images/pic07.jpg" alt="" /></a>
-											<header>
-												<h3>Commodo lorem varius</h3>
-											</header>
-											<p>Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur et vel
-											sem sit amet dolor neque semper magna. Lorem ipsum dolor sit amet consectetur et dolore
-											adipiscing elit. Curabitur vel sem sit.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">Ipsum sed dolor</a></li>
-											</ul>
-										</section>
-									</section>
-
-							</div>
-						</div>
-						<div class="row features">
-							<section class="4u 12u(narrower) feature">
-								<div class="image-wrapper first">
-									<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
-								</div>
-								<header>
-									<h3>Dolor sit consequat magna</h3>
-								</header>
-								<p>Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur
-								vel sem sit dolor neque semper magna lorem ipsum.</p>
-								<ul class="actions">
-									<li><a href="#" class="button">Elevate my awareness</a></li>
-								</ul>
-							</section>
-							<section class="4u 12u(narrower) feature">
-								<div class="image-wrapper">
-									<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
-								</div>
-								<header>
-									<h3>Dolor sit consequat magna</h3>
-								</header>
-								<p>Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur
-								vel sem sit dolor neque semper magna lorem ipsum.</p>
-								<ul class="actions">
-									<li><a href="#" class="button">Elevate my awareness</a></li>
-								</ul>
-							</section>
-							<section class="4u 12u(narrower) feature">
-								<div class="image-wrapper">
-									<a href="#" class="image featured"><img src="images/pic05.jpg" alt="" /></a>
-								</div>
-								<header>
-									<h3>Dolor sit consequat magna</h3>
-								</header>
-								<p>Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur
-								vel sem sit dolor neque semper magna lorem ipsum.</p>
-								<ul class="actions">
-									<li><a href="#" class="button">Elevate my awareness</a></li>
-								</ul>
-							</section>
-						</div>
+						         <div id = "menuBody">
+            						<nav id = "menunav">
+						              <ul>
+						                <li id="coffee" value="coffee">Coffee</li>
+						                <li id="non-coffee" value="non-coffee">Non-coffee</li>
+						                <li id="tea" value="tea">Tea</li>
+						                <li id="side" value="side">Side</li>
+						                <li id="cocktail" value="cocktail">Cocktail</li>
+						              </ul>
+						            </nav>
+         						 </div>
+						            <div id = "stage">
+					                  <div class = "galleryImage">
+					                   <ul class="polaroids" >
+						                  <% results.forEach(function(result) { %>
+					                      <li> <a href="<%=result.menuImagePath%>" > <img src="<%=result.menuImagePath%>"></a>
+                    				      <br/><%=result.menuName%></li>
+						                  <% }); %>
+					                   </ul>  
+					                 </div>
+						            </div>
 					</div>
 				</div>
 

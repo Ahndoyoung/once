@@ -11,7 +11,7 @@ router.get('/:page', function( req, res) {
 	var page = req.params.page;
 
 	once_db.notice(page, function(results) {
-		res.json(results);
+		res.render('notice',{notice : results.results});	
 	});
 });
 

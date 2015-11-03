@@ -11,8 +11,8 @@ router.get('/:menu', function(req, res) {
 	var menu_category = req.params.menu;
 	menu_category = menu_category.toLowerCase();
 		once_db.menu(menu_category, function(results){
-			res.json(results);
-		})
+         res.render('menu', {results : results.results});
+      })
 });
 
 //수정 페이지

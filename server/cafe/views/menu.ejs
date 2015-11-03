@@ -9,11 +9,10 @@
     <title>Once</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!--[if lte IE 8]><script src="/javascripts/ie/html5shiv.js"></script><![endif]-->
+    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
     <link rel="stylesheet" href="/stylesheets/main.css" />
-
-    <!--[if lte IE 8]><link rel="stylesheet" href="/sytlesheets/ie8.css" /><![endif]-->
-    <!--[if lte IE 9]><link rel="stylesheet" href="/stylesheets/ie9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+    <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
   </head>
   <body class="right-sidebar">
     <div id="page-wrapper">
@@ -39,39 +38,51 @@
         </div>
 
       <!-- Main -->
-
-         <div id = "menuBody">
-          <nav id = "menunav">
-            <ul>
-              <li id="coffee" value="coffee">Coffee</li>
-              <li id="non-coffee" value="non-coffee">Non-coffee</li>
-              <li id="tea" value="tea">Tea</li>
-              <li id="side" value="side">Side</li>
-              <li id="cocktail" value="cocktail">Cocktail</li>
-            </ul>
-          </nav>
-         </div>
-        <div id = "stage">
+        <div class="wrapper">
+          <div class="container" id="main">
+                     <div id = "menuBody">
+                        <nav id = "menunav">
+                          <ul>
+                            <li id="coffee" value="coffee">Coffee</li>
+                            <li id="non-coffee" value="non-coffee">Non-coffee</li>
+                            <li id="tea" value="tea">Tea</li>
+                            <li id="side" value="side">Side</li>
+                            <li id="cocktail" value="cocktail">Cocktail</li>
+                          </ul>
+                        </nav>
+                     </div>
+                        <div id = "stage">
+                            <div class = "galleryImage" style= "overflow:scroll">
+                             <ul class="polaroids" >
+                              <% results.forEach(function(result) { %>
+                                <li> <a href="<%=result.menuImagePath%>" > <img src="<%=result.menuImagePath%>"></a>
+                                  <br/><%=result.menuName%></li>
+                              <% }); %>
+                             </ul>  
+                           </div>
+                        </div>
+          </div>
         </div>
-              
-            <!-- Footer -->
-              <div id="footer-wrapper">
-                <div id="copyright" class="container">
-                  <ul class="menu">
-                    <li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-                  </ul>
-                </div>
-              </div>
+
+      <!-- Footer -->
+        <div id="footer-wrapper">
+          <div id="copyright" class="container">
+            <ul class="menu">
+              <li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+          </div>
+        </div>
 
     </div>
 
     <!-- Scripts -->
-      <script src="javascripts/jquery.min.js"></script>
-      <script src="javascripts/jquery.dropotron.min.js"></script>
-      <script src="javascripts/skel.min.js"></script>
-      <script src="javascripts/util.js"></script>
+
+      <script src="/javascripts/jquery.min.js"></script>
+      <script src="/javascripts/jquery.dropotron.min.js"></script>
+      <script src="/javascripts/skel.min.js"></script>
+      <script src="/javascripts/util.js"></script>
       <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-      <script src="javascripts/main.js"></script>
+      <script src="/javascripts/main.js"></script>
 
   </body>
 </html>

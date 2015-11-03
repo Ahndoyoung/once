@@ -2204,16 +2204,17 @@
 				#menunav {
 				    width: 550px;
 				    height: 35px;
-				    font-size: 16px;
+				    font-size: 20px;
 				    font-family: Tahoma, Geneva, sans-serif;
 				    font-weight: bold;
 				    text-align: center;
 				    text-shadow: 3px 2px 3px #333333;
 				    border-radius: 8px;
+				   //padding : 30px;
 				}
 				#menunav > ul {
 				    height: auto;
-				    padding: 8px 0px;
+				    padding: 20px 0px;
 				    margin: 0px;
 				}
 				#menunav > ul > li { 
@@ -2226,33 +2227,23 @@
 				#menunav > ul > li:hover{
 					cursor:pointer;
 				}
-
-				#stage >.stage-img{
-				    margin: 5px;
-				    padding: 5px;
-				    border: 1px solid #0000ff;
-				    height: auto;
-				    width: auto;
-				    float: left;
-				    text-align: center;
+				#stage{
+					position:relative;
+					height:relative;
+					padding: 6em 0 6em 0;
+					margin:3px;
 				}
-
-				#stage > img {
-				    display: inline;
-				    margin: 5px;
-				    border: 1px solid #ffffff;
-				}
-
-				#stage > img:hover {
-				    border:1px solid #0000ff;
-				}
-
-				#stage > .stage-desc{
-				    text-align: center;
-				    font-weight: normal;
-				    width: 120px;
-				    margin: 5px;
-				}
+				.galleryImage li {
+			        display: inline;
+			        list-style: none;
+			        width: 300px;
+			        min-height: 175px;
+			        float: left;
+			        margin: 0 10px 10px 0;
+			        text-align: center;
+			        position:relative;
+			    }
+			    
 
 	.dropotron {
 		text-align: left;
