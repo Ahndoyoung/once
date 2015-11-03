@@ -1,4 +1,4 @@
-package com.example.OnceReceiver;
+package com.example.Once;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class ListViewAdapter extends BaseAdapter {
     private Context mContext = null;
-    private ArrayList<SellingItem> mListData = new ArrayList<SellingItem>();
+    private ArrayList<SellingItem> mListData = new ArrayList<>();
 
     public ListViewAdapter(Context mContext) {
         super();

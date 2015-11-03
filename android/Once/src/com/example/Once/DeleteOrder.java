@@ -1,4 +1,4 @@
-package com.example.OnceReceiver;
+package com.example.Once;
 
 /**
  * Created by ahndoyoung on 2015. 10. 31..

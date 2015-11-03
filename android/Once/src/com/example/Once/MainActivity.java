@@ -1,20 +1,19 @@
-package com.example.OnceReceiver;
+package com.example.Once;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Color;
 import android.os.*;
 import android.transition.Scene;
 import android.transition.TransitionManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import com.google.gson.Gson;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,6 +52,7 @@ public class MainActivity extends Activity {
                 View v = viewTable.get(num);
                 counter = (LinearLayout) findViewById(R.id.counterlayout);
                 counter.removeView(v);
+
             }
         }
     };
@@ -179,7 +179,7 @@ public class MainActivity extends Activity {
         int size = Math.round(1000 * dm.density);
 
         counter = (LinearLayout) findViewById(R.id.counterlayout);
-        counter.addView(v, 0);
+        counter.addView(v, viewTable.size());
         viewTable.put(num, v);
         num ++;
 
@@ -221,6 +221,7 @@ public class MainActivity extends Activity {
         View v = viewTable.get(ordernum);
         counter = (LinearLayout) findViewById(R.id.counterlayout);
         counter.removeView(v);
+        viewTable.remove(ordernum);
         String res = "" + 2 +"{id : " + ordernum + "}";
         try {
             networkWirter.write(res);
