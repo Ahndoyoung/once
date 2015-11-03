@@ -1,6 +1,10 @@
 package com.example.Once;
 
 import android.app.Activity;
+import android.database.Cursor;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.*;
 import android.transition.Scene;
 import android.transition.TransitionManager;
@@ -34,14 +38,17 @@ public class MainActivity extends Activity {
             if(msg.what == 1){
                 SellingItems val = (SellingItems) msg.obj;
                 orderList.add(val);
-                addOrder(val);
+                addOrder(val, false);
             }else if(msg.what == 2){
                 DeleteOrder val = (DeleteOrder) msg.obj;
                 int num = val.getId();
                 View v = viewTable.get(num);
                 counter = (LinearLayout) findViewById(R.id.counterlayout);
                 counter.removeView(v);
-
+            }else if(msg.what == 3){
+                SellingItems val = (SellingItems) msg.obj;
+                orderList.add(val);
+                addOrder(val, true);
             }
         }
     };
@@ -65,12 +72,18 @@ public class MainActivity extends Activity {
 
         tvMsg = (TextView) findViewById(R.id.tvMsg);
         btnConnect = (Button) findViewById(R.id.btnConnect);
+
+
+
     }
 
     @Override
     protected void onResume() {
-        super.onResume();
         try {
+
+            if(Connector.getInstance().socket.getKeepAlive() == false){
+                Connector.disConnect();
+            }
 
             Connector.getInstance();
             new ChatThread().execute(null, null, null);
@@ -78,6 +91,8 @@ public class MainActivity extends Activity {
         } catch (IOException|NullPointerException e) {
             e.printStackTrace();
         }
+        super.onResume();
+
     }
 
     @Override
@@ -85,6 +100,7 @@ public class MainActivity extends Activity {
         super.onDestroy();
         try {
             Connector.getInstance().socket.close();
+            Connector.disConnect();
         } catch (IOException|NullPointerException e) {
             e.printStackTrace();
         }
@@ -113,6 +129,11 @@ public class MainActivity extends Activity {
                         DeleteOrder deleteOrder = new Gson().fromJson(sMsg, DeleteOrder.class);
                         msg.what = 2;
                         msg.obj = deleteOrder;
+                    }else if(sMsg.charAt(0) == '3'){
+                        sMsg = sMsg.substring(1,sMsg.length());
+                        SellingItems sellingItems = new Gson().fromJson(sMsg, SellingItems.class);
+                        msg.what = 3;
+                        msg.obj = sellingItems;
                     }
 
                     mHandler.sendMessage(msg);
@@ -129,11 +150,15 @@ public class MainActivity extends Activity {
 
     }
 
-    public void addOrder(SellingItems arg){
+    public void addOrder(SellingItems arg, Boolean isModified){
         int ordernum = arg.getId();
 
         View v = getLayoutInflater().inflate(R.layout.order, null);
-        ((TextView)v.findViewById(R.id.tvOrderNum)).setText("Order #"+ordernum);
+        if(!isModified) {
+            ((TextView) v.findViewById(R.id.tvOrderNum)).setText("Order #" + ordernum);
+        }else{
+            ((TextView) v.findViewById(R.id.tvOrderNum)).setText("Order #" + ordernum + " (M)");
+        }
         ((Button)v.findViewById(R.id.btnConfirm)).setText(ordernum+ "# " +"완료");
         ListView orderListView = (ListView)v.findViewById(R.id.listOrder);
         ListViewAdapter orderListViewAdpater = new ListViewAdapter(v.getContext());
@@ -153,6 +178,7 @@ public class MainActivity extends Activity {
         counter.addView(v, 0);
 
         viewTable.put(ordernum, v);
+
 
     }
 
@@ -177,15 +203,13 @@ public class MainActivity extends Activity {
         protected Void doInBackground(String... msg) {
             try {
                 sendmsg = msg[0];
-                Connector.getInstance().networkWriter.write(sendmsg);
-                Connector.getInstance().networkWriter.flush();
+                Connector.getInstance().printWriter.println(sendmsg);
 
             } catch (IOException|NullPointerException e) {
                 e.printStackTrace();
             }
             return null;
         }
-
 
         @Override
         protected void onPostExecute(Void aVoid) {

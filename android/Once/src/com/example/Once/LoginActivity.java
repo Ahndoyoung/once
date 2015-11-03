@@ -8,7 +8,9 @@ import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
 
 import java.io.*;
 import java.net.Socket;
@@ -19,7 +21,7 @@ import java.net.Socket;
 public class LoginActivity extends Activity {
 
     public EditText etIP;
-
+    public TextView tvMsg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,22 +34,21 @@ public class LoginActivity extends Activity {
 
         etIP = (EditText) findViewById(R.id.etIP);
         etIP.setText(Preference.getString(this, "ip"));
+        tvMsg = (TextView) findViewById(R.id.tvMsg);
     }
 
     public void Connect(View v) {
         Preference.putString(this, "ip", etIP.getText().toString());
         new LoginAsyncTask().execute(null, null, null);
 
-
-
-
     }
 
     class LoginAsyncTask extends AsyncTask<Void, Void, Void> {
 
-        int state;
+        int state = -1;
         @Override
         protected Void doInBackground(Void... params) {
+            state = -1;
             try {
 
                 Connector.ip = etIP.getText().toString();
@@ -55,24 +56,25 @@ public class LoginActivity extends Activity {
                 state = 0;
             } catch (IOException err) {
                 System.out.println(err);
-//            Toast.makeText(getApplicationContext(), "연결실패", Toast.LENGTH_LONG).show();
-                state = -1;
 
             } catch (NullPointerException err) {
                 System.out.println(err);
-//            Toast.makeText(getApplicationContext(), "IP를 입력해주세요", Toast.LENGTH_LONG).show();
-                state = -1;
 
             }
+
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            Log.i("ENDTH", ""+state);
             if(state != -1) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
+            }else{
+                tvMsg.setText("서버 연결 실패\n ip주소를 다시 확인하여 주세요");
             }
+            super.onPostExecute(aVoid);
         }
     }
 

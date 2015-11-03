@@ -8,7 +8,8 @@ import java.net.Socket;
  */
 public class Connector {
     public BufferedReader networkReader = null;
-    public BufferedWriter networkWriter =null;
+    public BufferedWriter networkWriter = null;
+    public PrintWriter printWriter = null;
     public Socket socket = null;
     public int port = 6623;
 
@@ -18,8 +19,10 @@ public class Connector {
     private Connector() throws IOException {
 
         socket = new Socket(ip, port);
+        socket.setSendBufferSize(1024);
         networkReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         networkWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+        printWriter = new PrintWriter(networkWriter, true);
 
     }
 
@@ -27,5 +30,10 @@ public class Connector {
         if(instance == null)
             instance = new Connector();
         return instance;
+    }
+
+    public static void disConnect() {
+        instance = null;
+        return;
     }
 }
