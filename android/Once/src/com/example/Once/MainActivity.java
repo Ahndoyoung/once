@@ -73,16 +73,17 @@ public class MainActivity extends Activity {
         tvMsg = (TextView) findViewById(R.id.tvMsg);
         btnConnect = (Button) findViewById(R.id.btnConnect);
 
-
-
     }
 
     @Override
     protected void onResume() {
+        super.onResume();
         try {
 
-            if(Connector.getInstance().socket.getKeepAlive() == false){
+            if(Connector.getInstance().socket.getKeepAlive() == false) {
                 Connector.disConnect();
+            }else{
+                Log.i("Connection", "Allive");
             }
 
             Connector.getInstance();
@@ -91,7 +92,6 @@ public class MainActivity extends Activity {
         } catch (IOException|NullPointerException e) {
             e.printStackTrace();
         }
-        super.onResume();
 
     }
 

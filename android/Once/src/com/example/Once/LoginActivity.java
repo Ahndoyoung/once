@@ -74,7 +74,7 @@ public class LoginActivity extends Activity {
             }else{
                 tvMsg.setText("서버 연결 실패\n ip주소를 다시 확인하여 주세요");
             }
-            super.onPostExecute(aVoid);
+
         }
     }
 
