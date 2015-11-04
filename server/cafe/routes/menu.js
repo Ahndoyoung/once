@@ -3,6 +3,7 @@ var router = express.Router();
 var once_db = require('../models/db_menu');
 
 router.get('/', function(req, res, next) {
+<<<<<<< HEAD
    once_db.menu('coffee', function(coffee){
       once_db.menu('non-coffee', function(non){
          once_db.menu('tea', function(tea){
@@ -29,6 +30,34 @@ router.get('/', function(req, res, next) {
          });
       });
    });
+=======
+	once_db.menu('coffee', function(coffee){
+		once_db.menu('non-coffee', function(non){
+			once_db.menu('tea', function(tea){
+				once_db.menu('side', function(side){
+					once_db.menu('cocktail', function(cocktail){
+						var coffee1 = coffee.results;
+						var non1 = non.results;
+						var tea1 = tea.results;
+						var side1 = side.results;
+						var cocktail1 = cocktail.results;
+						var results = {
+							coffee : coffee1,
+							non : non1,
+							tea : tea1,
+							side : side1,
+							cocktail : cocktail1
+						};
+console.log('results = ', results);
+						res.render('menu', {
+							results : results
+							})
+					});
+				});
+			});
+		});
+	});
+>>>>>>> 7518ea40cdf1ab4de0d85f7bd52c7ecf01774630
 });
 
 //메뉴 확인 페이지
