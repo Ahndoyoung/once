@@ -125,18 +125,27 @@ public class MainActivity extends Activity {
                     System.out.println("method" + sMsg.charAt(0));
                     System.out.println("method" + sMsg.charAt(1));
 
-                    if(sMsg.charAt(1) == '1'){
-                        sMsg = sMsg.substring(2,sMsg.length());
+                    int i;
+                    for(i=0; i<4; i++){
+                        char ch = sMsg.charAt(i);
+                        if(ch=='1' || ch=='2' || ch=='3'){
+                            sMsg = sMsg.substring(i, sMsg.length());
+                            break;
+                        }
+                    }
+                    System.out.println(sMsg);
+                    if(sMsg.charAt(0) == '1'){
+                        sMsg = sMsg.substring(1,sMsg.length());
                         SellingItems sellingItems = new Gson().fromJson(sMsg, SellingItems.class);
                         msg.what = 1;
                         msg.obj = sellingItems;
-                    }else if(sMsg.charAt(1) == '2'){
-                        sMsg = sMsg.substring(2,sMsg.length());
+                    }else if(sMsg.charAt(0) == '2'){
+                        sMsg = sMsg.substring(1,sMsg.length());
                         DeleteOrder deleteOrder = new Gson().fromJson(sMsg, DeleteOrder.class);
                         msg.what = 2;
                         msg.obj = deleteOrder;
-                    }else if(sMsg.charAt(1) == '3'){
-                        sMsg = sMsg.substring(2,sMsg.length());
+                    }else if(sMsg.charAt(0) == '3'){
+                        sMsg = sMsg.substring(1,sMsg.length());
                         SellingItems sellingItems = new Gson().fromJson(sMsg, SellingItems.class);
                         msg.what = 3;
                         msg.obj = sellingItems;
