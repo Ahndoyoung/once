@@ -110,6 +110,7 @@
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\MenuItem.cs" />
     <Compile Include="Model\JSONtype.cs" />
+    <Compile Include="Model\OrderItems.cs" />
     <Compile Include="Model\Receipt.cs" />
     <Compile Include="Model\SellingItem.cs" />
     <Compile Include="ViewModel\AdjustmentUCViewModel.cs" />
