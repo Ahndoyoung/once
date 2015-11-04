@@ -28,9 +28,9 @@
               <nav id="nav">
                 <ul>
                   <li><a href="#">Notice</a></li>
-                  <li><a href="left-sidebar.html">Menu</a></li>
-                  <li class="break"><a href="right-sidebar.html">Gallary</a></li>
-                  <li><a href="no-sidebar.html">ddddd</a></li>
+                  <li><a href="#">Menu</a></li>
+                  <li class="break"><a href="#">Gallary</a></li>
+                  <li><a href="#">ddddd</a></li>
                 </ul>
               </nav>
 
@@ -38,9 +38,9 @@
         </div>
 
       <!-- Main -->
+
         <div class="wrapper">
-          <div class="container" id="main">
-                     <div id = "menuBody">
+               <div id = "menuBody">
                         <nav id = "menunav">
                           <ul>
                             <li id="coffee" value="coffee">Coffee</li>
@@ -50,9 +50,12 @@
                             <li id="cocktail" value="cocktail">Cocktail</li>
                           </ul>
                         </nav>
-                     </div>
-                        <div id = "stage">
-                            <div class = "galleryImage" style= "overflow:scroll">
+              </div>
+          <div class="container" id="main">
+                        <div id = "stage1">
+                        </div>
+                        <div id = "stage" style= "overflow:scroll">
+                            <div class = "galleryImage" >
                              <ul class="polaroids" >
                               <% results.forEach(function(result) { %>
                                 <li> <a href="<%=result.menuImagePath%>" > <img src="<%=result.menuImagePath%>"></a>
@@ -66,7 +69,7 @@
 
       <!-- Footer -->
         <div id="footer-wrapper">
-          <div id="copyright" class="container">
+          <div id="menuCopyright" class="container">
             <ul class="menu">
               <li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
             </ul>

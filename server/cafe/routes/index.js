@@ -3,6 +3,7 @@ var router = express.Router();
 
 var menuDB = require('../models/db_menu');
 var noticeDB = require('../models/db_notice');
+
 var instagram = require('instagram-node').instagram();
 
 instagram.use({
@@ -31,7 +32,6 @@ router.get('/menu/:menu', function(req, res) {
 router.get('/notice/:page', function( req, res) {
    var page = req.params.page;
    noticeDB.notice(page, function(results) {
-   	console.log("results:",results);
       res.render('notice',{notice : results.results});
    });
 });
@@ -39,6 +39,5 @@ router.get('/notice/:page', function( req, res) {
 router.get('/introduction', function(req, res, next) {
    res.render('introduction', {});      
 });
-
 
 module.exports = router;

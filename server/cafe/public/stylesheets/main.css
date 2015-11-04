@@ -2201,6 +2201,9 @@
 				#nav > ul > li.break {
 					margin-left: 20em;
 				}
+				#menuBody{
+					padding-bottom: 15px;
+				}
 				#menunav {
 				    width: 550px;
 				    height: 35px;
@@ -2210,12 +2213,13 @@
 				    text-align: center;
 				    text-shadow: 3px 2px 3px #333333;
 				    border-radius: 8px;
-				   //padding : 30px;
+				    padding-bottom: 30px;
 				}
 				#menunav > ul {
 				    height: auto;
 				    padding: 20px 0px;
 				    margin: 0px;
+				    padding-bottom: 15px
 				}
 				#menunav > ul > li { 
 				display: inline; 
@@ -2227,9 +2231,13 @@
 				#menunav > ul > li:hover{
 					cursor:pointer;
 				}
+				#stage1{
+					height: 30px;
+					padding: 15px;
+				}
 				#stage{
 					position:relative;
-					height:relative;
+					height: 1500px;
 					padding: 6em 0 6em 0;
 					margin:3px;
 				}
@@ -2396,7 +2404,24 @@
 		padding-top: 4em;
 		margin-top: 6em;
 	}
-
+	#noticeCopyright{
+		position: relative;
+		//z-index: 1;
+		text-align: center;
+		//border-top: solid 1px #d2d7dc;
+		color: #a2a7ac;
+		//padding-top: 4em;
+		//margin-top: 6em;
+	}
+	#menuCopyright{
+		position: relative;
+		//z-index: 1;
+		text-align: center;
+		//border-top: solid 1px #d2d7dc;
+		color: #a2a7ac;
+		//padding-top: 4em;
+		//margin-top: 6em;
+	}
 /* Normal */
 
 	@media screen and (max-width: 1280px) {
