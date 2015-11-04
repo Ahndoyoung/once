@@ -90,6 +90,7 @@ public class MainActivity extends Activity {
 
         } catch (IOException|NullPointerException e) {
             e.printStackTrace();
+            Connector.disConnect();
             finish();
         }
         Log.i("onResume", "");
