@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#965823">
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/orderlayout"
+            android:layout_margin="10dp"
+            android:background="#fff4eed8">
+
+        <TextView android:text="Order #1" android:textColor="@android:color/black" android:textSize="30sp"
+                  android:gravity="center"
+                  android:textAlignment="gravity" android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:fontFamily="sans-serif-medium" android:textStyle="italic"
+                  android:id="@+id/tvOrderNum"/>
+        <ListView android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="15sp"
+                  android:fontFamily="sans-serif-medium" android:id="@+id/listOrder"
+                  android:layout_below="@+id/tvOrderNum" android:layout_above="@+id/btnConfirm"/>
+        <Button   android:layout_width="match_parent" android:layout_height="100dp" android:text="1# 완료"
+                  android:id="@+id/btnConfirm" android:layout_alignParentBottom="true" android:layout_alignParentEnd="true"
+                  android:textSize="30sp" android:onClick="confirmOrder"/>
+
+    </RelativeLayout>
+</LinearLayout>

@@ -14,6 +14,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Interactivity;
 using System.Windows.Media;
+using System.Windows.Threading;
 using System.Xml.Serialization;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -54,7 +55,7 @@ namespace Once_v2_2015.ViewModel
 
         private void Test()
         {
-            
+
         }
         #endregion
 
@@ -85,13 +86,14 @@ namespace Once_v2_2015.ViewModel
             SetCategory(cw);
 
             // init
+            ServerIP = GetIP(); // 서버아이피
             CheckDateTime();
             InitProperties();
             counterWindow = cw; // need modify
 
             if (categories.Count != 0)
             {
-                object[] obj = new object[] {cw, 0};
+                object[] obj = new object[] { cw, 0 };
                 LoadMenu(obj);
                 selectedCategory = categories[0].name;
             }
@@ -162,20 +164,18 @@ namespace Once_v2_2015.ViewModel
         private void Shutdown()
         {
             /* 소켓통신 쓰레드 종료 */
-            //if (serverThr.ThreadState != System.Threading.ThreadState.Aborted)
-            //{
-            //    try
-            //    {
-            //        client = null;
-            //        server.Close();
-            //        server = null;
-            //        serverThr.Abort();
-            //    }
-            //    catch (Exception err)
-            //    {
-            //        MessageBox.Show(err.ToString());
-            //    }
-            //}
+            if (serverThr.ThreadState != System.Threading.ThreadState.Aborted)
+            {
+                try
+                {
+                    serverSocket.Stop();
+                    serverThr.Abort();
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.ToString());
+                }
+            }
 
             Application.Current.Shutdown();
         }
@@ -417,7 +417,7 @@ namespace Once_v2_2015.ViewModel
             object[] values = (object[])obj;
             CounterWindow cw = (CounterWindow)values[0];
             string name = (string)values[1];
-            string way = (string) values[2];
+            string way = (string)values[2];
 
             int price = 0;
 
@@ -508,9 +508,9 @@ namespace Once_v2_2015.ViewModel
                 cw.lvSelling.UpdateLayout();
                 ListViewItem t =
                     (ListViewItem)cw.lvSelling.ItemContainerGenerator.ContainerFromItem(si);
-                if(si.temperature == 'I')
+                if (si.temperature == 'I')
                     t.Background = new SolidColorBrush(Color.FromArgb(70, 138, 214, 240));
-                else if(si.temperature == 'H')
+                else if (si.temperature == 'H')
                     t.Background = new SolidColorBrush(Color.FromArgb(100, 255, 214, 214));
 
             }
@@ -525,7 +525,7 @@ namespace Once_v2_2015.ViewModel
 
         public RelayCommand CancelOrderCommand
         {
-            get { return _cancelOrderCommand ?? (_cancelOrderCommand = new RelayCommand(CancelOrder));}
+            get { return _cancelOrderCommand ?? (_cancelOrderCommand = new RelayCommand(CancelOrder)); }
         }
 
         private void CancelOrder()
@@ -647,9 +647,10 @@ namespace Once_v2_2015.ViewModel
 
         private void SendOrder(object obj)
         {
-            object[] values = (object[]) obj;
-            CounterWindow cw = (CounterWindow) values[0];
-            OrdersUC ov = (OrdersUC) values[1];
+            object[] values = (object[])obj;
+            CounterWindow cw = (CounterWindow)values[0];
+            OrdersUC ov = (OrdersUC)values[1];
+            ordersUC = ov;
 
             var items = new ObservableCollection<SellingItem>();
             foreach (var si in SellingItems)
@@ -678,7 +679,7 @@ namespace Once_v2_2015.ViewModel
                     tb.Text = "Order #" + OrderNumber.ToString();
                     if (ShowDetailVisible == Visibility.Visible)
                         tb.Text += " (M)";
-                    tb.FontSize = (double) new FontSizeConverter().ConvertFrom("22pt");
+                    tb.FontSize = (double)new FontSizeConverter().ConvertFrom("22pt");
                     tb.FontFamily = new FontFamily("Segoe Print");
                     tb.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x60, 0x3A, 0x17));
                     grd.Children.Add(tb);
@@ -690,7 +691,7 @@ namespace Once_v2_2015.ViewModel
                     tb1.TextAlignment = TextAlignment.Center;
 
                     tb1.Text = cw.rbCash.IsChecked == true ? "현금" : "카드";
-                    tb1.FontSize = (double) new FontSizeConverter().ConvertFrom("20pt");
+                    tb1.FontSize = (double)new FontSizeConverter().ConvertFrom("20pt");
                     tb1.FontFamily = new FontFamily("Segoe UI Semibold");
                     tb1.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x59, 0x59, 0x59));
                     grd.Children.Add(tb1);
@@ -702,7 +703,7 @@ namespace Once_v2_2015.ViewModel
                     tb2.TextAlignment = TextAlignment.Right;
 
                     tb2.Text = Total;
-                    tb2.FontSize = (double) new FontSizeConverter().ConvertFrom("20pt");
+                    tb2.FontSize = (double)new FontSizeConverter().ConvertFrom("20pt");
                     tb2.FontFamily = new FontFamily("Segoe UI Semibold");
                     tb2.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x59, 0x59, 0x59));
                     grd.Children.Add(tb2);
@@ -715,7 +716,7 @@ namespace Once_v2_2015.ViewModel
                         OrderPosition.InitLvRight,
                         OrderPosition.InitLvBottom);
                     lv.SelectionMode = SelectionMode.Single;
-                    lv.FontSize = (double) new FontSizeConverter().ConvertFrom("15pt");
+                    lv.FontSize = (double)new FontSizeConverter().ConvertFrom("15pt");
                     lv.FontFamily = new FontFamily("NanumBarunGothic");
                     lv.Foreground = Brushes.Black;
                     Style style = Application.Current.FindResource("LinedListView") as Style;
@@ -732,13 +733,13 @@ namespace Once_v2_2015.ViewModel
                     gvc[0].Width = 240;
                     gvc[0].DisplayMemberBinding = new Binding("content");
                     gvch[0].Content = "Name";
-                    gvch[0].FontSize = (double) new FontSizeConverter().ConvertFrom("13pt");
+                    gvch[0].FontSize = (double)new FontSizeConverter().ConvertFrom("13pt");
                     gvch[0].FontFamily = new FontFamily("Segoe UI");
                     gvc[0].Header = gvch[0];
                     gvc[1].Width = 100;
                     gvc[1].DisplayMemberBinding = new Binding("quantity");
                     gvch[1].Content = "Qty";
-                    gvch[1].FontSize = (double) new FontSizeConverter().ConvertFrom("13pt");
+                    gvch[1].FontSize = (double)new FontSizeConverter().ConvertFrom("13pt");
                     gvch[1].FontFamily = new FontFamily("Segoe UI");
                     gvc[1].Header = gvch[1];
 
@@ -747,7 +748,7 @@ namespace Once_v2_2015.ViewModel
 
                     lv.View = gv;
                     grd.Children.Add(lv);
-                    
+
 
                     // Button
                     Button btnM = new Button();
@@ -759,7 +760,7 @@ namespace Once_v2_2015.ViewModel
 
                     btnM.Content = "Modify";
                     btnM.FontFamily = new FontFamily("NanumBarunGothic");
-                    btnM.FontSize = (double) new FontSizeConverter().ConvertFrom("11pt");
+                    btnM.FontSize = (double)new FontSizeConverter().ConvertFrom("11pt");
                     btnM.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x60, 0x3A, 0x17));
 
                     btnM.HorizontalAlignment = HorizontalAlignment.Right;
@@ -779,7 +780,7 @@ namespace Once_v2_2015.ViewModel
 
                     btnC.Content = "Complete";
                     btnC.FontFamily = new FontFamily("NanumBarunGothic");
-                    btnC.FontSize = (double) new FontSizeConverter().ConvertFrom("11pt");
+                    btnC.FontSize = (double)new FontSizeConverter().ConvertFrom("11pt");
                     btnC.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0xFB, 0xFB, 0xEF));
 
                     btnC.HorizontalAlignment = HorizontalAlignment.Right;
@@ -787,8 +788,8 @@ namespace Once_v2_2015.ViewModel
                     btnC.Margin = new Thickness(0, 0, OrderPosition.InitBtnCRight, OrderPosition.InitBtnBottom);
 
                     btnC.Command = CompleteOrderCommand;
-                    string[] money = new string[] {DiscountPrice, SubTotal, Total};
-                    object[] obj_btnC = new object[] {ov, brd, way, money, items};
+                    string[] money = new string[] { DiscountPrice, SubTotal, Total };
+                    object[] obj_btnC = new object[] { ov, brd, way, money, items };
                     btnC.CommandParameter = obj_btnC;
 
                     grd.Children.Add(btnM);
@@ -800,42 +801,39 @@ namespace Once_v2_2015.ViewModel
                     brd.HorizontalAlignment = HorizontalAlignment.Left;
                     brd.Width = 450;
                     brd.Margin =
-                        new Thickness(OrderPosition.InitBorderLeft + OrderPosition.MarginBorderLeft*(ExistingOrder++),
+                        new Thickness(OrderPosition.InitBorderLeft + OrderPosition.MarginBorderLeft * (ExistingOrder++),
                             OrderPosition.InitBorderTop, 0, OrderPosition.InitBorderBottom);
                     brd.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xF7, 0xF1, 0xE1));
 
                     brd.Child = grd;
                     ov.grdOrders.Children.Add(brd);
 
-                    // JSON, 소켓
+                    // JSON 주문 보내기
                     try
                     {
                         NumberingSI nsi = new NumberingSI(OrderNumber, items);
-                        string request = JsonConvert.SerializeObject(nsi);
-                        request += '\n';
-                        //string uri = "165.246.";
-                        //WebClient webClient = new WebClient();
-                        //webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
-                        //webClient.Encoding = UTF8Encoding.UTF8;
-                        //string response = webClient.UploadString(uri, request);
-                        byte[] bytes = Encoding.UTF8.GetBytes(request);
-                        client.Send(bytes);
+                        string request = ShowDetailVisible != Visibility.Visible ? "1" : "3";
+                        request += JsonConvert.SerializeObject(nsi);
+                        writer.WriteLine(request);
                     }
                     catch (Exception err)
                     {
                         Console.WriteLine(err.ToString());
                     }
 
+                    OrderItems oi = new OrderItems(OrderNumber, way, int.Parse(DiscountPrice), int.Parse(SubTotal), int.Parse(Total), items);
+                    orders.Add(oi);
+
                     OrderNumber++;
                     File.WriteAllText("DateTime_Sale.once", date_today + '\n' + OrderNumber, Encoding.Default);
-                    
+
                     // init
                     SellingItems.Clear();
                     DiscountPrice = "0";
                     SubTotal = "0";
 
                     ShowDetailVisible = Visibility.Collapsed;
-                    
+
                     // ListViewItem 색상입히기
                     lv.UpdateLayout();
                     foreach (var si in items)
@@ -863,12 +861,12 @@ namespace Once_v2_2015.ViewModel
 
         private void CompleteOrder(object obj)
         {
-            object[] values = (object[]) obj;
-            OrdersUC ov = (OrdersUC) values[0];
-            Border brd = (Border) values[1];
-            string way = (string) values[2];
-            string[] money = (string[]) values[3];
-            ObservableCollection<SellingItem> items = (ObservableCollection<SellingItem>) values[4];
+            object[] values = (object[])obj;
+            OrdersUC ov = (OrdersUC)values[0];
+            Border brd = (Border)values[1];
+            string way = (string)values[2];
+            string[] money = (string[])values[3];
+            ObservableCollection<SellingItem> items = (ObservableCollection<SellingItem>)values[4];
 
             bool isFired = false;
             for (int i = 0; i < ov.grdOrders.Children.Count; i++)
@@ -878,6 +876,30 @@ namespace Once_v2_2015.ViewModel
                     ov.grdOrders.Children.RemoveAt(i);
                     ExistingOrder--;
                     isFired = true;
+
+                    // JSON 주문 완료
+                    Grid grd = (Grid)brd.Child;
+                    TextBlock tb = (TextBlock)grd.Children[0];
+                    int orderNum = int.Parse(tb.Text.Split('#')[1].Split(' ')[0]); // 주문완료할 주문번호
+                    try
+                    {
+                        DeleteOrder del = new DeleteOrder(orderNum);
+                        string request = "2" + JsonConvert.SerializeObject(del);
+                        writer.WriteLine(request);
+                    }
+                    catch (Exception err)
+                    {
+                        Console.WriteLine(err.ToString());
+                    }
+
+                    for (int j = 0; j < orders.Count; j++)
+                    {
+                        if (orders[j].orderNum == orderNum)
+                        {
+                            orders.RemoveAt(j);
+                            break;
+                        }
+                    }
 
                     // 결제
                     DateTime dt = DateTime.Now;
@@ -941,16 +963,16 @@ namespace Once_v2_2015.ViewModel
 
         private void ModifyOrder(object obj)
         {
-            object[] values = (object [])obj;
-            int idx = (int) values[0];
-            CounterWindow cw = (CounterWindow) values[1];
+            object[] values = (object[])obj;
+            int idx = (int)values[0];
+            CounterWindow cw = (CounterWindow)values[1];
             ObservableCollection<SellingItem> items = (ObservableCollection<SellingItem>)values[2];
             string total = (string)values[3];
             string subTotal = (string)values[4];
             string discount = (string)values[5];
             string payment = (string)values[6];
-            OrdersUC ov = (OrdersUC) values[7];
-            Border brd = (Border) values[8];
+            OrdersUC ov = (OrdersUC)values[7];
+            Border brd = (Border)values[8];
 
 
             MessageBoxResult mbr = MessageBox.Show("Order #" + idx.ToString() + "을(를) 수정하시겠습니까?", "수정확인",
@@ -960,7 +982,7 @@ namespace Once_v2_2015.ViewModel
                 // ShowDetail
                 ShowDetailVisible = Visibility.Visible;
 
-                object[] param = new object[] {idx, total, subTotal, discount, payment};
+                object[] param = new object[] { idx, total, subTotal, discount, payment };
                 cw.btnShowDetail.CommandParameter = param;
 
                 // FireOrder
@@ -972,6 +994,30 @@ namespace Once_v2_2015.ViewModel
                         ov.grdOrders.Children.RemoveAt(i);
                         ExistingOrder--;
                         isFired = true;
+
+                        // JSON 주문 완료
+                        Grid grd = (Grid)brd.Child;
+                        TextBlock tb = (TextBlock)grd.Children[0];
+                        int orderNum = int.Parse(tb.Text.Split('#')[1].Split(' ')[0]); // 주문완료할 주문번호
+                        try
+                        {
+                            DeleteOrder del = new DeleteOrder(orderNum);
+                            string request = "2" + JsonConvert.SerializeObject(del);
+                            writer.WriteLine(request);
+                        }
+                        catch (Exception err)
+                        {
+                            Console.WriteLine(err.ToString());
+                        }
+
+                        for (int j = 0; j < orders.Count; j++)
+                        {
+                            if (orders[j].orderNum == orderNum)
+                            {
+                                orders.RemoveAt(j);
+                                break;
+                            }
+                        }
                     }
 
                     if (isFired && i != ov.grdOrders.Children.Count)
@@ -1013,12 +1059,12 @@ namespace Once_v2_2015.ViewModel
 
         private void ShowDetail(object obj)
         {
-            object[] values = (object[]) obj;
-            int idx = (int) values[0];
-            string total = (string) values[1];
-            string subTotal = (string) values[2];
-            string discount = (string) values[3];
-            string payment = (string) values[4];
+            object[] values = (object[])obj;
+            int idx = (int)values[0];
+            string total = (string)values[1];
+            string subTotal = (string)values[2];
+            string discount = (string)values[3];
+            string payment = (string)values[4];
 
             MessageBox.Show(
                 "Order #" + idx.ToString() + "\n\nSubTotal : " + subTotal + "\nDiscounts : " + discount +
@@ -1095,7 +1141,7 @@ namespace Once_v2_2015.ViewModel
             }
         }
 
-        private string _total ="0";
+        private string _total = "0";
 
         public string Total
         {
@@ -1142,7 +1188,7 @@ namespace Once_v2_2015.ViewModel
                 RaisePropertyChanged("OrdersVisible");
             }
         }
-        
+
         private Visibility _CounterWindowVisible = Visibility.Visible;
 
         public Visibility CounterWindowVisible
@@ -1190,7 +1236,7 @@ namespace Once_v2_2015.ViewModel
                 RaisePropertyChanged("ShowDetailVisible");
             }
         }
-        
+
         private Visibility _TrayVisible = Visibility.Visible;
 
         public Visibility TrayVisible
@@ -1202,7 +1248,7 @@ namespace Once_v2_2015.ViewModel
                 RaisePropertyChanged("TrayVisible");
             }
         }
-        
+
         private int _orderNumber = 1;
 
         public int OrderNumber
@@ -1297,18 +1343,46 @@ namespace Once_v2_2015.ViewModel
             }
         }
 
+        private string _ServerIP;
+
+        public string ServerIP
+        {
+            get { return _ServerIP; }
+            set
+            {
+                _ServerIP = value;
+                RaisePropertyChanged("ServerIP");
+            }
+        }
+
+        private Brush _ConnectionBrush = Brushes.Red;
+
+        public Brush ConnectionBrush
+        {
+            get { return _ConnectionBrush; }
+            set
+            {
+                _ConnectionBrush = value;
+                RaisePropertyChanged("ConnectionBrush");
+            }
+        }
+
         #endregion
 
         public CounterWindow counterWindow = null; // need modify
+        public OrdersUC ordersUC = null; // need modify
         private string date_today = null;
         private string selectedCategory = null;
 
         /* 소켓 통신 */
         private Thread serverThr = null;
-        private Socket server = null;
-        private Socket client = null;
+        private TcpListener serverSocket = null;
+        private TcpClient clientSocket = null;
+        private StreamWriter writer = null;
+        private StreamReader reader = null;
 
         public List<Category> categories = new List<Category>();
+        public List<OrderItems> orders = new List<OrderItems>();
 
         private static List<Category> LoadCategory()
         {
@@ -1412,23 +1486,159 @@ namespace Once_v2_2015.ViewModel
 
         private void ListenClient()
         {
-            server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            
-            IPEndPoint ipep = new IPEndPoint(IPAddress.Any, 9051);
-            server.Bind(ipep);
-            server.Listen(10);
+            serverSocket = new TcpListener(IPAddress.Any, 6623);
+            serverSocket.Start();
 
-            try
+            while (true)
             {
-                client = server.Accept();
+                // 계속 클라이언트 요청을 기다림
+                try
+                {
+                    // 연결 성공
+                    clientSocket = serverSocket.AcceptTcpClient();
+                    writer = new StreamWriter(clientSocket.GetStream(), Encoding.UTF8);
+                    writer.AutoFlush = true;
+                    reader = new StreamReader(clientSocket.GetStream(), Encoding.UTF8);
+                    ConnectionBrush = Brushes.LawnGreen;
+
+                    SendExistingOrders();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
+
+                while (true)
+                {
+                    // 클라이언트로부터 버퍼를 받음
+                    string str = null;
+                    try
+                    {
+                        str = reader.ReadLine();
+
+                        if (str[0] == '2')
+                        {
+                            str = str.Substring(1, str.Length - 1);
+                            DeleteOrder del = JsonConvert.DeserializeObject<DeleteOrder>(str);
+                            ordersUC.Dispatcher.Invoke(DispatcherPriority.Normal, new RecvCompleteDelegate(RecvComplete), del.id);
+                        }
+                    }
+                    catch(Exception err)
+                    {
+                        Console.WriteLine(err);
+                    }
+                    if (string.IsNullOrEmpty(str))
+                    {
+                        ConnectionBrush = Brushes.Red;
+                        writer.Close();
+                        reader.Close();
+                        clientSocket.Close();
+                        break;
+                    }
+                }
             }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
-            }            
-            MessageBox.Show("클라이언트 연결");
         }
-        
+
+        private void SendExistingOrders()
+        {
+            for (int i = 0; i < orders.Count; i++)
+            {
+                NumberingSI nsi = new NumberingSI(orders[i].orderNum, orders[i].items);
+                string request = "1";
+                request += JsonConvert.SerializeObject(nsi);
+                writer.WriteLine(request);
+            }
+        }
+
+        private delegate void RecvCompleteDelegate(int num);
+        private void RecvComplete(int num)
+        {
+            bool isFired = false;
+            for (int i = 1; i < ordersUC.grdOrders.Children.Count; i++)
+            {
+                Border brd = (Border)ordersUC.grdOrders.Children[i];
+                Grid grd = (Grid)brd.Child;
+                TextBlock tb = (TextBlock)grd.Children[0];
+                int orderNum = int.Parse(tb.Text.Split('#')[1].Split(' ')[0]); // 주문완료할 주문번호
+
+                if (num == orderNum)
+                {
+                    ordersUC.grdOrders.Children.RemoveAt(i);
+                    ExistingOrder--;
+                    isFired = true;
+
+                    int ordersIdx = -1;
+                    for (int j = 0; j < orders.Count; j++)
+                    {
+                        if (orders[j].orderNum == orderNum)
+                        {
+                            ordersIdx = j;
+                            break;
+                        }
+                    }
+
+                    DateTime dt = DateTime.Now;
+                    string query =
+                            string.Format("INSERT INTO RECEIPT(RECEIPT_DATE, RECEIPT_TYPE, RECEIPT_DISCOUNT, RECEIPT_SUBTOTAL, RECEIPT_AMOUNT)" +
+                            "VALUES(Now(), '{0}', {1}, {2}, {3})", orders[ordersIdx].way, orders[ordersIdx].discount, orders[ordersIdx].subtotal, orders[ordersIdx].amount);
+                    OleDB.NonQuery(query);
+
+                    query =
+                        string.Format("SELECT TOP 1 RECEIPT_NUM FROM RECEIPT ORDER BY RECEIPT_NUM DESC");
+                    OleDbConnection conn = new OleDbConnection(OleDB.connPath);
+                    OleDbCommand cmd = new OleDbCommand(query, conn);
+                    int idx = -1;
+                    try
+                    {
+                        conn.Open();
+                        var read = cmd.ExecuteReader();
+                        while (read.Read())
+                        {
+                            idx = int.Parse(read[0].ToString());
+                        }
+                        read.Close();
+                    }
+                    catch
+                    {
+                    }
+                    // 메뉴
+                    foreach (var si in orders[ordersIdx].items)
+                    {
+                        char temp = si.temperature != null ? (char)si.temperature : 'N';
+                        char size = si.size != null ? (char)si.size : 'N';
+                        char whip = si.isWhipping == true ? 'T' : 'F';
+                        query =
+                           string.Format("INSERT INTO SALE(MENU_NAME, MENU_TEMP, MENU_SIZE, MENU_WHIP, MENU_PRICE, SALE_QUANTITY, RECEIPT_NUM)" +
+                           "VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')", si.name, temp, size, whip, si.price, si.quantity, idx);
+                        cmd.CommandText = query;
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    conn.Close();
+
+                    orders.RemoveAt(ordersIdx);
+                }
+
+                if (isFired && i != ordersUC.grdOrders.Children.Count)
+                {
+                    Border tmp = (Border)ordersUC.grdOrders.Children[i];
+                    tmp.Margin = new Thickness(tmp.Margin.Left - OrderPosition.MarginBorderLeft, tmp.Margin.Top, 0, tmp.Margin.Bottom);
+                }
+            }
+        }
+
+        private string GetIP()
+        {
+            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+            string ip = null;
+            for (int i = 0; i < host.AddressList.Length; i++)
+            {
+                if (host.AddressList[i].AddressFamily == AddressFamily.InterNetwork)
+                    ip = host.AddressList[i].ToString();
+            }
+            return ip;
+        }
+
         private void OnReceiveMessageAction(ViewModelMessage obj)
         {
             string[] arr = obj.Text.Split('^');
@@ -1465,8 +1675,8 @@ namespace Once_v2_2015.ViewModel
         {
             Messenger.Default.Register<ViewModelMessage>(this, OnReceiveMessageAction);
 
-            //serverThr = new Thread(new ThreadStart(ListenClient));
-            //serverThr.Start();
+            serverThr = new Thread(new ThreadStart(ListenClient));
+            serverThr.Start();
         }
     }
 }
