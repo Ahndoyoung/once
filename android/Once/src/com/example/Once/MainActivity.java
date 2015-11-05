@@ -66,7 +66,6 @@ public class MainActivity extends Activity {
 
         ActionBar actionBar = getActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(0xFFF7F1E1));
-        actionBar.set
 
         setContentView(R.layout.view);
         rootContainer = (ViewGroup) findViewById(R.id.rootContainer);
