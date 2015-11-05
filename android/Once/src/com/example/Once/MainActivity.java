@@ -1,9 +1,11 @@
 package com.example.Once;
 
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -62,6 +64,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ActionBar actionBar = getActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(0xFFF7F1E1));
+        actionBar.set
+
         setContentView(R.layout.view);
         rootContainer = (ViewGroup) findViewById(R.id.rootContainer);
         counter = (LinearLayout) findViewById(R.id.counterlayout);
@@ -84,7 +90,14 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         try {
+            if(Connector.getInstance().socket.getKeepAlive() == false){
+                Log.i("onResume", "re connect");
+                Connector.disConnect();
+                viewTable.clear();
+                counter = (LinearLayout) findViewById(R.id.counterlayout);
+                counter.removeAllViews();
 
+            }
             Connector.getInstance();
             new ChatThread().execute(null, null, null);
 
@@ -190,7 +203,7 @@ public class MainActivity extends Activity {
 
 
         counter = (LinearLayout) findViewById(R.id.counterlayout);
-        counter.addView(v, 0);
+        counter.addView(v, viewTable.size());
 
         viewTable.put(ordernum, v);
 

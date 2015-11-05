@@ -32,6 +32,11 @@ public class Connector {
     }
 
     public static void disConnect() {
+        try {
+            instance.socket.close();
+        } catch (IOException|NullPointerException e) {
+            e.printStackTrace();
+        }
         instance = null;
         return;
     }
