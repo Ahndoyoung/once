@@ -749,6 +749,20 @@ namespace Once_v2_2015.ViewModel
                     lv.View = gv;
                     grd.Children.Add(lv);
 
+                    // TextBlock (Order Time)
+                    TextBlock tbTime = new TextBlock();
+                    tbTime.Margin = new Thickness(OrderPosition.InitTbTimeLeft, OrderPosition.InitTbTimeTop,
+                        OrderPosition.InitTbTimeRight,
+                        0);
+                    tbTime.VerticalAlignment = VerticalAlignment.Top;
+                    tbTime.TextAlignment = TextAlignment.Left;
+
+                    tbTime.Text = DateTime.Now.ToShortTimeString();
+                    tbTime.FontSize = (double)new FontSizeConverter().ConvertFrom("15pt");
+                    tbTime.FontFamily = new FontFamily("Segoe Print");
+                    tbTime.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x60, 0x3A, 0x17));
+                    grd.Children.Add(tbTime);
+
 
                     // Button
                     Button btnM = new Button();
